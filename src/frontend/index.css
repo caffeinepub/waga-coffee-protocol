@@ -1,0 +1,244 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Outfit (Body) ── */
+@font-face {
+  font-family: "Outfit";
+  src: url("/assets/fonts/Outfit-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+/* ── Bricolage Grotesque (Display/Headings) ── */
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("/assets/fonts/BricolageGrotesque-Variable.woff2") format("woff2");
+  font-weight: 200 800;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    /* WAGA Coffee Protocol — Dark Coffee Theme */
+    --radius: 0.75rem;
+
+    /* Backgrounds */
+    --background: 0.12 0.01 60;
+    --foreground: 0.93 0.03 80;
+
+    /* Card surfaces */
+    --card: 0.16 0.015 60;
+    --card-foreground: 0.93 0.03 80;
+
+    /* Popover */
+    --popover: 0.18 0.015 60;
+    --popover-foreground: 0.93 0.03 80;
+
+    /* Primary: Amber/Gold */
+    --primary: 0.72 0.13 72;
+    --primary-foreground: 0.12 0.01 60;
+
+    /* Secondary: Coffee Brown */
+    --secondary: 0.32 0.07 55;
+    --secondary-foreground: 0.93 0.03 80;
+
+    /* Muted */
+    --muted: 0.22 0.02 60;
+    --muted-foreground: 0.58 0.04 70;
+
+    /* Accent: Warm Cream */
+    --accent: 0.88 0.06 82;
+    --accent-foreground: 0.12 0.01 60;
+
+    /* Destructive */
+    --destructive: 0.58 0.22 27;
+    --destructive-foreground: 0.95 0.02 80;
+
+    /* Border */
+    --border: 0.28 0.03 60;
+    --input: 0.22 0.02 60;
+    --ring: 0.72 0.13 72;
+
+    /* Charts */
+    --chart-1: 0.72 0.13 72;
+    --chart-2: 0.6 0.1 150;
+    --chart-3: 0.55 0.15 25;
+    --chart-4: 0.65 0.12 190;
+    --chart-5: 0.7 0.14 55;
+
+    /* Sidebar */
+    --sidebar: 0.14 0.012 60;
+    --sidebar-foreground: 0.93 0.03 80;
+    --sidebar-primary: 0.72 0.13 72;
+    --sidebar-primary-foreground: 0.12 0.01 60;
+    --sidebar-accent: 0.22 0.02 60;
+    --sidebar-accent-foreground: 0.93 0.03 80;
+    --sidebar-border: 0.28 0.03 60;
+    --sidebar-ring: 0.72 0.13 72;
+
+    /* Custom WAGA tokens */
+    --amber: 0.72 0.13 72;
+    --amber-dim: 0.55 0.10 72;
+    --cream: 0.88 0.06 82;
+    --coffee: 0.32 0.07 55;
+    --coffee-dark: 0.22 0.05 55;
+    --success: 0.6 0.15 150;
+    --warning: 0.75 0.12 80;
+    --info: 0.6 0.12 240;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Outfit", "General Sans", system-ui, sans-serif;
+    font-feature-settings: "cv11", "ss01";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Bricolage Grotesque", "Cabinet Grotesk", system-ui, sans-serif;
+    letter-spacing: -0.02em;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: oklch(var(--background));
+  }
+  ::-webkit-scrollbar-thumb {
+    background: oklch(var(--border));
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: oklch(var(--amber-dim));
+  }
+}
+
+@layer utilities {
+  .text-amber { color: oklch(var(--amber)); }
+  .text-cream { color: oklch(var(--cream)); }
+  .text-coffee { color: oklch(var(--coffee)); }
+  .bg-amber { background-color: oklch(var(--amber)); }
+  .bg-coffee { background-color: oklch(var(--coffee)); }
+  .bg-coffee-dark { background-color: oklch(var(--coffee-dark)); }
+  .border-amber { border-color: oklch(var(--amber)); }
+
+  .glow-amber {
+    box-shadow: 0 0 20px oklch(var(--amber) / 0.15), 0 0 40px oklch(var(--amber) / 0.05);
+  }
+  .glow-amber-sm {
+    box-shadow: 0 0 10px oklch(var(--amber) / 0.2);
+  }
+
+  .card-hover {
+    transition: all 0.2s ease;
+  }
+  .card-hover:hover {
+    border-color: oklch(var(--amber) / 0.3);
+    box-shadow: 0 0 15px oklch(var(--amber) / 0.08), 0 4px 20px oklch(0 0 0 / 0.3);
+    transform: translateY(-1px);
+  }
+
+  .badge-amber {
+    background-color: oklch(var(--amber) / 0.15);
+    color: oklch(var(--amber));
+    border: 1px solid oklch(var(--amber) / 0.3);
+  }
+  .badge-green {
+    background-color: oklch(var(--success) / 0.15);
+    color: oklch(var(--success));
+    border: 1px solid oklch(var(--success) / 0.3);
+  }
+  .badge-red {
+    background-color: oklch(var(--destructive) / 0.15);
+    color: oklch(var(--destructive));
+    border: 1px solid oklch(var(--destructive) / 0.3);
+  }
+  .badge-blue {
+    background-color: oklch(var(--info) / 0.15);
+    color: oklch(var(--info));
+    border: 1px solid oklch(var(--info) / 0.3);
+  }
+  .badge-gray {
+    background-color: oklch(var(--muted) / 0.5);
+    color: oklch(var(--muted-foreground));
+    border: 1px solid oklch(var(--border));
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, oklch(var(--amber)) 0%, oklch(var(--cream)) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .noise-texture {
+    position: relative;
+  }
+  .noise-texture::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    border-radius: inherit;
+  }
+
+  .code-block {
+    font-family: "JetBrains Mono", "Geist Mono", "Courier New", monospace;
+    font-size: 0.8rem;
+    line-height: 1.6;
+    background-color: oklch(0.1 0.01 60);
+    border: 1px solid oklch(var(--border));
+    border-radius: 0.5rem;
+    padding: 1rem 1.25rem;
+    overflow-x: auto;
+  }
+
+  .step-complete { color: oklch(var(--success)); }
+  .step-active { color: oklch(var(--amber)); }
+  .step-inactive { color: oklch(var(--muted-foreground)); }
+}
+
+/* Timeline connector */
+.timeline-line {
+  position: absolute;
+  left: 1.25rem;
+  top: 2.5rem;
+  bottom: -0.5rem;
+  width: 2px;
+  background: linear-gradient(180deg, oklch(var(--amber) / 0.6), oklch(var(--amber) / 0.1));
+}
+
+/* Step circle */
+.step-circle {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: oklch(var(--amber) / 0.15);
+  border: 1px solid oklch(var(--amber) / 0.4);
+  color: oklch(var(--amber));
+  font-weight: 700;
+  font-size: 0.875rem;
+  flex-shrink: 0;
+}
+
+/* Hero mesh gradient */
+.hero-mesh {
+  background:
+    radial-gradient(ellipse 80% 60% at 10% 20%, oklch(var(--coffee) / 0.3) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 90% 80%, oklch(var(--amber) / 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 50% at 50% 50%, oklch(var(--coffee-dark) / 0.5) 0%, transparent 100%),
+    oklch(var(--background));
+}
