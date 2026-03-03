@@ -1,3 +1,4 @@
+import { NextStepButton } from "@/components/NextStepButton";
 import { Button } from "@/components/ui/button";
 import { useApp } from "@/context/AppContext";
 import { cn } from "@/lib/utils";
@@ -299,6 +300,8 @@ export function ReserveVerification() {
           ))}
         </div>
       </motion.div>
+
+      <NextStepButton />
     </div>
   );
 }

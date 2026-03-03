@@ -73,7 +73,7 @@ export function StepNav({ currentStep, onStepChange }: StepNavProps) {
               <Coffee className="w-3.5 h-3.5 text-amber" />
             </div>
             <span className="font-display font-bold text-sm text-amber hidden sm:block">
-              WAGA
+              OAC
             </span>
           </div>
 

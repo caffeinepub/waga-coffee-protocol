@@ -1,3 +1,4 @@
+import { NextStepButton } from "@/components/NextStepButton";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -198,7 +199,7 @@ export function TokenMinting() {
                   <span className="text-amber font-semibold">
                     {quantity.toLocaleString()} ERC-1155 tokens
                   </span>{" "}
-                  on the WAGA Coffee smart contract
+                  on the OburugoAgroChain smart contract
                 </div>
               )}
 
@@ -326,6 +327,8 @@ export function TokenMinting() {
           ))}
         </div>
       </motion.div>
+
+      <NextStepButton />
     </div>
   );
 }

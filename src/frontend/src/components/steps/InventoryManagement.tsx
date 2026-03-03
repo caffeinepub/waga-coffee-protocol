@@ -1,3 +1,4 @@
+import { NextStepButton } from "@/components/NextStepButton";
 import { useApp } from "@/context/AppContext";
 import { cn } from "@/lib/utils";
 import {
@@ -27,7 +28,7 @@ pragma solidity ^0.8.19;
 import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 import "@chainlink/contracts/src/v0.8/ChainlinkClient.sol";
 
-contract WAGACoffeeProtocol is ERC1155, ChainlinkClient {
+contract OburugoAgroChainProtocol is ERC1155, ChainlinkClient {
     mapping(bytes32 => Batch) public batches;
     mapping(uint256 => TokenMetadata) public tokenMeta;
 
@@ -361,7 +362,7 @@ export function InventoryManagement() {
           <div className="flex items-center gap-2">
             <Link2 className="w-4 h-4 text-amber" />
             <span className="text-sm font-semibold">
-              WAGACoffeeProtocol.sol
+              OburugoAgroChainProtocol.sol
             </span>
           </div>
           <div className="flex gap-1.5">
@@ -429,6 +430,8 @@ export function InventoryManagement() {
           </div>
         ))}
       </motion.div>
+
+      <NextStepButton />
     </div>
   );
 }

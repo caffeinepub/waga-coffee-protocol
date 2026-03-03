@@ -1,3 +1,4 @@
+import { NextStepButton } from "@/components/NextStepButton";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -26,8 +27,7 @@ import {
   Zap,
 } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
-import QRCode from "qrcode";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 const STATIC_BATCH = {
   product: "Yirgacheffe Single Origin",
@@ -54,7 +54,7 @@ const FAKE_TX = {
   blockHash: "0x7f6e5d4c3b2a1f0e9d8c7b6a5e4f3d2c1b0a9f8e7d6c5b4a3f2e1d0c9b8a7f",
   timestamp: new Date().toISOString(),
   from: "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
-  to: "0xWAGA_PROTOCOL_CONTRACT_v2_0x5FbDB2315678",
+  to: "0xOAC_PROTOCOL_CONTRACT_v2_0x5FbDB2315678",
   gasUsed: "142,381",
   gasPrice: "12.4 Gwei",
   contractAddress: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
@@ -80,6 +80,7 @@ export function QRTraceability() {
   const [scanned, setScanned] = useState(false);
   const [showBlockchain, setShowBlockchain] = useState(false);
   const [qrDataUrl, setQrDataUrl] = useState("");
+  const qrLibRef = useRef<boolean>(false);
 
   const verifiedBatch = batches.find(
     (b) => b.status !== "Pending Verification" && b.status !== "Failed",
@@ -113,42 +114,67 @@ export function QRTraceability() {
     batches.find((b) => b.id === coffeeInfo.batchId)?.status ??
     "Pending Verification";
 
-  // Generate real QR code
-  useEffect(() => {
-    const qrText = [
-      "WAGA Coffee Protocol",
-      `Batch: ${coffeeInfo.batchId}`,
-      `Producer: ${coffeeInfo.producer}`,
-      `Origin: ${coffeeInfo.origin}`,
-      `Process: ${coffeeInfo.process}`,
-      `Harvest: ${coffeeInfo.harvestDate}`,
-      `Altitude: ${coffeeInfo.altitude}`,
-      `Status: ${batchStatus}`,
-      `Token: ${batchToken?.id ?? "Pending"}`,
-      `Supply: ${batchToken?.supply ?? "N/A"}`,
-      `TxHash: ${batchToken?.txHash ?? "N/A"}`,
-    ].join("\n");
+  const generateQR = useCallback(
+    (lib: { toDataURL: (text: string, opts: object) => Promise<string> }) => {
+      const qrText = [
+        "OburugoAgroChain",
+        `Batch: ${coffeeInfo.batchId}`,
+        `Producer: ${coffeeInfo.producer}`,
+        `Origin: ${coffeeInfo.origin}`,
+        `Process: ${coffeeInfo.process}`,
+        `Harvest: ${coffeeInfo.harvestDate}`,
+        `Altitude: ${coffeeInfo.altitude}`,
+        `Status: ${batchStatus}`,
+        `Token: ${batchToken?.id ?? "Pending"}`,
+        `Supply: ${batchToken?.supply ?? "N/A"}`,
+        `TxHash: ${batchToken?.txHash ?? "N/A"}`,
+      ].join("\n");
 
-    QRCode.toDataURL(qrText, {
-      width: 200,
-      margin: 1,
-      color: {
-        dark: "#1a0f00",
-        light: "#f5f0e8",
-      },
-    })
-      .then((url) => setQrDataUrl(url))
-      .catch((err) => console.error("QR generation failed:", err));
-  }, [
-    coffeeInfo.batchId,
-    coffeeInfo.producer,
-    coffeeInfo.origin,
-    coffeeInfo.process,
-    coffeeInfo.harvestDate,
-    coffeeInfo.altitude,
-    batchStatus,
-    batchToken,
-  ]);
+      lib
+        .toDataURL(qrText, {
+          width: 200,
+          margin: 1,
+          color: { dark: "#1a0f00", light: "#f5f0e8" },
+        })
+        .then((url: string) => setQrDataUrl(url))
+        .catch((err: unknown) => console.error("QR generation failed:", err));
+    },
+    [
+      coffeeInfo.batchId,
+      coffeeInfo.producer,
+      coffeeInfo.origin,
+      coffeeInfo.process,
+      coffeeInfo.harvestDate,
+      coffeeInfo.altitude,
+      batchStatus,
+      batchToken,
+    ],
+  );
+
+  // Load QR library from CDN and generate QR code
+  useEffect(() => {
+    if (qrLibRef.current) {
+      // Library already loaded, re-generate
+      const w = window as unknown as {
+        QRCode?: { toDataURL: (text: string, opts: object) => Promise<string> };
+      };
+      if (w.QRCode) generateQR(w.QRCode);
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.src =
+      "https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js";
+    script.async = true;
+    script.onload = () => {
+      qrLibRef.current = true;
+      const w = window as unknown as {
+        QRCode?: { toDataURL: (text: string, opts: object) => Promise<string> };
+      };
+      if (w.QRCode) generateQR(w.QRCode);
+    };
+    document.head.appendChild(script);
+  }, [generateQR]);
 
   const baseDate = verifiedBatch?.harvestDate || "2024-10-01";
 
@@ -303,7 +329,7 @@ export function QRTraceability() {
               {qrDataUrl ? (
                 <img
                   src={qrDataUrl}
-                  alt="WAGA Coffee QR Code"
+                  alt="OburugoAgroChain QR Code"
                   width={200}
                   height={200}
                   className="rounded-xl"
@@ -317,7 +343,7 @@ export function QRTraceability() {
 
             <div className="text-center">
               <p className="font-mono text-xs text-muted-foreground mb-1">
-                WAGA/{coffeeInfo.batchId}
+                OAC/{coffeeInfo.batchId}
               </p>
               <p className="text-xs text-muted-foreground/60">
                 Scan with any QR reader or click below
@@ -630,6 +656,8 @@ export function QRTraceability() {
           </div>
         </DialogContent>
       </Dialog>
+
+      <NextStepButton />
     </div>
   );
 }

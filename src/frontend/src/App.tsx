@@ -9,6 +9,7 @@ import { TokenMinting } from "@/components/steps/TokenMinting";
 import { TokenRedemption } from "@/components/steps/TokenRedemption";
 import { Toaster } from "@/components/ui/sonner";
 import { AppProvider } from "@/context/AppContext";
+import { NavigationProvider } from "@/context/NavigationContext";
 import { Coffee, Github } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useRef, useState } from "react";
@@ -43,6 +44,11 @@ function AppContent() {
     }, 50);
   }
 
+  function handleNext() {
+    const next = Math.min(currentStep + 1, STEPS.length);
+    handleStepChange(next);
+  }
+
   const StepComponent = STEPS[currentStep - 1];
 
   return (
@@ -75,7 +81,13 @@ function AppContent() {
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
           >
-            <StepComponent />
+            <NavigationProvider
+              currentStep={currentStep}
+              totalSteps={STEPS.length}
+              onNext={handleNext}
+            >
+              <StepComponent />
+            </NavigationProvider>
           </motion.div>
         </AnimatePresence>
       </main>
@@ -89,7 +101,7 @@ function AppContent() {
                 <Coffee className="w-3 h-3 text-amber" />
               </div>
               <span className="font-display font-bold text-sm text-amber">
-                WAGA Coffee Protocol
+                OburugoAgroChain
               </span>
             </div>
 
@@ -132,7 +144,7 @@ function AppContent() {
                 className="hover:text-amber transition-colors flex items-center gap-1"
               >
                 <Github className="w-3 h-3" />
-                WAGA Token
+                OAC Token
               </a>
             </div>
           </div>

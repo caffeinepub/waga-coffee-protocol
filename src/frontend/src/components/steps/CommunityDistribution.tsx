@@ -1,3 +1,4 @@
+import { NextStepButton } from "@/components/NextStepButton";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -73,7 +74,7 @@ export function CommunityDistribution() {
       stake: distStake,
     });
     toast.success(`Distributor ${d.name} registered`, {
-      description: `${d.tier} tier · Stake: ${d.stake.toLocaleString()} WAGA`,
+      description: `${d.tier} tier · Stake: ${d.stake.toLocaleString()} OAC`,
     });
     setDistName("");
     setDistLocation("");
@@ -88,7 +89,7 @@ export function CommunityDistribution() {
     const newStake = dist.stake + stakeAmount;
     updateStake(selectedDistForStake, newStake);
     toast.success(
-      `Staked ${stakeAmount.toLocaleString()} WAGA for ${dist.name}`,
+      `Staked ${stakeAmount.toLocaleString()} OAC for ${dist.name}`,
       {
         description: `New total: ${newStake.toLocaleString()} · Tier: ${getTierFromStake(newStake)}`,
       },
@@ -101,7 +102,7 @@ export function CommunityDistribution() {
     if (!dist) return;
     const newStake = Math.max(0, dist.stake - amount);
     updateStake(distributorId, newStake);
-    toast.info(`Unstaked ${amount.toLocaleString()} WAGA from ${dist.name}`);
+    toast.info(`Unstaked ${amount.toLocaleString()} OAC from ${dist.name}`);
   }
 
   function handleCreateOrder(e: React.FormEvent) {
@@ -216,7 +217,7 @@ export function CommunityDistribution() {
                   </div>
                   <div className="space-y-1.5">
                     <Label className="text-xs text-muted-foreground">
-                      Initial Staking Amount (min 1,000 WAGA)
+                      Initial Staking Amount (min 1,000 OAC)
                     </Label>
                     <Input
                       data-ocid="distribution.stake_input"
@@ -242,7 +243,7 @@ export function CommunityDistribution() {
                       >
                         {getTierFromStake(distStake)}
                       </span>{" "}
-                      (Bronze: 1k–5k · Silver: 5k–10k · Gold: 10k+)
+                      (Bronze: 1k–5k OAC · Silver: 5k–10k OAC · Gold: 10k+ OAC)
                     </p>
                   </div>
                   <Button
@@ -303,7 +304,7 @@ export function CommunityDistribution() {
                         <div className="flex items-center justify-between text-xs">
                           <span className="text-muted-foreground">Stake</span>
                           <span className="text-amber font-mono font-semibold">
-                            {d.stake.toLocaleString()} WAGA
+                            {d.stake.toLocaleString()} OAC
                           </span>
                         </div>
                       </div>
@@ -320,15 +321,15 @@ export function CommunityDistribution() {
                     {[
                       {
                         tier: "Bronze",
-                        range: "1,000 – 4,999",
+                        range: "1,000 – 4,999 OAC",
                         discount: "5%",
                       },
                       {
                         tier: "Silver",
-                        range: "5,000 – 9,999",
+                        range: "5,000 – 9,999 OAC",
                         discount: "10%",
                       },
-                      { tier: "Gold", range: "10,000+", discount: "15%" },
+                      { tier: "Gold", range: "10,000+ OAC", discount: "15%" },
                     ].map((t) => (
                       <div
                         key={t.tier}
@@ -342,9 +343,7 @@ export function CommunityDistribution() {
                         >
                           {t.tier}
                         </span>
-                        <span className="text-muted-foreground">
-                          {t.range} WAGA
-                        </span>
+                        <span className="text-muted-foreground">{t.range}</span>
                         <span className="text-success font-medium">
                           {t.discount} off
                         </span>
@@ -362,7 +361,7 @@ export function CommunityDistribution() {
               {/* Add stake form */}
               <div className="rounded-2xl border border-border bg-card p-6 h-fit">
                 <h3 className="font-display font-semibold mb-4">
-                  Stake More WAGA
+                  Stake More OAC
                 </h3>
                 {distributors.length === 0 ? (
                   <p className="text-sm text-muted-foreground text-center py-4">
@@ -384,7 +383,7 @@ export function CommunityDistribution() {
                         <SelectContent className="bg-popover border-border">
                           {distributors.map((d) => (
                             <SelectItem key={d.id} value={d.id}>
-                              {d.name} · {d.stake.toLocaleString()} WAGA
+                              {d.name} · {d.stake.toLocaleString()} OAC
                             </SelectItem>
                           ))}
                         </SelectContent>
@@ -401,7 +400,7 @@ export function CommunityDistribution() {
                           setStakeAmount(Number.parseInt(e.target.value) || 0)
                         }
                         min={1}
-                        placeholder="Enter WAGA amount"
+                        placeholder="Enter OAC amount"
                         className="bg-muted/30 border-border focus:border-amber/50"
                       />
                     </div>
@@ -466,7 +465,7 @@ export function CommunityDistribution() {
                               {dist.stake.toLocaleString()}
                             </div>
                             <div className="text-xs text-muted-foreground">
-                              WAGA staked
+                              OAC staked
                             </div>
                           </div>
 
@@ -772,6 +771,8 @@ export function CommunityDistribution() {
           </div>
         </div>
       </motion.div>
+
+      <NextStepButton />
     </div>
   );
 }

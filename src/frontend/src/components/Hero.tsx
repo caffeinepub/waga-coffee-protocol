@@ -121,13 +121,7 @@ export function Hero({ onExplore }: HeroProps) {
             </div>
           </div>
           <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-none tracking-tight mb-4">
-            <span className="gradient-text">WAGA</span>
-            <br />
-            <span className="text-foreground/90">Coffee</span>
-            <br />
-            <span className="text-foreground/70 text-4xl md:text-5xl lg:text-6xl font-medium">
-              Protocol
-            </span>
+            <span className="gradient-text">OburugoAgroChain</span>
           </h1>
         </motion.div>
 
