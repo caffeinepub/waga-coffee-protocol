@@ -20,72 +20,73 @@
 
 @layer base {
   :root {
-    /* WAGA Coffee Protocol — Dark Coffee Theme */
+    /* OburugoAgroChain — Deep Espresso Brown + Forest Green + Harvest Yellow */
     --radius: 0.75rem;
 
-    /* Backgrounds */
-    --background: 0.12 0.01 60;
-    --foreground: 0.93 0.03 80;
+    /* Backgrounds — deep espresso brown */
+    --background: 0.10 0.018 35;
+    --foreground: 0.93 0.025 80;
 
     /* Card surfaces */
-    --card: 0.16 0.015 60;
-    --card-foreground: 0.93 0.03 80;
+    --card: 0.14 0.022 35;
+    --card-foreground: 0.93 0.025 80;
 
     /* Popover */
-    --popover: 0.18 0.015 60;
-    --popover-foreground: 0.93 0.03 80;
+    --popover: 0.16 0.022 35;
+    --popover-foreground: 0.93 0.025 80;
 
-    /* Primary: Amber/Gold */
-    --primary: 0.72 0.13 72;
-    --primary-foreground: 0.12 0.01 60;
+    /* Primary: Forest Green (buttons, CTAs, active states) */
+    --primary: 0.55 0.14 145;
+    --primary-foreground: 0.96 0.01 80;
 
-    /* Secondary: Coffee Brown */
-    --secondary: 0.32 0.07 55;
-    --secondary-foreground: 0.93 0.03 80;
+    /* Secondary: Mid espresso brown */
+    --secondary: 0.28 0.055 35;
+    --secondary-foreground: 0.93 0.025 80;
 
     /* Muted */
-    --muted: 0.22 0.02 60;
-    --muted-foreground: 0.58 0.04 70;
+    --muted: 0.20 0.02 35;
+    --muted-foreground: 0.56 0.04 65;
 
-    /* Accent: Warm Cream */
-    --accent: 0.88 0.06 82;
-    --accent-foreground: 0.12 0.01 60;
+    /* Accent: Harvest Yellow (highlights, tags, accents) */
+    --accent: 0.82 0.14 80;
+    --accent-foreground: 0.10 0.018 35;
 
     /* Destructive */
     --destructive: 0.58 0.22 27;
     --destructive-foreground: 0.95 0.02 80;
 
     /* Border */
-    --border: 0.28 0.03 60;
-    --input: 0.22 0.02 60;
-    --ring: 0.72 0.13 72;
+    --border: 0.26 0.03 35;
+    --input: 0.20 0.02 35;
+    --ring: 0.55 0.14 145;
 
     /* Charts */
-    --chart-1: 0.72 0.13 72;
-    --chart-2: 0.6 0.1 150;
-    --chart-3: 0.55 0.15 25;
-    --chart-4: 0.65 0.12 190;
-    --chart-5: 0.7 0.14 55;
+    --chart-1: 0.55 0.14 145;
+    --chart-2: 0.82 0.14 80;
+    --chart-3: 0.58 0.22 27;
+    --chart-4: 0.60 0.12 190;
+    --chart-5: 0.65 0.10 35;
 
     /* Sidebar */
-    --sidebar: 0.14 0.012 60;
-    --sidebar-foreground: 0.93 0.03 80;
-    --sidebar-primary: 0.72 0.13 72;
-    --sidebar-primary-foreground: 0.12 0.01 60;
-    --sidebar-accent: 0.22 0.02 60;
-    --sidebar-accent-foreground: 0.93 0.03 80;
-    --sidebar-border: 0.28 0.03 60;
-    --sidebar-ring: 0.72 0.13 72;
+    --sidebar: 0.12 0.018 35;
+    --sidebar-foreground: 0.93 0.025 80;
+    --sidebar-primary: 0.55 0.14 145;
+    --sidebar-primary-foreground: 0.96 0.01 80;
+    --sidebar-accent: 0.20 0.02 35;
+    --sidebar-accent-foreground: 0.93 0.025 80;
+    --sidebar-border: 0.26 0.03 35;
+    --sidebar-ring: 0.55 0.14 145;
 
-    /* Custom WAGA tokens */
-    --amber: 0.72 0.13 72;
-    --amber-dim: 0.55 0.10 72;
-    --cream: 0.88 0.06 82;
-    --coffee: 0.32 0.07 55;
-    --coffee-dark: 0.22 0.05 55;
-    --success: 0.6 0.15 150;
-    --warning: 0.75 0.12 80;
-    --info: 0.6 0.12 240;
+    /* Custom OburugoAgroChain tokens */
+    --espresso: 0.10 0.018 35;
+    --espresso-mid: 0.28 0.055 35;
+    --green: 0.55 0.14 145;
+    --green-dim: 0.42 0.10 145;
+    --yellow: 0.82 0.14 80;
+    --yellow-dim: 0.68 0.11 80;
+    --success: 0.60 0.15 145;
+    --warning: 0.82 0.14 80;
+    --info: 0.60 0.12 240;
   }
 
   * {
@@ -118,44 +119,78 @@
     border-radius: 3px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: oklch(var(--amber-dim));
+    background: oklch(var(--yellow-dim));
   }
 }
 
 @layer utilities {
-  .text-amber { color: oklch(var(--amber)); }
-  .text-cream { color: oklch(var(--cream)); }
-  .text-coffee { color: oklch(var(--coffee)); }
-  .bg-amber { background-color: oklch(var(--amber)); }
-  .bg-coffee { background-color: oklch(var(--coffee)); }
-  .bg-coffee-dark { background-color: oklch(var(--coffee-dark)); }
-  .border-amber { border-color: oklch(var(--amber)); }
+  /* Green utilities */
+  .text-green { color: oklch(var(--green)); }
+  .bg-green { background-color: oklch(var(--green)); }
+  .border-green { border-color: oklch(var(--green)); }
 
-  .glow-amber {
-    box-shadow: 0 0 20px oklch(var(--amber) / 0.15), 0 0 40px oklch(var(--amber) / 0.05);
+  /* Yellow utilities */
+  .text-yellow { color: oklch(var(--yellow)); }
+  .bg-yellow { background-color: oklch(var(--yellow)); }
+  .border-yellow { border-color: oklch(var(--yellow)); }
+
+  /* Espresso utilities */
+  .text-espresso { color: oklch(var(--espresso)); }
+  .bg-espresso { background-color: oklch(var(--espresso)); }
+  .bg-espresso-mid { background-color: oklch(var(--espresso-mid)); }
+
+  /* Legacy amber aliases mapped to yellow for backward compat */
+  .text-amber { color: oklch(var(--yellow)); }
+  .text-cream { color: oklch(var(--foreground)); }
+  .text-coffee { color: oklch(var(--espresso-mid)); }
+  .bg-amber { background-color: oklch(var(--yellow)); }
+  .bg-coffee { background-color: oklch(var(--espresso-mid)); }
+  .bg-coffee-dark { background-color: oklch(var(--espresso)); }
+  .border-amber { border-color: oklch(var(--yellow)); }
+
+  /* Glow utilities — green for primary, yellow for accent */
+  .glow-green {
+    box-shadow: 0 0 20px oklch(var(--green) / 0.15), 0 0 40px oklch(var(--green) / 0.05);
   }
-  .glow-amber-sm {
-    box-shadow: 0 0 10px oklch(var(--amber) / 0.2);
+  .glow-green-sm {
+    box-shadow: 0 0 10px oklch(var(--green) / 0.25);
   }
+  .glow-yellow {
+    box-shadow: 0 0 20px oklch(var(--yellow) / 0.15), 0 0 40px oklch(var(--yellow) / 0.05);
+  }
+  .glow-yellow-sm {
+    box-shadow: 0 0 10px oklch(var(--yellow) / 0.2);
+  }
+
+  /* Legacy glow aliases */
+  .glow-amber { box-shadow: 0 0 20px oklch(var(--yellow) / 0.15), 0 0 40px oklch(var(--yellow) / 0.05); }
+  .glow-amber-sm { box-shadow: 0 0 10px oklch(var(--yellow) / 0.2); }
 
   .card-hover {
     transition: all 0.2s ease;
   }
   .card-hover:hover {
-    border-color: oklch(var(--amber) / 0.3);
-    box-shadow: 0 0 15px oklch(var(--amber) / 0.08), 0 4px 20px oklch(0 0 0 / 0.3);
+    border-color: oklch(var(--green) / 0.35);
+    box-shadow: 0 0 15px oklch(var(--green) / 0.10), 0 4px 20px oklch(0 0 0 / 0.35);
     transform: translateY(-1px);
   }
 
-  .badge-amber {
-    background-color: oklch(var(--amber) / 0.15);
-    color: oklch(var(--amber));
-    border: 1px solid oklch(var(--amber) / 0.3);
-  }
+  /* Badges */
   .badge-green {
-    background-color: oklch(var(--success) / 0.15);
-    color: oklch(var(--success));
-    border: 1px solid oklch(var(--success) / 0.3);
+    background-color: oklch(var(--green) / 0.15);
+    color: oklch(var(--green));
+    border: 1px solid oklch(var(--green) / 0.3);
+  }
+  .badge-yellow {
+    background-color: oklch(var(--yellow) / 0.15);
+    color: oklch(var(--yellow));
+    border: 1px solid oklch(var(--yellow) / 0.3);
+  }
+  /* Legacy badge-amber mapped to yellow */
+  .badge-amber {
+    background-color: oklch(var(--yellow) / 0.15);
+    color: oklch(var(--yellow));
+    border: 1px solid oklch(var(--yellow) / 0.3);
   }
   .badge-red {
     background-color: oklch(var(--destructive) / 0.15);
@@ -173,8 +208,9 @@
     border: 1px solid oklch(var(--border));
   }
 
+  /* Gradient text: green to yellow */
   .gradient-text {
-    background: linear-gradient(135deg, oklch(var(--amber)) 0%, oklch(var(--cream)) 100%);
+    background: linear-gradient(135deg, oklch(var(--green)) 0%, oklch(var(--yellow)) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -196,29 +232,29 @@
     font-family: "JetBrains Mono", "Geist Mono", "Courier New", monospace;
     font-size: 0.8rem;
     line-height: 1.6;
-    background-color: oklch(0.1 0.01 60);
+    background-color: oklch(0.08 0.015 35);
     border: 1px solid oklch(var(--border));
     border-radius: 0.5rem;
     padding: 1rem 1.25rem;
     overflow-x: auto;
   }
 
-  .step-complete { color: oklch(var(--success)); }
-  .step-active { color: oklch(var(--amber)); }
+  .step-complete { color: oklch(var(--green)); }
+  .step-active { color: oklch(var(--yellow)); }
   .step-inactive { color: oklch(var(--muted-foreground)); }
 }
 
-/* Timeline connector */
+/* Timeline connector — yellow accent */
 .timeline-line {
   position: absolute;
   left: 1.25rem;
   top: 2.5rem;
   bottom: -0.5rem;
   width: 2px;
-  background: linear-gradient(180deg, oklch(var(--amber) / 0.6), oklch(var(--amber) / 0.1));
+  background: linear-gradient(180deg, oklch(var(--yellow) / 0.6), oklch(var(--yellow) / 0.1));
 }
 
-/* Step circle */
+/* Step circle — green primary */
 .step-circle {
   width: 2.5rem;
   height: 2.5rem;
@@ -226,19 +262,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: oklch(var(--amber) / 0.15);
-  border: 1px solid oklch(var(--amber) / 0.4);
-  color: oklch(var(--amber));
+  background-color: oklch(var(--green) / 0.15);
+  border: 1px solid oklch(var(--green) / 0.4);
+  color: oklch(var(--green));
   font-weight: 700;
   font-size: 0.875rem;
   flex-shrink: 0;
 }
 
-/* Hero mesh gradient */
+/* Hero mesh gradient — espresso brown tones */
 .hero-mesh {
   background:
-    radial-gradient(ellipse 80% 60% at 10% 20%, oklch(var(--coffee) / 0.3) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 80% at 90% 80%, oklch(var(--amber) / 0.08) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 50% at 50% 50%, oklch(var(--coffee-dark) / 0.5) 0%, transparent 100%),
+    radial-gradient(ellipse 80% 60% at 10% 20%, oklch(var(--espresso-mid) / 0.4) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 90% 80%, oklch(var(--green) / 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 50% at 50% 50%, oklch(var(--espresso) / 0.6) 0%, transparent 100%),
     oklch(var(--background));
 }

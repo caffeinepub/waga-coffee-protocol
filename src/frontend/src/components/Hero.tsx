@@ -82,17 +82,17 @@ export function Hero({ onExplore }: HeroProps) {
         className="absolute inset-0 opacity-[0.03]"
         style={{
           backgroundImage: `
-            linear-gradient(oklch(var(--amber)) 1px, transparent 1px),
-            linear-gradient(90deg, oklch(var(--amber)) 1px, transparent 1px)
+            linear-gradient(oklch(var(--yellow)) 1px, transparent 1px),
+            linear-gradient(90deg, oklch(var(--yellow)) 1px, transparent 1px)
           `,
           backgroundSize: "60px 60px",
         }}
       />
 
       {/* Decorative coffee ring */}
-      <div className="absolute top-20 right-20 w-64 h-64 rounded-full border border-amber/10 opacity-40 hidden lg:block" />
-      <div className="absolute top-24 right-24 w-56 h-56 rounded-full border border-amber/5 opacity-60 hidden lg:block" />
-      <div className="absolute -bottom-20 -left-20 w-80 h-80 rounded-full border border-amber/5 opacity-30 hidden lg:block" />
+      <div className="absolute top-20 right-20 w-64 h-64 rounded-full border border-yellow/10 opacity-40 hidden lg:block" />
+      <div className="absolute top-24 right-24 w-56 h-56 rounded-full border border-yellow/5 opacity-60 hidden lg:block" />
+      <div className="absolute -bottom-20 -left-20 w-80 h-80 rounded-full border border-yellow/5 opacity-30 hidden lg:block" />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 py-24">
         {/* Badge */}
@@ -102,7 +102,7 @@ export function Hero({ onExplore }: HeroProps) {
           transition={{ duration: 0.5 }}
           className="flex items-center gap-2 mb-8"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-amber/30 bg-amber/10 text-amber text-xs font-semibold tracking-wider uppercase">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-yellow/30 bg-yellow/10 text-yellow text-xs font-semibold tracking-wider uppercase">
             <Zap className="w-3 h-3" />
             <span>Blockchain Protocol</span>
           </div>
@@ -116,8 +116,8 @@ export function Hero({ onExplore }: HeroProps) {
           className="mb-6"
         >
           <div className="flex items-center gap-4 mb-4">
-            <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-amber/15 border border-amber/30">
-              <Coffee className="w-6 h-6 text-amber" />
+            <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-yellow/15 border border-yellow/30">
+              <Coffee className="w-6 h-6 text-yellow" />
             </div>
           </div>
           <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-none tracking-tight mb-4">
@@ -146,7 +146,7 @@ export function Hero({ onExplore }: HeroProps) {
             <span>Live Protocol</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-1.5 h-1.5 rounded-full bg-amber" />
+            <div className="w-1.5 h-1.5 rounded-full bg-yellow" />
             <span>ERC-1155 Tokens</span>
           </div>
           <div className="flex items-center gap-2">
@@ -166,7 +166,7 @@ export function Hero({ onExplore }: HeroProps) {
             data-ocid="hero.explore_button"
             onClick={onExplore}
             size="lg"
-            className="bg-amber text-background hover:bg-amber/90 font-semibold text-base px-8 py-6 rounded-xl glow-amber-sm transition-all duration-200 hover:scale-[1.02]"
+            className="bg-green text-background hover:opacity-90 font-semibold text-base px-8 py-6 rounded-xl glow-green-sm transition-all duration-200 hover:scale-[1.02]"
           >
             Explore the Protocol
             <ArrowDown className="ml-2 w-4 h-4" />
@@ -198,12 +198,12 @@ export function Hero({ onExplore }: HeroProps) {
                 className="group relative p-4 rounded-xl border border-border/60 bg-card/50 backdrop-blur-sm card-hover cursor-default"
               >
                 {/* Number */}
-                <div className="text-xs font-bold text-amber/60 mb-3 font-mono">
+                <div className="text-xs font-bold text-yellow/60 mb-3 font-mono">
                   0{step.num}
                 </div>
                 {/* Icon */}
                 <div className="mb-3">
-                  <step.icon className="w-5 h-5 text-amber/70 group-hover:text-amber transition-colors duration-200" />
+                  <step.icon className="w-5 h-5 text-yellow/70 group-hover:text-yellow transition-colors duration-200" />
                 </div>
                 {/* Label */}
                 <div className="text-xs font-semibold text-foreground/80 mb-1 font-display leading-tight">
@@ -215,7 +215,7 @@ export function Hero({ onExplore }: HeroProps) {
 
                 {/* Connector dot */}
                 {step.num < 7 && (
-                  <div className="absolute -right-1.5 top-1/2 -translate-y-1/2 w-3 h-px bg-amber/30 hidden lg:block" />
+                  <div className="absolute -right-1.5 top-1/2 -translate-y-1/2 w-3 h-px bg-yellow/30 hidden lg:block" />
                 )}
               </motion.div>
             ))}
@@ -237,7 +237,7 @@ export function Hero({ onExplore }: HeroProps) {
           animate={{ y: [0, 6, 0] }}
           transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY }}
         >
-          <ArrowDown className="w-4 h-4 text-amber/60" />
+          <ArrowDown className="w-4 h-4 text-yellow/60" />
         </motion.div>
       </motion.div>
     </section>

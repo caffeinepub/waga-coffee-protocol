@@ -170,7 +170,7 @@ export function TokenRedemption() {
           className="rounded-2xl border border-border bg-card p-6 h-fit"
         >
           <div className="flex items-center gap-2 mb-6">
-            <RefreshCcw className="w-4 h-4 text-amber" />
+            <RefreshCcw className="w-4 h-4 text-yellow" />
             <h3 className="font-display font-semibold">
               New Redemption Request
             </h3>
@@ -201,7 +201,7 @@ export function TokenRedemption() {
                 >
                   <SelectTrigger
                     data-ocid="redemption.token_select"
-                    className="bg-muted/30 border-border focus:border-amber/50"
+                    className="bg-muted/30 border-border focus:border-green/50"
                   >
                     <SelectValue placeholder="Choose a token..." />
                   </SelectTrigger>
@@ -210,7 +210,7 @@ export function TokenRedemption() {
                       const batch = batches.find((b) => b.id === t.batchId);
                       return (
                         <SelectItem key={t.id} value={t.id}>
-                          <span className="font-mono text-amber">{t.id}</span>
+                          <span className="font-mono text-yellow">{t.id}</span>
                           <span className="text-muted-foreground ml-2 text-xs">
                             · {batch?.origin ?? t.batchId} ·{" "}
                             {t.remainingSupply.toLocaleString()} avail
@@ -239,7 +239,7 @@ export function TokenRedemption() {
                       ?.remainingSupply
                   }
                   placeholder="Number of bags to redeem"
-                  className="bg-muted/30 border-border focus:border-amber/50"
+                  className="bg-muted/30 border-border focus:border-green/50"
                   required
                 />
               </div>
@@ -253,7 +253,7 @@ export function TokenRedemption() {
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
                   placeholder="123 Coffee Lane, Oslo, Norway"
-                  className="bg-muted/30 border-border focus:border-amber/50"
+                  className="bg-muted/30 border-border focus:border-green/50"
                   required
                 />
               </div>
@@ -276,7 +276,7 @@ export function TokenRedemption() {
                 data-ocid="redemption.submit_button"
                 type="submit"
                 disabled={!selectedTokenId || quantity <= 0 || !address.trim()}
-                className="w-full bg-amber text-background hover:bg-amber/90 font-semibold disabled:opacity-50"
+                className="w-full bg-green text-background hover:opacity-90 font-semibold disabled:opacity-50"
               >
                 <RefreshCcw className="w-4 h-4 mr-2" />
                 Submit Redemption Request
@@ -326,7 +326,7 @@ export function TokenRedemption() {
                     >
                       <div className="flex items-start justify-between mb-3">
                         <div>
-                          <div className="font-mono text-sm font-bold text-amber">
+                          <div className="font-mono text-sm font-bold text-yellow">
                             {r.id}
                           </div>
                           <div className="text-xs text-muted-foreground mt-0.5">
@@ -353,7 +353,7 @@ export function TokenRedemption() {
                             key={step}
                             className={cn(
                               "flex-1 h-1 rounded-full transition-all duration-500",
-                              si <= currentFlowIdx ? "bg-amber" : "bg-border",
+                              si <= currentFlowIdx ? "bg-green" : "bg-border",
                             )}
                           />
                         ))}
@@ -409,18 +409,18 @@ export function TokenRedemption() {
                   <div
                     className={cn(
                       "flex items-center justify-center w-8 h-8 rounded-full border text-xs font-bold",
-                      "bg-amber/10 border-amber/30 text-amber",
+                      "bg-yellow/10 border-yellow/30 text-yellow",
                     )}
                   >
                     {idx + 1}
                   </div>
                   {idx < REDEMPTION_FLOW.length - 1 && (
-                    <div className="w-px h-6 bg-amber/20 my-1" />
+                    <div className="w-px h-6 bg-yellow/20 my-1" />
                   )}
                 </div>
                 <div className="flex-1 pb-2">
                   <div className="flex items-center gap-2 mb-1">
-                    <StatusIcon className="w-3.5 h-3.5 text-amber" />
+                    <StatusIcon className="w-3.5 h-3.5 text-yellow" />
                     <span className="font-display font-semibold text-sm">
                       {status}
                     </span>
@@ -472,7 +472,7 @@ export function TokenRedemption() {
                     isComment
                       ? "text-muted-foreground/60"
                       : isKeyword
-                        ? "text-amber"
+                        ? "text-yellow"
                         : "text-foreground/80",
                   )}
                 >
@@ -496,8 +496,8 @@ export function TokenRedemption() {
             key={card.title}
             className="rounded-xl border border-border bg-card p-5 card-hover"
           >
-            <div className="w-9 h-9 rounded-lg bg-amber/10 border border-amber/20 flex items-center justify-center mb-3">
-              <card.icon className="w-4 h-4 text-amber" />
+            <div className="w-9 h-9 rounded-lg bg-yellow/10 border border-yellow/20 flex items-center justify-center mb-3">
+              <card.icon className="w-4 h-4 text-yellow" />
             </div>
             <h4 className="font-display font-semibold text-sm mb-2">
               {card.title}

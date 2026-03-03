@@ -71,15 +71,28 @@ export default {
           border: "oklch(var(--sidebar-border))",
           ring: "oklch(var(--sidebar-ring))",
         },
-        // WAGA custom semantic tokens
-        amber: {
-          DEFAULT: "oklch(var(--amber))",
-          dim: "oklch(var(--amber-dim))",
+        // OburugoAgroChain custom semantic tokens
+        green: {
+          DEFAULT: "oklch(var(--green) / <alpha-value>)",
+          dim: "oklch(var(--green-dim) / <alpha-value>)",
         },
-        cream: "oklch(var(--cream))",
+        yellow: {
+          DEFAULT: "oklch(var(--yellow) / <alpha-value>)",
+          dim: "oklch(var(--yellow-dim) / <alpha-value>)",
+        },
+        espresso: {
+          DEFAULT: "oklch(var(--espresso) / <alpha-value>)",
+          mid: "oklch(var(--espresso-mid) / <alpha-value>)",
+        },
+        // Legacy aliases for backward compat
+        amber: {
+          DEFAULT: "oklch(var(--yellow) / <alpha-value>)",
+          dim: "oklch(var(--yellow-dim) / <alpha-value>)",
+        },
+        cream: "oklch(var(--foreground))",
         coffee: {
-          DEFAULT: "oklch(var(--coffee))",
-          dark: "oklch(var(--coffee-dark))",
+          DEFAULT: "oklch(var(--espresso-mid))",
+          dark: "oklch(var(--espresso))",
         },
         success: "oklch(var(--success))",
         warning: "oklch(var(--warning))",
@@ -94,9 +107,13 @@ export default {
       },
       boxShadow: {
         xs: "0 1px 2px 0 rgba(0,0,0,0.05)",
-        "amber-sm": "0 0 10px oklch(var(--amber) / 0.2)",
-        "amber-md": "0 0 20px oklch(var(--amber) / 0.15), 0 0 40px oklch(var(--amber) / 0.05)",
-        "card-hover": "0 0 15px oklch(var(--amber) / 0.08), 0 4px 20px rgba(0,0,0,0.3)",
+        "green-sm": "0 0 10px oklch(var(--green) / 0.25)",
+        "green-md": "0 0 20px oklch(var(--green) / 0.15), 0 0 40px oklch(var(--green) / 0.05)",
+        "yellow-sm": "0 0 10px oklch(var(--yellow) / 0.2)",
+        "yellow-md": "0 0 20px oklch(var(--yellow) / 0.15), 0 0 40px oklch(var(--yellow) / 0.05)",
+        "amber-sm": "0 0 10px oklch(var(--yellow) / 0.2)",
+        "amber-md": "0 0 20px oklch(var(--yellow) / 0.15), 0 0 40px oklch(var(--yellow) / 0.05)",
+        "card-hover": "0 0 15px oklch(var(--green) / 0.10), 0 4px 20px rgba(0,0,0,0.35)",
       },
       keyframes: {
         "accordion-down": {
@@ -106,6 +123,10 @@ export default {
         "accordion-up": {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
+        },
+        "pulse-green": {
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: "0.5" },
         },
         "pulse-amber": {
           "0%, 100%": { opacity: "1" },
@@ -127,6 +148,7 @@ export default {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "pulse-green": "pulse-green 2s ease-in-out infinite",
         "pulse-amber": "pulse-amber 2s ease-in-out infinite",
         "spin-slow": "spin-slow 3s linear infinite",
         "fade-in": "fade-in 0.3s ease-out",

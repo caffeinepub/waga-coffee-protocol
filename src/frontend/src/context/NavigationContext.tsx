@@ -5,6 +5,8 @@ interface NavigationContextType {
   currentStep: number;
   totalSteps: number;
   onNext: () => void;
+  canProceed: boolean;
+  blockingMessage: string;
 }
 
 const NavigationContext = createContext<NavigationContextType | null>(null);
@@ -14,14 +16,20 @@ export function NavigationProvider({
   currentStep,
   totalSteps,
   onNext,
+  canProceed,
+  blockingMessage,
 }: {
   children: React.ReactNode;
   currentStep: number;
   totalSteps: number;
   onNext: () => void;
+  canProceed: boolean;
+  blockingMessage: string;
 }) {
   return (
-    <NavigationContext.Provider value={{ currentStep, totalSteps, onNext }}>
+    <NavigationContext.Provider
+      value={{ currentStep, totalSteps, onNext, canProceed, blockingMessage }}
+    >
       {children}
     </NavigationContext.Provider>
   );

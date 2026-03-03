@@ -105,7 +105,7 @@ export function BatchCreation() {
         >
           <div className="rounded-2xl border border-border bg-card p-6 card-hover">
             <div className="flex items-center gap-2 mb-6">
-              <Layers className="w-4 h-4 text-amber" />
+              <Layers className="w-4 h-4 text-yellow" />
               <h3 className="font-display font-semibold text-foreground">
                 New Batch Details
               </h3>
@@ -123,7 +123,7 @@ export function BatchCreation() {
                     value={form.producer}
                     onChange={(e) => updateField("producer", e.target.value)}
                     placeholder="Yirgacheffe Cooperative"
-                    className="bg-muted/30 border-border focus:border-amber/50"
+                    className="bg-muted/30 border-border focus:border-green/50"
                     required
                   />
                 </div>
@@ -138,7 +138,7 @@ export function BatchCreation() {
                     value={form.origin}
                     onChange={(e) => updateField("origin", e.target.value)}
                     placeholder="Ethiopia"
-                    className="bg-muted/30 border-border focus:border-amber/50"
+                    className="bg-muted/30 border-border focus:border-green/50"
                     required
                   />
                 </div>
@@ -152,7 +152,7 @@ export function BatchCreation() {
                     value={form.variety}
                     onChange={(e) => updateField("variety", e.target.value)}
                     placeholder="Heirloom"
-                    className="bg-muted/30 border-border focus:border-amber/50"
+                    className="bg-muted/30 border-border focus:border-green/50"
                   />
                 </div>
 
@@ -165,7 +165,7 @@ export function BatchCreation() {
                     value={form.altitude}
                     onChange={(e) => updateField("altitude", e.target.value)}
                     placeholder="1,800-2,200 masl"
-                    className="bg-muted/30 border-border focus:border-amber/50"
+                    className="bg-muted/30 border-border focus:border-green/50"
                   />
                 </div>
 
@@ -180,7 +180,7 @@ export function BatchCreation() {
                   >
                     <SelectTrigger
                       data-ocid="batch.process_select"
-                      className="bg-muted/30 border-border focus:border-amber/50"
+                      className="bg-muted/30 border-border focus:border-green/50"
                     >
                       <SelectValue />
                     </SelectTrigger>
@@ -203,7 +203,7 @@ export function BatchCreation() {
                     value={form.roastProfile}
                     onValueChange={(v) => updateField("roastProfile", v)}
                   >
-                    <SelectTrigger className="bg-muted/30 border-border focus:border-amber/50">
+                    <SelectTrigger className="bg-muted/30 border-border focus:border-green/50">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent className="bg-popover border-border">
@@ -225,7 +225,7 @@ export function BatchCreation() {
                     type="date"
                     value={form.harvestDate}
                     onChange={(e) => updateField("harvestDate", e.target.value)}
-                    className="bg-muted/30 border-border focus:border-amber/50"
+                    className="bg-muted/30 border-border focus:border-green/50"
                     style={{ colorScheme: "dark" }}
                   />
                 </div>
@@ -246,7 +246,7 @@ export function BatchCreation() {
                       )
                     }
                     min={1}
-                    className="bg-muted/30 border-border focus:border-amber/50"
+                    className="bg-muted/30 border-border focus:border-green/50"
                     required
                   />
                 </div>
@@ -260,7 +260,7 @@ export function BatchCreation() {
                     value={form.bagSize}
                     onValueChange={(v) => updateField("bagSize", v)}
                   >
-                    <SelectTrigger className="bg-muted/30 border-border focus:border-amber/50">
+                    <SelectTrigger className="bg-muted/30 border-border focus:border-green/50">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent className="bg-popover border-border">
@@ -289,7 +289,7 @@ export function BatchCreation() {
                     }
                     step={0.01}
                     min={0}
-                    className="bg-muted/30 border-border focus:border-amber/50"
+                    className="bg-muted/30 border-border focus:border-green/50"
                   />
                 </div>
               </div>
@@ -297,7 +297,7 @@ export function BatchCreation() {
               <Button
                 data-ocid="batch.submit_button"
                 type="submit"
-                className="w-full bg-amber text-background hover:bg-amber/90 font-semibold mt-2 transition-all duration-200"
+                className="w-full bg-green text-background hover:opacity-90 font-semibold mt-2 transition-all duration-200"
               >
                 <Plus className="w-4 h-4 mr-2" />
                 Create Batch
@@ -350,7 +350,7 @@ export function BatchCreation() {
                 >
                   <div className="flex items-start justify-between mb-3">
                     <div>
-                      <div className="font-mono text-sm font-bold text-amber">
+                      <div className="font-mono text-sm font-bold text-yellow">
                         {batch.id}
                       </div>
                       <div className="text-sm font-medium text-foreground mt-0.5">
@@ -411,8 +411,8 @@ export function BatchCreation() {
           )}
 
           {/* Info card */}
-          <div className="rounded-xl border border-amber/20 bg-amber/5 p-4">
-            <div className="text-xs font-semibold text-amber mb-1.5">
+          <div className="rounded-xl border border-yellow/20 bg-yellow/5 p-4">
+            <div className="text-xs font-semibold text-yellow mb-1.5">
               On-Chain Registration
             </div>
             <p className="text-xs text-muted-foreground leading-relaxed">

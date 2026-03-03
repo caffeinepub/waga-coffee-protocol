@@ -69,10 +69,10 @@ export function StepNav({ currentStep, onStepChange }: StepNavProps) {
         <div className="flex items-center justify-between h-14">
           {/* Logo */}
           <div className="flex items-center gap-2 flex-shrink-0">
-            <div className="flex items-center justify-center w-7 h-7 rounded-lg bg-amber/15 border border-amber/30">
-              <Coffee className="w-3.5 h-3.5 text-amber" />
+            <div className="flex items-center justify-center w-7 h-7 rounded-lg bg-yellow/15 border border-yellow/30">
+              <Coffee className="w-3.5 h-3.5 text-yellow" />
             </div>
-            <span className="font-display font-bold text-sm text-amber hidden sm:block">
+            <span className="font-display font-bold text-sm text-yellow hidden sm:block">
               OAC
             </span>
           </div>
@@ -82,7 +82,7 @@ export function StepNav({ currentStep, onStepChange }: StepNavProps) {
             <div className="flex items-center gap-2">
               <div className="w-24 h-1.5 rounded-full bg-border overflow-hidden">
                 <div
-                  className="h-full rounded-full bg-amber transition-all duration-500"
+                  className="h-full rounded-full bg-green transition-all duration-500"
                   style={{ width: `${progressPct}%` }}
                 />
               </div>
@@ -107,9 +107,9 @@ export function StepNav({ currentStep, onStepChange }: StepNavProps) {
                 className={cn(
                   "group relative flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium transition-all duration-200 whitespace-nowrap flex-shrink-0",
                   isActive
-                    ? "bg-amber/15 text-amber border border-amber/30"
+                    ? "bg-yellow/15 text-yellow border border-yellow/30"
                     : isComplete
-                      ? "text-success hover:bg-success/10 hover:text-success"
+                      ? "text-green hover:bg-green/10 hover:text-green"
                       : "text-muted-foreground hover:text-foreground hover:bg-muted/30",
                 )}
               >
@@ -118,9 +118,9 @@ export function StepNav({ currentStep, onStepChange }: StepNavProps) {
                   className={cn(
                     "flex items-center justify-center w-5 h-5 rounded-full text-[10px] font-bold flex-shrink-0 transition-all duration-200",
                     isActive
-                      ? "bg-amber text-background"
+                      ? "bg-yellow text-background"
                       : isComplete
-                        ? "bg-success/20 text-success"
+                        ? "bg-green/20 text-green"
                         : "bg-border/60 text-muted-foreground",
                   )}
                 >
@@ -132,7 +132,7 @@ export function StepNav({ currentStep, onStepChange }: StepNavProps) {
 
                 {/* Active underline */}
                 {isActive && (
-                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-amber" />
+                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-yellow" />
                 )}
 
                 {/* Connector */}
@@ -140,7 +140,7 @@ export function StepNav({ currentStep, onStepChange }: StepNavProps) {
                   <div
                     className={cn(
                       "absolute -right-0.5 top-1/2 -translate-y-1/2 w-1 h-px",
-                      isComplete ? "bg-success/30" : "bg-border/40",
+                      isComplete ? "bg-green/30" : "bg-border/40",
                     )}
                   />
                 )}
@@ -153,7 +153,7 @@ export function StepNav({ currentStep, onStepChange }: StepNavProps) {
       {/* Overall progress bar */}
       <div className="h-0.5 w-full bg-border/30">
         <div
-          className="h-full bg-amber/60 transition-all duration-700 ease-out"
+          className="h-full bg-green/60 transition-all duration-700 ease-out"
           style={{ width: `${progressPct}%` }}
         />
       </div>

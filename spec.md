@@ -1,32 +1,51 @@
-# WAGA Coffee Protocol
+# OburugoAgroChain
 
 ## Current State
-Step 7 (QR Traceability) renders a decorative SVG that looks like a QR code but is not scannable by any real QR reader. It has a "Simulate QR Scan" button that reveals batch info in-app. The blockchain modal uses static hardcoded data (FAKE_TX). The displayed batch info already pulls from AppContext (real batch data if available, fallback static), but the QR image itself encodes nothing real.
+
+The app uses a dark coffee-themed palette with amber/gold as the primary action color, warm cream as accent, and dark brown backgrounds. Custom tokens include `--amber`, `--cream`, `--coffee`, `--coffee-dark`, `--success`, `--warning`, `--info`.
 
 ## Requested Changes (Diff)
 
 ### Add
-- Install `qrcode` npm package to generate a real, scannable QR code image
-- Generate a data URL from `qrcode` that encodes a JSON payload containing the full batch cycle: batch metadata (id, producer, origin, variety, altitude, process, roastProfile, harvestDate, bags, pricePerBag), verification status + timestamps, token info (id, supply, txHash, mintedAt), distribution orders count, redemptions count
-- Render the generated QR code `<img>` in place of the SVG mock
-- When scanned with any phone camera or QR reader, the scan result is the batch JSON data (or a formatted text string if JSON is too long)
-- The "Complete Cycle" display: show all 7 protocol steps with their completion status, driven by real AppContext state (batch created, verified, minted, distributed, redeemed, QR generated)
+- New `--yellow` token for accent use (highlights, tags, secondary indicators)
+- New `--green` token as the primary CTA/action/verified badge color
 
 ### Modify
-- Replace the decorative SVG QR code with a dynamically generated real QR code image (`<img src={qrDataUrl} />`)
-- Encode the QR with a human-readable summary URL-style string or compact JSON of the full cycle batch data
-- Update the blockchain record modal to use real batch/token data from AppContext where available, falling back to static for demo
-- The "Supply Chain Journey" timeline should already reflect real batch data (it does), keep as is
+- `--background` and card surfaces: shift to deep espresso brown (darker, richer brown — like dark roasted espresso)
+- `--primary`: change from amber/gold to earthy green (for buttons, CTAs, active states)
+- `--accent`: change from warm cream to yellow (for highlights, tags, accents)
+- `--ring`: update to green to match new primary
+- `--sidebar-primary`: update to green
+- All amber-glow utilities and badge-amber references: replace with yellow equivalents
+- `step-active` color: change from amber to yellow
+- Timeline line gradient: update from amber to yellow
+- Step circle: update from amber to green
+- Hero mesh gradient: update to use espresso brown tones
+- `gradient-text`: update to use green-to-yellow gradient
+- Scrollbar hover: update to yellow
+- Chart tokens: update to use new green/yellow palette
+- All component files using `text-amber`, `bg-amber`, `border-amber`, `glow-amber`, `badge-amber`, `step-active` classes: replace with green/yellow equivalents
 
 ### Remove
-- The static SVG QR code (all the `<rect>` and `<circle>` elements)
-- The decorative corner accent overlays (no longer needed since we have a real QR image)
+- Old amber-centric custom tokens and utilities (replaced by green/yellow)
 
 ## Implementation Plan
-1. Install `qrcode` and `@types/qrcode` in frontend package
-2. In QRTraceability.tsx, add a `useEffect` that generates QR data URL via `QRCode.toDataURL(text, options)` whenever `coffeeInfo` changes
-3. The encoded text = a compact string with all key batch cycle fields:
-   - WAGA Coffee Protocol | Batch: {id} | Producer: {producer} | Origin: {origin} | Process: {process} | Status: {batchStatus} | Token: {tokenId} | Supply: {supply} | TxHash: {txHash} | Verified: {verifiedAt} | Redeemed: {redemptionCount}
-4. Render `<img src={qrDataUrl} />` with white background, replacing SVG mock
-5. Add a "Complete Cycle" summary section below the QR panel showing all 7 steps as checkmarks (completed vs pending), driven by real AppContext state
-6. Wire blockchain modal to use real token txHash and real batch data
+
+1. Update `index.css`:
+   - Deep espresso brown backgrounds: `--background: 0.10 0.018 35` (very dark brown, hue ~35)
+   - Card surfaces slightly lighter espresso: `--card: 0.14 0.02 35`
+   - `--primary`: earthy green `0.55 0.14 145` (muted forest green)
+   - `--primary-foreground`: near-white `0.96 0.01 80`
+   - `--accent`: warm yellow `0.82 0.14 80` (earthy amber-yellow)
+   - `--accent-foreground`: dark espresso `0.10 0.018 35`
+   - `--ring`: green `0.55 0.14 145`
+   - Custom tokens: `--espresso`, `--green`, `--green-dim`, `--yellow`, `--yellow-dim`
+   - Replace amber utility classes with green/yellow equivalents
+   - Update step-circle, timeline-line, hero-mesh, gradient-text
+
+2. Update `tailwind.config.js`:
+   - Replace `amber` and `cream` custom colors with `green` and `yellow` tokens
+   - Update box-shadow tokens to use green/yellow
+
+3. Update all step components and App.tsx/Hero.tsx/StepNav.tsx/NextStepButton.tsx to use new color classes
+

@@ -94,7 +94,7 @@ export function InventoryManagement() {
       label: "Total Batches",
       value: totalBatches,
       icon: Package,
-      color: "text-amber",
+      color: "text-yellow",
     },
     {
       label: "Verified Batches",
@@ -123,7 +123,7 @@ export function InventoryManagement() {
     {
       label: "Total Minted",
       value: totalMinted.toLocaleString(),
-      color: "text-amber",
+      color: "text-yellow",
     },
     {
       label: "Total Redeemed",
@@ -275,7 +275,7 @@ export function InventoryManagement() {
       >
         <div className="p-5 border-b border-border flex items-center justify-between">
           <h3 className="font-display font-semibold flex items-center gap-2">
-            <BarChart3 className="w-4 h-4 text-amber" />
+            <BarChart3 className="w-4 h-4 text-yellow" />
             Batch Inventory
           </h3>
           <span className="text-xs text-muted-foreground">
@@ -320,7 +320,7 @@ export function InventoryManagement() {
                     className="border-b border-border/30 hover:bg-muted/10 transition-colors"
                   >
                     <td className="p-4">
-                      <span className="font-mono text-sm text-amber font-semibold">
+                      <span className="font-mono text-sm text-yellow font-semibold">
                         {batch.id}
                       </span>
                     </td>
@@ -360,7 +360,7 @@ export function InventoryManagement() {
       >
         <div className="flex items-center justify-between p-4 border-b border-border bg-muted/20">
           <div className="flex items-center gap-2">
-            <Link2 className="w-4 h-4 text-amber" />
+            <Link2 className="w-4 h-4 text-yellow" />
             <span className="text-sm font-semibold">
               OburugoAgroChainProtocol.sol
             </span>
@@ -392,7 +392,7 @@ export function InventoryManagement() {
                     isComment
                       ? "text-muted-foreground/60"
                       : isKeyword
-                        ? "text-amber"
+                        ? "text-yellow"
                         : hasType
                           ? "text-info"
                           : "text-foreground/80",
@@ -418,8 +418,8 @@ export function InventoryManagement() {
             key={card.title}
             className="rounded-xl border border-border bg-card p-5 card-hover"
           >
-            <div className="w-9 h-9 rounded-lg bg-amber/10 border border-amber/20 flex items-center justify-center mb-3">
-              <card.icon className="w-4 h-4 text-amber" />
+            <div className="w-9 h-9 rounded-lg bg-yellow/10 border border-yellow/20 flex items-center justify-center mb-3">
+              <card.icon className="w-4 h-4 text-yellow" />
             </div>
             <h4 className="font-display font-semibold text-sm mb-2">
               {card.title}

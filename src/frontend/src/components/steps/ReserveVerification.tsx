@@ -120,7 +120,7 @@ export function ReserveVerification() {
         className="rounded-2xl border border-border bg-card p-6"
       >
         <h3 className="font-display font-semibold mb-4 flex items-center gap-2">
-          <AlertCircle className="w-4 h-4 text-amber" />
+          <AlertCircle className="w-4 h-4 text-yellow" />
           Pending Verification
           <span className="ml-auto text-xs font-normal text-muted-foreground bg-muted/30 px-2 py-0.5 rounded-full border border-border">
             {pendingBatches.length} batch
@@ -151,11 +151,11 @@ export function ReserveVerification() {
                 className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-xl border border-border/60 bg-muted/10"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-amber/10 border border-amber/20 flex items-center justify-center flex-shrink-0">
-                    <ShieldCheck className="w-4 h-4 text-amber" />
+                  <div className="w-8 h-8 rounded-lg bg-yellow/10 border border-yellow/20 flex items-center justify-center flex-shrink-0">
+                    <ShieldCheck className="w-4 h-4 text-yellow" />
                   </div>
                   <div>
-                    <div className="font-mono text-sm font-bold text-amber">
+                    <div className="font-mono text-sm font-bold text-yellow">
                       {batch.id}
                     </div>
                     <div className="text-xs text-muted-foreground">
@@ -168,7 +168,7 @@ export function ReserveVerification() {
                   data-ocid={`verification.initiate_button.${idx + 1}`}
                   onClick={() => handleInitiate(batch.id)}
                   size="sm"
-                  className="bg-amber text-background hover:bg-amber/90 font-semibold text-xs flex-shrink-0"
+                  className="bg-green text-background hover:opacity-90 font-semibold text-xs flex-shrink-0"
                 >
                   Initiate Verification
                 </Button>
@@ -216,11 +216,11 @@ export function ReserveVerification() {
                         ) : v.status === "Failed" ? (
                           <XCircle className="w-5 h-5 text-destructive" />
                         ) : (
-                          <Loader2 className="w-5 h-5 text-amber animate-spin" />
+                          <Loader2 className="w-5 h-5 text-yellow animate-spin" />
                         )}
                       </div>
                       <div>
-                        <div className="font-mono text-sm font-bold text-amber">
+                        <div className="font-mono text-sm font-bold text-yellow">
                           {v.batchId}
                         </div>
                         {batch && (
@@ -239,12 +239,12 @@ export function ReserveVerification() {
 
                     <div className="flex items-center gap-2">
                       {v.status === "Processing" && (
-                        <div className="flex items-center gap-2 text-xs text-amber">
+                        <div className="flex items-center gap-2 text-xs text-yellow">
                           <div className="flex gap-1">
                             {[0, 0.3, 0.6].map((delay) => (
                               <div
                                 key={delay}
-                                className="w-1.5 h-1.5 rounded-full bg-amber animate-bounce"
+                                className="w-1.5 h-1.5 rounded-full bg-yellow animate-bounce"
                                 style={{ animationDelay: `${delay}s` }}
                               />
                             ))}
@@ -287,8 +287,8 @@ export function ReserveVerification() {
               )}
               style={{ animationDelay: `${idx * 0.1}s` }}
             >
-              <div className="w-9 h-9 rounded-lg bg-amber/10 border border-amber/20 flex items-center justify-center mb-3">
-                <card.icon className="w-4 h-4 text-amber" />
+              <div className="w-9 h-9 rounded-lg bg-yellow/10 border border-yellow/20 flex items-center justify-center mb-3">
+                <card.icon className="w-4 h-4 text-yellow" />
               </div>
               <h4 className="font-display font-semibold text-sm mb-2">
                 {card.title}

@@ -97,7 +97,7 @@ export function TokenMinting() {
           className="rounded-2xl border border-border bg-card p-6 card-hover h-fit"
         >
           <div className="flex items-center gap-2 mb-6">
-            <Coins className="w-4 h-4 text-amber" />
+            <Coins className="w-4 h-4 text-yellow" />
             <h3 className="font-display font-semibold">Mint New Tokens</h3>
           </div>
 
@@ -125,14 +125,14 @@ export function TokenMinting() {
                 >
                   <SelectTrigger
                     data-ocid="minting.batch_select"
-                    className="bg-muted/30 border-border focus:border-amber/50"
+                    className="bg-muted/30 border-border focus:border-green/50"
                   >
                     <SelectValue placeholder="Choose a verified batch..." />
                   </SelectTrigger>
                   <SelectContent className="bg-popover border-border">
                     {verifiedBatches.map((b) => (
                       <SelectItem key={b.id} value={b.id}>
-                        <span className="font-mono text-amber">{b.id}</span>
+                        <span className="font-mono text-yellow">{b.id}</span>
                         <span className="text-muted-foreground ml-2 text-xs">
                           · {b.producer} · {b.numberOfBags.toLocaleString()}{" "}
                           bags
@@ -147,7 +147,7 @@ export function TokenMinting() {
                 <motion.div
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: "auto" }}
-                  className="rounded-xl border border-amber/20 bg-amber/5 p-4 space-y-2"
+                  className="rounded-xl border border-yellow/20 bg-yellow/5 p-4 space-y-2"
                 >
                   {(() => {
                     const b = batches.find((x) => x.id === selectedBatchId);
@@ -188,7 +188,7 @@ export function TokenMinting() {
                     setQuantity(Number.parseInt(e.target.value) || 0)
                   }
                   min={1}
-                  className="bg-muted/30 border-border focus:border-amber/50"
+                  className="bg-muted/30 border-border focus:border-green/50"
                   required
                 />
               </div>
@@ -196,7 +196,7 @@ export function TokenMinting() {
               {selectedBatchId && quantity > 0 && (
                 <div className="rounded-lg bg-muted/20 border border-border p-3 text-xs text-muted-foreground">
                   Minting{" "}
-                  <span className="text-amber font-semibold">
+                  <span className="text-green font-semibold">
                     {quantity.toLocaleString()} ERC-1155 tokens
                   </span>{" "}
                   on the OburugoAgroChain smart contract
@@ -207,7 +207,7 @@ export function TokenMinting() {
                 data-ocid="minting.submit_button"
                 type="submit"
                 disabled={!selectedBatchId || quantity <= 0}
-                className="w-full bg-amber text-background hover:bg-amber/90 font-semibold disabled:opacity-50"
+                className="w-full bg-green text-background hover:opacity-90 font-semibold disabled:opacity-50"
               >
                 <Coins className="w-4 h-4 mr-2" />
                 Mint Tokens
@@ -250,7 +250,7 @@ export function TokenMinting() {
                 >
                   <div className="flex items-start justify-between mb-3">
                     <div>
-                      <div className="font-mono text-sm font-bold text-amber">
+                      <div className="font-mono text-sm font-bold text-yellow">
                         {token.id}
                       </div>
                       <div className="text-xs text-muted-foreground mt-0.5">
@@ -285,9 +285,9 @@ export function TokenMinting() {
                   <button
                     type="button"
                     onClick={() => copyTx(token.txHash)}
-                    className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-amber transition-colors group"
+                    className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-yellow transition-colors group"
                   >
-                    <Copy className="w-3 h-3 group-hover:text-amber" />
+                    <Copy className="w-3 h-3 group-hover:text-yellow" />
                     <span className="font-mono truncate max-w-[200px]">
                       {token.txHash.slice(0, 20)}...
                     </span>
@@ -314,8 +314,8 @@ export function TokenMinting() {
               key={card.title}
               className="rounded-xl border border-border bg-card p-5 card-hover"
             >
-              <div className="w-9 h-9 rounded-lg bg-amber/10 border border-amber/20 flex items-center justify-center mb-3">
-                <card.icon className="w-4 h-4 text-amber" />
+              <div className="w-9 h-9 rounded-lg bg-yellow/10 border border-yellow/20 flex items-center justify-center mb-3">
+                <card.icon className="w-4 h-4 text-yellow" />
               </div>
               <h4 className="font-display font-semibold text-sm mb-2">
                 {card.title}

@@ -154,7 +154,7 @@ export function CommunityDistribution() {
             <TabsTrigger
               data-ocid="distribution.tab.distributors"
               value="distributors"
-              className="data-[state=active]:bg-amber data-[state=active]:text-background font-medium text-sm"
+              className="data-[state=active]:bg-green data-[state=active]:text-background font-medium text-sm"
             >
               <Users className="w-3.5 h-3.5 mr-2" />
               Distributors
@@ -162,7 +162,7 @@ export function CommunityDistribution() {
             <TabsTrigger
               data-ocid="distribution.tab.staking"
               value="staking"
-              className="data-[state=active]:bg-amber data-[state=active]:text-background font-medium text-sm"
+              className="data-[state=active]:bg-green data-[state=active]:text-background font-medium text-sm"
             >
               <TrendingUp className="w-3.5 h-3.5 mr-2" />
               Staking
@@ -170,7 +170,7 @@ export function CommunityDistribution() {
             <TabsTrigger
               data-ocid="distribution.tab.orders"
               value="orders"
-              className="data-[state=active]:bg-amber data-[state=active]:text-background font-medium text-sm"
+              className="data-[state=active]:bg-green data-[state=active]:text-background font-medium text-sm"
             >
               <Package className="w-3.5 h-3.5 mr-2" />
               Distribution Orders
@@ -183,7 +183,7 @@ export function CommunityDistribution() {
               {/* Registration form */}
               <div className="rounded-2xl border border-border bg-card p-6">
                 <h3 className="font-display font-semibold mb-4 flex items-center gap-2">
-                  <Plus className="w-4 h-4 text-amber" />
+                  <Plus className="w-4 h-4 text-yellow" />
                   Register Distributor
                 </h3>
                 <form
@@ -199,7 +199,7 @@ export function CommunityDistribution() {
                       value={distName}
                       onChange={(e) => setDistName(e.target.value)}
                       placeholder="e.g. Nordic Coffee Traders"
-                      className="bg-muted/30 border-border focus:border-amber/50"
+                      className="bg-muted/30 border-border focus:border-green/50"
                       required
                     />
                   </div>
@@ -212,7 +212,7 @@ export function CommunityDistribution() {
                       value={distLocation}
                       onChange={(e) => setDistLocation(e.target.value)}
                       placeholder="e.g. Oslo, Norway"
-                      className="bg-muted/30 border-border focus:border-amber/50"
+                      className="bg-muted/30 border-border focus:border-green/50"
                     />
                   </div>
                   <div className="space-y-1.5">
@@ -227,7 +227,7 @@ export function CommunityDistribution() {
                         setDistStake(Number.parseInt(e.target.value) || 0)
                       }
                       min={1000}
-                      className="bg-muted/30 border-border focus:border-amber/50"
+                      className="bg-muted/30 border-border focus:border-green/50"
                     />
                     <p className="text-xs text-muted-foreground">
                       Tier:{" "}
@@ -235,7 +235,7 @@ export function CommunityDistribution() {
                         className={cn(
                           "font-semibold",
                           distStake >= 10000
-                            ? "text-amber"
+                            ? "text-yellow"
                             : distStake >= 5000
                               ? "text-muted-foreground"
                               : "text-muted-foreground",
@@ -249,7 +249,7 @@ export function CommunityDistribution() {
                   <Button
                     data-ocid="distribution.register_button"
                     type="submit"
-                    className="w-full bg-amber text-background hover:bg-amber/90 font-semibold"
+                    className="w-full bg-green text-background hover:opacity-90 font-semibold"
                   >
                     Register Distributor
                   </Button>
@@ -303,7 +303,7 @@ export function CommunityDistribution() {
                         </div>
                         <div className="flex items-center justify-between text-xs">
                           <span className="text-muted-foreground">Stake</span>
-                          <span className="text-amber font-mono font-semibold">
+                          <span className="text-yellow font-mono font-semibold">
                             {d.stake.toLocaleString()} OAC
                           </span>
                         </div>
@@ -377,7 +377,7 @@ export function CommunityDistribution() {
                         value={selectedDistForStake}
                         onValueChange={setSelectedDistForStake}
                       >
-                        <SelectTrigger className="bg-muted/30 border-border focus:border-amber/50">
+                        <SelectTrigger className="bg-muted/30 border-border focus:border-green/50">
                           <SelectValue placeholder="Select distributor..." />
                         </SelectTrigger>
                         <SelectContent className="bg-popover border-border">
@@ -401,13 +401,13 @@ export function CommunityDistribution() {
                         }
                         min={1}
                         placeholder="Enter OAC amount"
-                        className="bg-muted/30 border-border focus:border-amber/50"
+                        className="bg-muted/30 border-border focus:border-green/50"
                       />
                     </div>
                     <Button
                       type="submit"
                       disabled={!selectedDistForStake || stakeAmount <= 0}
-                      className="w-full bg-amber text-background hover:bg-amber/90 font-semibold disabled:opacity-50"
+                      className="w-full bg-green text-background hover:opacity-90 font-semibold disabled:opacity-50"
                     >
                       <TrendingUp className="w-4 h-4 mr-2" />
                       Add Stake
@@ -443,7 +443,7 @@ export function CommunityDistribution() {
                           <div className="flex items-start justify-between mb-3">
                             <div>
                               <div className="font-semibold text-sm flex items-center gap-2">
-                                <User className="w-3.5 h-3.5 text-amber" />
+                                <User className="w-3.5 h-3.5 text-yellow" />
                                 {dist.name}
                               </div>
                               <div className="text-xs text-muted-foreground mt-0.5">
@@ -461,7 +461,7 @@ export function CommunityDistribution() {
                           </div>
 
                           <div className="flex items-center justify-between mb-3">
-                            <div className="text-2xl font-mono font-bold text-amber">
+                            <div className="text-2xl font-mono font-bold text-yellow">
                               {dist.stake.toLocaleString()}
                             </div>
                             <div className="text-xs text-muted-foreground">
@@ -481,14 +481,14 @@ export function CommunityDistribution() {
                                 </span>
                               )}
                               {dist.tier === "Gold" && (
-                                <span className="text-amber">
+                                <span className="text-yellow">
                                   Max tier reached
                                 </span>
                               )}
                             </div>
                             <div className="h-1.5 rounded-full bg-border overflow-hidden">
                               <div
-                                className="h-full rounded-full bg-amber transition-all duration-500"
+                                className="h-full rounded-full bg-green transition-all duration-500"
                                 style={{
                                   width: `${Math.min(100, (dist.stake / 10000) * 100)}%`,
                                 }}
@@ -559,13 +559,13 @@ export function CommunityDistribution() {
                         value={orderTokenId}
                         onValueChange={setOrderTokenId}
                       >
-                        <SelectTrigger className="bg-muted/30 border-border focus:border-amber/50">
+                        <SelectTrigger className="bg-muted/30 border-border focus:border-green/50">
                           <SelectValue placeholder="Choose a token..." />
                         </SelectTrigger>
                         <SelectContent className="bg-popover border-border">
                           {availableTokens.map((t) => (
                             <SelectItem key={t.id} value={t.id}>
-                              <span className="font-mono text-amber">
+                              <span className="font-mono text-yellow">
                                 {t.id}
                               </span>
                               <span className="text-muted-foreground ml-2 text-xs">
@@ -584,7 +584,7 @@ export function CommunityDistribution() {
                         value={orderDistributorId}
                         onValueChange={setOrderDistributorId}
                       >
-                        <SelectTrigger className="bg-muted/30 border-border focus:border-amber/50">
+                        <SelectTrigger className="bg-muted/30 border-border focus:border-green/50">
                           <SelectValue placeholder="Choose a distributor..." />
                         </SelectTrigger>
                         <SelectContent className="bg-popover border-border">
@@ -615,7 +615,7 @@ export function CommunityDistribution() {
                           setOrderQty(Number.parseInt(e.target.value) || 0)
                         }
                         min={1}
-                        className="bg-muted/30 border-border focus:border-amber/50"
+                        className="bg-muted/30 border-border focus:border-green/50"
                       />
                     </div>
                     <Button
@@ -623,7 +623,7 @@ export function CommunityDistribution() {
                       disabled={
                         !orderTokenId || !orderDistributorId || orderQty <= 0
                       }
-                      className="w-full bg-amber text-background hover:bg-amber/90 font-semibold disabled:opacity-50"
+                      className="w-full bg-green text-background hover:opacity-90 font-semibold disabled:opacity-50"
                     >
                       Create Order
                     </Button>
@@ -660,7 +660,7 @@ export function CommunityDistribution() {
                           className="rounded-xl border border-border bg-card p-4 card-hover"
                         >
                           <div className="flex items-start justify-between mb-2">
-                            <div className="font-mono text-sm font-bold text-amber">
+                            <div className="font-mono text-sm font-bold text-yellow">
                               {order.id}
                             </div>
                             <span
@@ -735,7 +735,7 @@ export function CommunityDistribution() {
                 icon: Users,
                 label: "Distributor",
                 sub: "Staked Partner",
-                color: "text-amber",
+                color: "text-yellow",
               },
               {
                 icon: User,
@@ -751,14 +751,14 @@ export function CommunityDistribution() {
                     className="flex items-center text-muted-foreground/40"
                   >
                     <ArrowRight className="w-6 h-6 hidden sm:block" />
-                    <div className="w-8 h-px bg-amber/30 block sm:hidden" />
+                    <div className="w-8 h-px bg-yellow/30 block sm:hidden" />
                   </div>
                 )}
                 <div
                   key={node.label}
                   className="flex flex-col items-center gap-2 p-4 rounded-xl border border-border bg-card min-w-[100px] text-center"
                 >
-                  <div className="w-10 h-10 rounded-full bg-amber/10 border border-amber/20 flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-full bg-yellow/10 border border-yellow/20 flex items-center justify-center">
                     <node.icon className={cn("w-5 h-5", node.color)} />
                   </div>
                   <div className="font-semibold text-sm">{node.label}</div>

@@ -191,7 +191,7 @@ export function QRTraceability() {
       title: "Processing",
       desc: `${coffeeInfo.process} method — 18-21 day fermentation`,
       date: formatDate(7, baseDate),
-      color: "text-amber",
+      color: "text-yellow",
     },
     {
       icon: Coffee,
@@ -358,7 +358,7 @@ export function QRTraceability() {
                 "w-full font-semibold transition-all duration-300",
                 scanned
                   ? "bg-success/20 text-success border border-success/30"
-                  : "bg-amber text-background hover:bg-amber/90 glow-amber-sm",
+                  : "bg-green text-background hover:opacity-90 glow-green-sm",
               )}
             >
               <Scan className="w-4 h-4 mr-2" />
@@ -372,12 +372,12 @@ export function QRTraceability() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
             data-ocid="qr.cycle_status.card"
-            className="rounded-2xl border border-amber/30 bg-amber/5 p-5"
+            className="rounded-2xl border border-yellow/30 bg-yellow/5 p-5"
           >
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
-                <Zap className="w-4 h-4 text-amber" />
-                <h3 className="font-display font-semibold text-sm text-amber">
+                <Zap className="w-4 h-4 text-yellow" />
+                <h3 className="font-display font-semibold text-sm text-yellow">
                   Protocol Cycle Status
                 </h3>
               </div>
@@ -516,14 +516,14 @@ export function QRTraceability() {
                   <div key={step.title} className="relative flex gap-4">
                     {/* Connector line */}
                     {!isLast && (
-                      <div className="absolute left-[1.15rem] top-10 bottom-0 w-0.5 bg-gradient-to-b from-amber/50 to-amber/10" />
+                      <div className="absolute left-[1.15rem] top-10 bottom-0 w-0.5 bg-gradient-to-b from-yellow/50 to-yellow/10" />
                     )}
 
                     {/* Icon circle */}
                     <div
                       className={cn(
                         "relative z-10 flex items-center justify-center w-9 h-9 rounded-full border flex-shrink-0 mt-1",
-                        "bg-amber/10 border-amber/30",
+                        "bg-yellow/10 border-yellow/30",
                       )}
                     >
                       <step.icon className={cn("w-4 h-4", step.color)} />
@@ -550,10 +550,10 @@ export function QRTraceability() {
           </div>
 
           {/* Producer info */}
-          <div className="rounded-xl border border-amber/20 bg-amber/5 p-4 space-y-2">
+          <div className="rounded-xl border border-yellow/20 bg-yellow/5 p-4 space-y-2">
             <div className="flex items-center gap-2">
-              <Sprout className="w-3.5 h-3.5 text-amber" />
-              <span className="text-xs font-semibold text-amber">
+              <Sprout className="w-3.5 h-3.5 text-yellow" />
+              <span className="text-xs font-semibold text-yellow">
                 Producer Details
               </span>
             </div>
@@ -571,7 +571,7 @@ export function QRTraceability() {
 
           {!scanned && (
             <div className="rounded-xl border border-border/60 bg-muted/10 p-4 flex items-center gap-3 text-sm text-muted-foreground">
-              <QrCode className="w-4 h-4 text-amber flex-shrink-0" />
+              <QrCode className="w-4 h-4 text-yellow flex-shrink-0" />
               <span>
                 Click "Simulate QR Scan" to reveal the full provenance record.
               </span>
@@ -588,7 +588,7 @@ export function QRTraceability() {
         >
           <DialogHeader>
             <DialogTitle className="font-display text-lg flex items-center gap-2">
-              <Zap className="w-5 h-5 text-amber" />
+              <Zap className="w-5 h-5 text-yellow" />
               Blockchain Transaction Record
             </DialogTitle>
           </DialogHeader>
@@ -607,7 +607,7 @@ export function QRTraceability() {
                   <span
                     className={cn(
                       "text-xs text-foreground break-all",
-                      row.mono && "font-mono text-amber",
+                      row.mono && "font-mono text-yellow",
                     )}
                   >
                     {row.value}
@@ -619,7 +619,7 @@ export function QRTraceability() {
             {/* Event logs */}
             <div>
               <h4 className="font-display font-semibold text-sm mb-3 flex items-center gap-2">
-                <Box className="w-4 h-4 text-amber" />
+                <Box className="w-4 h-4 text-yellow" />
                 Event Logs
               </h4>
               <div className="space-y-2">
@@ -629,7 +629,7 @@ export function QRTraceability() {
                     className="rounded-lg border border-border bg-background p-3"
                   >
                     <div className="flex items-center justify-between mb-1.5">
-                      <span className="font-mono text-xs font-bold text-amber">
+                      <span className="font-mono text-xs font-bold text-yellow">
                         {log.event}
                       </span>
                       <span className="text-xs text-muted-foreground/60">
