@@ -27,7 +27,8 @@ import {
   Zap,
 } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import QRCode from "qrcode";
+import { useEffect, useState } from "react";
 
 const STATIC_BATCH = {
   product: "Yirgacheffe Single Origin",
@@ -80,7 +81,6 @@ export function QRTraceability() {
   const [scanned, setScanned] = useState(false);
   const [showBlockchain, setShowBlockchain] = useState(false);
   const [qrDataUrl, setQrDataUrl] = useState("");
-  const qrLibRef = useRef<boolean>(false);
 
   const verifiedBatch = batches.find(
     (b) => b.status !== "Pending Verification" && b.status !== "Failed",
@@ -114,67 +114,39 @@ export function QRTraceability() {
     batches.find((b) => b.id === coffeeInfo.batchId)?.status ??
     "Pending Verification";
 
-  const generateQR = useCallback(
-    (lib: { toDataURL: (text: string, opts: object) => Promise<string> }) => {
-      const qrText = [
-        "OburugoAgroChain",
-        `Batch: ${coffeeInfo.batchId}`,
-        `Producer: ${coffeeInfo.producer}`,
-        `Origin: ${coffeeInfo.origin}`,
-        `Process: ${coffeeInfo.process}`,
-        `Harvest: ${coffeeInfo.harvestDate}`,
-        `Altitude: ${coffeeInfo.altitude}`,
-        `Status: ${batchStatus}`,
-        `Token: ${batchToken?.id ?? "Pending"}`,
-        `Supply: ${batchToken?.supply ?? "N/A"}`,
-        `TxHash: ${batchToken?.txHash ?? "N/A"}`,
-      ].join("\n");
-
-      lib
-        .toDataURL(qrText, {
-          width: 200,
-          margin: 1,
-          color: { dark: "#1a0f00", light: "#f5f0e8" },
-        })
-        .then((url: string) => setQrDataUrl(url))
-        .catch((err: unknown) => console.error("QR generation failed:", err));
-    },
-    [
-      coffeeInfo.batchId,
-      coffeeInfo.producer,
-      coffeeInfo.origin,
-      coffeeInfo.process,
-      coffeeInfo.harvestDate,
-      coffeeInfo.altitude,
-      batchStatus,
-      batchToken,
-    ],
-  );
-
-  // Load QR library from CDN and generate QR code
+  // Generate QR code using npm package
   useEffect(() => {
-    if (qrLibRef.current) {
-      // Library already loaded, re-generate
-      const w = window as unknown as {
-        QRCode?: { toDataURL: (text: string, opts: object) => Promise<string> };
-      };
-      if (w.QRCode) generateQR(w.QRCode);
-      return;
-    }
+    const qrText = [
+      "OburugoAgroChain",
+      `Batch: ${coffeeInfo.batchId}`,
+      `Producer: ${coffeeInfo.producer}`,
+      `Origin: ${coffeeInfo.origin}`,
+      `Process: ${coffeeInfo.process}`,
+      `Harvest: ${coffeeInfo.harvestDate}`,
+      `Altitude: ${coffeeInfo.altitude}`,
+      `Status: ${batchStatus}`,
+      `Token: ${batchToken?.id ?? "Pending"}`,
+      `Supply: ${batchToken?.supply ?? "N/A"}`,
+      `TxHash: ${batchToken?.txHash ?? "N/A"}`,
+    ].join("\n");
 
-    const script = document.createElement("script");
-    script.src =
-      "https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js";
-    script.async = true;
-    script.onload = () => {
-      qrLibRef.current = true;
-      const w = window as unknown as {
-        QRCode?: { toDataURL: (text: string, opts: object) => Promise<string> };
-      };
-      if (w.QRCode) generateQR(w.QRCode);
-    };
-    document.head.appendChild(script);
-  }, [generateQR]);
+    QRCode.toDataURL(qrText, {
+      width: 200,
+      margin: 1,
+      color: { dark: "#1a0f00", light: "#f5f0e8" },
+    })
+      .then((url: string) => setQrDataUrl(url))
+      .catch((err: unknown) => console.error("QR generation failed:", err));
+  }, [
+    coffeeInfo.batchId,
+    coffeeInfo.producer,
+    coffeeInfo.origin,
+    coffeeInfo.process,
+    coffeeInfo.harvestDate,
+    coffeeInfo.altitude,
+    batchStatus,
+    batchToken,
+  ]);
 
   const baseDate = verifiedBatch?.harvestDate || "2024-10-01";
 
