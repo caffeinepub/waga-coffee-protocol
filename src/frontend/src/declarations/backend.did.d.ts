@@ -10,7 +10,60 @@ import type { ActorMethod } from '@icp-sdk/core/agent';
 import type { IDL } from '@icp-sdk/core/candid';
 import type { Principal } from '@icp-sdk/core/principal';
 
-export interface _SERVICE { 'ping' : ActorMethod<[], string> }
+export interface Batch {
+  'id' : bigint,
+  'region' : string,
+  'status' : BatchStatus,
+  'farmName' : string,
+  'weightKg' : bigint,
+  'grade' : string,
+}
+export interface BatchLifecycle {
+  'distributions' : Array<DistributionOrder>,
+  'tokens' : Array<Token>,
+  'batch' : Batch,
+  'redemptions' : Array<Redemption>,
+}
+export type BatchStatus = { 'pendingVerification' : null } |
+  { 'verified' : null } |
+  { 'minted' : null };
+export interface DistributionOrder {
+  'id' : bigint,
+  'tokenId' : bigint,
+  'distributorId' : bigint,
+  'timestamp' : bigint,
+  'quantity' : bigint,
+}
+export interface Redemption {
+  'id' : bigint,
+  'status' : RedemptionStatus,
+  'redeemer' : string,
+  'timestamp' : bigint,
+  'quantity' : bigint,
+  'batchId' : bigint,
+}
+export type RedemptionStatus = { 'pending' : null } |
+  { 'completed' : null };
+export interface Token {
+  'transactionHash' : string,
+  'tokenSupply' : bigint,
+  'timestamp' : bigint,
+  'batchId' : bigint,
+}
+export interface _SERVICE {
+  'completeRedemptionRequest' : ActorMethod<[bigint], boolean>,
+  'createBatch' : ActorMethod<[string, string, bigint, string], bigint>,
+  'getAllBatches' : ActorMethod<[], Array<Batch>>,
+  'getBatch' : ActorMethod<[bigint], [] | [Batch]>,
+  'getBatchInventory' : ActorMethod<[bigint], [] | [bigint]>,
+  'getBatchLifecycle' : ActorMethod<[bigint], [] | [BatchLifecycle]>,
+  'getTokenBalance' : ActorMethod<[bigint], [] | [bigint]>,
+  'mintTokens' : ActorMethod<[bigint, bigint, string], boolean>,
+  'placeDistributionOrder' : ActorMethod<[bigint, bigint, bigint], boolean>,
+  'registerDistributor' : ActorMethod<[string, string, string], bigint>,
+  'submitRedemptionRequest' : ActorMethod<[bigint, bigint, string], bigint>,
+  'verifyBatch' : ActorMethod<[bigint], boolean>,
+}
 export declare const idlService: IDL.ServiceClass;
 export declare const idlInitArgs: IDL.Type[];
 export declare const idlFactory: IDL.InterfaceFactory;

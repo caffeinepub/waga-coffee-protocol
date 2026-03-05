@@ -8,14 +8,168 @@
 
 import { IDL } from '@icp-sdk/core/candid';
 
+export const BatchStatus = IDL.Variant({
+  'pendingVerification' : IDL.Null,
+  'verified' : IDL.Null,
+  'minted' : IDL.Null,
+});
+export const Batch = IDL.Record({
+  'id' : IDL.Nat,
+  'region' : IDL.Text,
+  'status' : BatchStatus,
+  'farmName' : IDL.Text,
+  'weightKg' : IDL.Nat,
+  'grade' : IDL.Text,
+});
+export const DistributionOrder = IDL.Record({
+  'id' : IDL.Nat,
+  'tokenId' : IDL.Nat,
+  'distributorId' : IDL.Nat,
+  'timestamp' : IDL.Int,
+  'quantity' : IDL.Nat,
+});
+export const Token = IDL.Record({
+  'transactionHash' : IDL.Text,
+  'tokenSupply' : IDL.Nat,
+  'timestamp' : IDL.Int,
+  'batchId' : IDL.Nat,
+});
+export const RedemptionStatus = IDL.Variant({
+  'pending' : IDL.Null,
+  'completed' : IDL.Null,
+});
+export const Redemption = IDL.Record({
+  'id' : IDL.Nat,
+  'status' : RedemptionStatus,
+  'redeemer' : IDL.Text,
+  'timestamp' : IDL.Int,
+  'quantity' : IDL.Nat,
+  'batchId' : IDL.Nat,
+});
+export const BatchLifecycle = IDL.Record({
+  'distributions' : IDL.Vec(DistributionOrder),
+  'tokens' : IDL.Vec(Token),
+  'batch' : Batch,
+  'redemptions' : IDL.Vec(Redemption),
+});
+
 export const idlService = IDL.Service({
-  'ping' : IDL.Func([], [IDL.Text], ['query']),
+  'completeRedemptionRequest' : IDL.Func([IDL.Nat], [IDL.Bool], []),
+  'createBatch' : IDL.Func(
+      [IDL.Text, IDL.Text, IDL.Nat, IDL.Text],
+      [IDL.Nat],
+      [],
+    ),
+  'getAllBatches' : IDL.Func([], [IDL.Vec(Batch)], ['query']),
+  'getBatch' : IDL.Func([IDL.Nat], [IDL.Opt(Batch)], ['query']),
+  'getBatchInventory' : IDL.Func([IDL.Nat], [IDL.Opt(IDL.Nat)], ['query']),
+  'getBatchLifecycle' : IDL.Func(
+      [IDL.Nat],
+      [IDL.Opt(BatchLifecycle)],
+      ['query'],
+    ),
+  'getTokenBalance' : IDL.Func([IDL.Nat], [IDL.Opt(IDL.Nat)], ['query']),
+  'mintTokens' : IDL.Func([IDL.Nat, IDL.Nat, IDL.Text], [IDL.Bool], []),
+  'placeDistributionOrder' : IDL.Func(
+      [IDL.Nat, IDL.Nat, IDL.Nat],
+      [IDL.Bool],
+      [],
+    ),
+  'registerDistributor' : IDL.Func(
+      [IDL.Text, IDL.Text, IDL.Text],
+      [IDL.Nat],
+      [],
+    ),
+  'submitRedemptionRequest' : IDL.Func(
+      [IDL.Nat, IDL.Nat, IDL.Text],
+      [IDL.Nat],
+      [],
+    ),
+  'verifyBatch' : IDL.Func([IDL.Nat], [IDL.Bool], []),
 });
 
 export const idlInitArgs = [];
 
 export const idlFactory = ({ IDL }) => {
-  return IDL.Service({ 'ping' : IDL.Func([], [IDL.Text], ['query']) });
+  const BatchStatus = IDL.Variant({
+    'pendingVerification' : IDL.Null,
+    'verified' : IDL.Null,
+    'minted' : IDL.Null,
+  });
+  const Batch = IDL.Record({
+    'id' : IDL.Nat,
+    'region' : IDL.Text,
+    'status' : BatchStatus,
+    'farmName' : IDL.Text,
+    'weightKg' : IDL.Nat,
+    'grade' : IDL.Text,
+  });
+  const DistributionOrder = IDL.Record({
+    'id' : IDL.Nat,
+    'tokenId' : IDL.Nat,
+    'distributorId' : IDL.Nat,
+    'timestamp' : IDL.Int,
+    'quantity' : IDL.Nat,
+  });
+  const Token = IDL.Record({
+    'transactionHash' : IDL.Text,
+    'tokenSupply' : IDL.Nat,
+    'timestamp' : IDL.Int,
+    'batchId' : IDL.Nat,
+  });
+  const RedemptionStatus = IDL.Variant({
+    'pending' : IDL.Null,
+    'completed' : IDL.Null,
+  });
+  const Redemption = IDL.Record({
+    'id' : IDL.Nat,
+    'status' : RedemptionStatus,
+    'redeemer' : IDL.Text,
+    'timestamp' : IDL.Int,
+    'quantity' : IDL.Nat,
+    'batchId' : IDL.Nat,
+  });
+  const BatchLifecycle = IDL.Record({
+    'distributions' : IDL.Vec(DistributionOrder),
+    'tokens' : IDL.Vec(Token),
+    'batch' : Batch,
+    'redemptions' : IDL.Vec(Redemption),
+  });
+  
+  return IDL.Service({
+    'completeRedemptionRequest' : IDL.Func([IDL.Nat], [IDL.Bool], []),
+    'createBatch' : IDL.Func(
+        [IDL.Text, IDL.Text, IDL.Nat, IDL.Text],
+        [IDL.Nat],
+        [],
+      ),
+    'getAllBatches' : IDL.Func([], [IDL.Vec(Batch)], ['query']),
+    'getBatch' : IDL.Func([IDL.Nat], [IDL.Opt(Batch)], ['query']),
+    'getBatchInventory' : IDL.Func([IDL.Nat], [IDL.Opt(IDL.Nat)], ['query']),
+    'getBatchLifecycle' : IDL.Func(
+        [IDL.Nat],
+        [IDL.Opt(BatchLifecycle)],
+        ['query'],
+      ),
+    'getTokenBalance' : IDL.Func([IDL.Nat], [IDL.Opt(IDL.Nat)], ['query']),
+    'mintTokens' : IDL.Func([IDL.Nat, IDL.Nat, IDL.Text], [IDL.Bool], []),
+    'placeDistributionOrder' : IDL.Func(
+        [IDL.Nat, IDL.Nat, IDL.Nat],
+        [IDL.Bool],
+        [],
+      ),
+    'registerDistributor' : IDL.Func(
+        [IDL.Text, IDL.Text, IDL.Text],
+        [IDL.Nat],
+        [],
+      ),
+    'submitRedemptionRequest' : IDL.Func(
+        [IDL.Nat, IDL.Nat, IDL.Text],
+        [IDL.Nat],
+        [],
+      ),
+    'verifyBatch' : IDL.Func([IDL.Nat], [IDL.Bool], []),
+  });
 };
 
 export const init = ({ IDL }) => { return []; };

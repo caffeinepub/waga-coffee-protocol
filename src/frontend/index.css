@@ -20,73 +20,80 @@
 
 @layer base {
   :root {
-    /* OburugoAgroChain — Deep Espresso Brown + Forest Green + Harvest Yellow */
+    /* OburugoAgroChain Investor Pitch Deck — Deep Navy + Gold + Forest Green */
     --radius: 0.75rem;
 
-    /* Backgrounds — deep espresso brown */
-    --background: 0.10 0.018 35;
-    --foreground: 0.93 0.025 80;
+    /* Backgrounds — deep midnight navy */
+    --background: 0.12 0.025 255;
+    --foreground: 0.95 0.01 80;
 
-    /* Card surfaces */
-    --card: 0.14 0.022 35;
-    --card-foreground: 0.93 0.025 80;
+    /* Card surfaces — slightly lifted navy */
+    --card: 0.16 0.030 255;
+    --card-foreground: 0.95 0.01 80;
 
     /* Popover */
-    --popover: 0.16 0.022 35;
-    --popover-foreground: 0.93 0.025 80;
+    --popover: 0.18 0.030 255;
+    --popover-foreground: 0.95 0.01 80;
 
-    /* Primary: Forest Green (buttons, CTAs, active states) */
-    --primary: 0.55 0.14 145;
-    --primary-foreground: 0.96 0.01 80;
+    /* Primary: Forest Green */
+    --primary: 0.58 0.14 148;
+    --primary-foreground: 0.98 0.005 80;
 
-    /* Secondary: Mid espresso brown */
-    --secondary: 0.28 0.055 35;
-    --secondary-foreground: 0.93 0.025 80;
+    /* Secondary: Navy mid */
+    --secondary: 0.22 0.040 255;
+    --secondary-foreground: 0.95 0.01 80;
 
     /* Muted */
-    --muted: 0.20 0.02 35;
-    --muted-foreground: 0.56 0.04 65;
+    --muted: 0.20 0.025 255;
+    --muted-foreground: 0.60 0.03 260;
 
-    /* Accent: Harvest Yellow (highlights, tags, accents) */
-    --accent: 0.82 0.14 80;
-    --accent-foreground: 0.10 0.018 35;
+    /* Accent: Rich Gold/Amber */
+    --accent: 0.78 0.155 75;
+    --accent-foreground: 0.10 0.025 255;
 
     /* Destructive */
     --destructive: 0.58 0.22 27;
     --destructive-foreground: 0.95 0.02 80;
 
     /* Border */
-    --border: 0.26 0.03 35;
-    --input: 0.20 0.02 35;
-    --ring: 0.55 0.14 145;
+    --border: 0.26 0.035 255;
+    --input: 0.20 0.025 255;
+    --ring: 0.78 0.155 75;
 
     /* Charts */
-    --chart-1: 0.55 0.14 145;
-    --chart-2: 0.82 0.14 80;
+    --chart-1: 0.58 0.14 148;
+    --chart-2: 0.78 0.155 75;
     --chart-3: 0.58 0.22 27;
     --chart-4: 0.60 0.12 190;
-    --chart-5: 0.65 0.10 35;
+    --chart-5: 0.65 0.10 255;
 
     /* Sidebar */
-    --sidebar: 0.12 0.018 35;
-    --sidebar-foreground: 0.93 0.025 80;
-    --sidebar-primary: 0.55 0.14 145;
-    --sidebar-primary-foreground: 0.96 0.01 80;
-    --sidebar-accent: 0.20 0.02 35;
-    --sidebar-accent-foreground: 0.93 0.025 80;
-    --sidebar-border: 0.26 0.03 35;
-    --sidebar-ring: 0.55 0.14 145;
+    --sidebar: 0.14 0.025 255;
+    --sidebar-foreground: 0.95 0.01 80;
+    --sidebar-primary: 0.58 0.14 148;
+    --sidebar-primary-foreground: 0.98 0.005 80;
+    --sidebar-accent: 0.20 0.025 255;
+    --sidebar-accent-foreground: 0.95 0.01 80;
+    --sidebar-border: 0.26 0.035 255;
+    --sidebar-ring: 0.78 0.155 75;
 
-    /* Custom OburugoAgroChain tokens */
-    --espresso: 0.10 0.018 35;
-    --espresso-mid: 0.28 0.055 35;
-    --green: 0.55 0.14 145;
-    --green-dim: 0.42 0.10 145;
-    --yellow: 0.82 0.14 80;
-    --yellow-dim: 0.68 0.11 80;
-    --success: 0.60 0.15 145;
-    --warning: 0.82 0.14 80;
+    /* Custom pitch deck semantic tokens */
+    --navy: 0.12 0.025 255;
+    --navy-mid: 0.18 0.032 255;
+    --navy-lift: 0.22 0.038 255;
+    --gold: 0.78 0.155 75;
+    --gold-dim: 0.62 0.12 75;
+    --green: 0.58 0.14 148;
+    --green-dim: 0.45 0.10 148;
+    --success: 0.60 0.15 148;
+    --warning: 0.78 0.155 75;
     --info: 0.60 0.12 240;
+
+    /* Legacy compat */
+    --espresso: 0.12 0.025 255;
+    --espresso-mid: 0.22 0.038 255;
+    --yellow: 0.78 0.155 75;
+    --yellow-dim: 0.62 0.12 75;
   }
 
   * {
@@ -99,17 +106,18 @@
     font-feature-settings: "cv11", "ss01";
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: "Bricolage Grotesque", "Cabinet Grotesk", system-ui, sans-serif;
+    font-family: "Bricolage Grotesque", system-ui, sans-serif;
     letter-spacing: -0.02em;
   }
 
   /* Scrollbar */
   ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+    width: 4px;
+    height: 4px;
   }
   ::-webkit-scrollbar-track {
     background: oklch(var(--background));
@@ -119,88 +127,88 @@
     border-radius: 3px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: oklch(var(--yellow-dim));
+    background: oklch(var(--gold-dim));
   }
 }
 
 @layer utilities {
+  /* Gold utilities */
+  .text-gold { color: oklch(var(--gold)); }
+  .bg-gold { background-color: oklch(var(--gold)); }
+  .border-gold { border-color: oklch(var(--gold)); }
+
+  /* Navy utilities */
+  .bg-navy { background-color: oklch(var(--navy)); }
+  .bg-navy-mid { background-color: oklch(var(--navy-mid)); }
+  .bg-navy-lift { background-color: oklch(var(--navy-lift)); }
+
   /* Green utilities */
   .text-green { color: oklch(var(--green)); }
   .bg-green { background-color: oklch(var(--green)); }
   .border-green { border-color: oklch(var(--green)); }
 
-  /* Yellow utilities */
-  .text-yellow { color: oklch(var(--yellow)); }
-  .bg-yellow { background-color: oklch(var(--yellow)); }
-  .border-yellow { border-color: oklch(var(--yellow)); }
-
-  /* Espresso utilities */
-  .text-espresso { color: oklch(var(--espresso)); }
-  .bg-espresso { background-color: oklch(var(--espresso)); }
-  .bg-espresso-mid { background-color: oklch(var(--espresso-mid)); }
-
-  /* Legacy amber aliases mapped to yellow for backward compat */
-  .text-amber { color: oklch(var(--yellow)); }
+  /* Yellow = Gold aliases */
+  .text-yellow { color: oklch(var(--gold)); }
+  .bg-yellow { background-color: oklch(var(--gold)); }
+  .border-yellow { border-color: oklch(var(--gold)); }
+  .text-amber { color: oklch(var(--gold)); }
+  .bg-amber { background-color: oklch(var(--gold)); }
+  .border-amber { border-color: oklch(var(--gold)); }
   .text-cream { color: oklch(var(--foreground)); }
-  .text-coffee { color: oklch(var(--espresso-mid)); }
-  .bg-amber { background-color: oklch(var(--yellow)); }
-  .bg-coffee { background-color: oklch(var(--espresso-mid)); }
-  .bg-coffee-dark { background-color: oklch(var(--espresso)); }
-  .border-amber { border-color: oklch(var(--yellow)); }
 
-  /* Glow utilities — green for primary, yellow for accent */
+  /* Glow utilities */
+  .glow-gold {
+    box-shadow: 0 0 24px oklch(var(--gold) / 0.25), 0 0 48px oklch(var(--gold) / 0.08);
+  }
+  .glow-gold-sm {
+    box-shadow: 0 0 12px oklch(var(--gold) / 0.30);
+  }
   .glow-green {
-    box-shadow: 0 0 20px oklch(var(--green) / 0.15), 0 0 40px oklch(var(--green) / 0.05);
+    box-shadow: 0 0 24px oklch(var(--green) / 0.20), 0 0 48px oklch(var(--green) / 0.06);
   }
   .glow-green-sm {
-    box-shadow: 0 0 10px oklch(var(--green) / 0.25);
-  }
-  .glow-yellow {
-    box-shadow: 0 0 20px oklch(var(--yellow) / 0.15), 0 0 40px oklch(var(--yellow) / 0.05);
-  }
-  .glow-yellow-sm {
-    box-shadow: 0 0 10px oklch(var(--yellow) / 0.2);
+    box-shadow: 0 0 12px oklch(var(--green) / 0.28);
   }
 
-  /* Legacy glow aliases */
-  .glow-amber { box-shadow: 0 0 20px oklch(var(--yellow) / 0.15), 0 0 40px oklch(var(--yellow) / 0.05); }
-  .glow-amber-sm { box-shadow: 0 0 10px oklch(var(--yellow) / 0.2); }
+  /* Legacy amber/yellow glow aliases */
+  .glow-amber { box-shadow: 0 0 20px oklch(var(--gold) / 0.15), 0 0 40px oklch(var(--gold) / 0.05); }
+  .glow-amber-sm { box-shadow: 0 0 10px oklch(var(--gold) / 0.2); }
+  .glow-yellow { box-shadow: 0 0 20px oklch(var(--gold) / 0.15), 0 0 40px oklch(var(--gold) / 0.05); }
+  .glow-yellow-sm { box-shadow: 0 0 10px oklch(var(--gold) / 0.2); }
 
-  .card-hover {
-    transition: all 0.2s ease;
-  }
-  .card-hover:hover {
-    border-color: oklch(var(--green) / 0.35);
-    box-shadow: 0 0 15px oklch(var(--green) / 0.10), 0 4px 20px oklch(0 0 0 / 0.35);
-    transform: translateY(-1px);
+  /* Gradient text: green to gold */
+  .gradient-text {
+    background: linear-gradient(135deg, oklch(var(--green)) 0%, oklch(var(--gold)) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
-  /* Badges */
+  /* Badge utilities */
   .badge-green {
-    background-color: oklch(var(--green) / 0.15);
+    background-color: oklch(var(--green) / 0.12);
     color: oklch(var(--green));
-    border: 1px solid oklch(var(--green) / 0.3);
+    border: 1px solid oklch(var(--green) / 0.30);
+  }
+  .badge-gold {
+    background-color: oklch(var(--gold) / 0.12);
+    color: oklch(var(--gold));
+    border: 1px solid oklch(var(--gold) / 0.30);
   }
   .badge-yellow {
-    background-color: oklch(var(--yellow) / 0.15);
-    color: oklch(var(--yellow));
-    border: 1px solid oklch(var(--yellow) / 0.3);
+    background-color: oklch(var(--gold) / 0.12);
+    color: oklch(var(--gold));
+    border: 1px solid oklch(var(--gold) / 0.30);
   }
-  /* Legacy badge-amber mapped to yellow */
   .badge-amber {
-    background-color: oklch(var(--yellow) / 0.15);
-    color: oklch(var(--yellow));
-    border: 1px solid oklch(var(--yellow) / 0.3);
+    background-color: oklch(var(--gold) / 0.12);
+    color: oklch(var(--gold));
+    border: 1px solid oklch(var(--gold) / 0.30);
   }
   .badge-red {
-    background-color: oklch(var(--destructive) / 0.15);
+    background-color: oklch(var(--destructive) / 0.12);
     color: oklch(var(--destructive));
-    border: 1px solid oklch(var(--destructive) / 0.3);
-  }
-  .badge-blue {
-    background-color: oklch(var(--info) / 0.15);
-    color: oklch(var(--info));
-    border: 1px solid oklch(var(--info) / 0.3);
+    border: 1px solid oklch(var(--destructive) / 0.30);
   }
   .badge-gray {
     background-color: oklch(var(--muted) / 0.5);
@@ -208,73 +216,181 @@
     border: 1px solid oklch(var(--border));
   }
 
-  /* Gradient text: green to yellow */
-  .gradient-text {
-    background: linear-gradient(135deg, oklch(var(--green)) 0%, oklch(var(--yellow)) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  /* Card hover */
+  .card-hover {
+    transition: all 0.2s ease;
   }
-
-  .noise-texture {
-    position: relative;
+  .card-hover:hover {
+    border-color: oklch(var(--gold) / 0.35);
+    box-shadow: 0 0 20px oklch(var(--gold) / 0.08), 0 4px 24px oklch(0 0 0 / 0.35);
+    transform: translateY(-1px);
   }
-  .noise-texture::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-    pointer-events: none;
-    border-radius: inherit;
-  }
-
-  .code-block {
-    font-family: "JetBrains Mono", "Geist Mono", "Courier New", monospace;
-    font-size: 0.8rem;
-    line-height: 1.6;
-    background-color: oklch(0.08 0.015 35);
-    border: 1px solid oklch(var(--border));
-    border-radius: 0.5rem;
-    padding: 1rem 1.25rem;
-    overflow-x: auto;
-  }
-
-  .step-complete { color: oklch(var(--green)); }
-  .step-active { color: oklch(var(--yellow)); }
-  .step-inactive { color: oklch(var(--muted-foreground)); }
 }
 
-/* Timeline connector — yellow accent */
-.timeline-line {
-  position: absolute;
-  left: 1.25rem;
-  top: 2.5rem;
-  bottom: -0.5rem;
-  width: 2px;
-  background: linear-gradient(180deg, oklch(var(--yellow) / 0.6), oklch(var(--yellow) / 0.1));
+/* ── Slide transition animations ── */
+@keyframes slide-fade-in {
+  0%   { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 
-/* Step circle — green primary */
-.step-circle {
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 50%;
-  display: flex;
+@keyframes slide-fade-out {
+  0%   { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-20px); }
+}
+
+/* ── Cover title letter animation ── */
+@keyframes letter-rise {
+  0%   { opacity: 0; transform: translateY(32px) scale(0.90); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ── Underline sweep ── */
+@keyframes underline-sweep {
+  0%   { width: 0; opacity: 0; }
+  100% { width: 100%; opacity: 1; }
+}
+
+/* ── Coffee bean float ── */
+@keyframes bean-float {
+  0%   { transform: translateY(-80px) rotate(var(--r-start)); opacity: 0; }
+  8%   { opacity: var(--bean-opacity); }
+  92%  { opacity: var(--bean-opacity); }
+  100% { transform: translateY(110vh) rotate(var(--r-end)); opacity: 0; }
+}
+
+/* ── Glow pulse ── */
+@keyframes glow-pulse {
+  0%, 100% { filter: brightness(1) drop-shadow(0 0 6px oklch(var(--gold) / 0.4)); }
+  50%       { filter: brightness(1.2) drop-shadow(0 0 16px oklch(var(--gold) / 0.8)); }
+}
+
+/* ── Fade-in stagger helper ── */
+@keyframes fade-in-up {
+  0%   { opacity: 0; transform: translateY(16px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.5s ease-out forwards;
+}
+
+/* ── Slide content enter ── */
+.slide-enter {
+  animation: slide-fade-in 0.45s ease-out forwards;
+}
+
+/* ── Step flow pill ── */
+.step-flow-pill {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  background-color: oklch(var(--green) / 0.15);
-  border: 1px solid oklch(var(--green) / 0.4);
-  color: oklch(var(--green));
-  font-weight: 700;
-  font-size: 0.875rem;
-  flex-shrink: 0;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background-color: oklch(var(--navy-lift));
+  border: 1px solid oklch(var(--gold) / 0.25);
+  color: oklch(var(--gold) / 0.85);
+  white-space: nowrap;
 }
 
-/* Hero mesh gradient — espresso brown tones */
-.hero-mesh {
+/* ── Deck overlay vignette (cover only) ── */
+.cover-vignette {
+  background: radial-gradient(
+    ellipse 120% 120% at 50% 0%,
+    transparent 40%,
+    oklch(var(--navy) / 0.7) 100%
+  );
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* ── Navy slide mesh background ── */
+.slide-mesh {
   background:
-    radial-gradient(ellipse 80% 60% at 10% 20%, oklch(var(--espresso-mid) / 0.4) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 80% at 90% 80%, oklch(var(--green) / 0.06) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 50% at 50% 50%, oklch(var(--espresso) / 0.6) 0%, transparent 100%),
-    oklch(var(--background));
+    radial-gradient(ellipse 80% 60% at 5% 15%, oklch(var(--green) / 0.04) 0%, transparent 65%),
+    radial-gradient(ellipse 70% 70% at 95% 85%, oklch(var(--gold) / 0.04) 0%, transparent 65%),
+    oklch(var(--navy));
+}
+
+/* accordion compat */
+@keyframes accordion-down {
+  from { height: 0; }
+  to   { height: var(--radix-accordion-content-height); }
+}
+@keyframes accordion-up {
+  from { height: var(--radix-accordion-content-height); }
+  to   { height: 0; }
+}
+
+/* ── Print helpers (screen) ── */
+.print-only {
+  display: none;
+}
+
+/* ── @media print ── */
+@media print {
+  /* Force background colors/images to render */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Reset page margins */
+  @page {
+    margin: 0;
+    size: A4 landscape;
+  }
+
+  /* Hide interactive chrome */
+  .no-print {
+    display: none !important;
+  }
+
+  /* Hide the screen-only interactive slide viewer */
+  .slide-mesh > .fixed,
+  .slide-mesh > section,
+  .slide-mesh > .slide-enter {
+    display: none !important;
+  }
+
+  /* Show the print container */
+  .print-only {
+    display: block !important;
+  }
+
+  /* Each slide = one printed page */
+  .print-slide {
+    width: 100vw;
+    min-height: 100vh;
+    page-break-after: always;
+    break-after: page;
+    overflow: hidden;
+    position: relative;
+    background: oklch(0.12 0.025 255);
+  }
+
+  /* Last slide — no trailing blank page */
+  .print-slide:last-child {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  /* Slide content fills the page, remove scroll padding */
+  .print-slide > * {
+    min-height: 100vh;
+    padding-bottom: 0 !important;
+  }
+
+  /* Kill body overflow lock */
+  body {
+    overflow: visible !important;
+  }
+
+  /* Kill the fixed-position interactive wrapper clipping */
+  .fixed.inset-0.slide-mesh {
+    position: relative !important;
+    overflow: visible !important;
+    height: auto !important;
+  }
 }

@@ -11,7 +11,7 @@ import {
   ShieldCheck,
   Zap,
 } from "lucide-react";
-import { type Variants, motion } from "motion/react";
+import { type Variants, motion, useReducedMotion } from "motion/react";
 
 interface HeroProps {
   onExplore: () => void;
@@ -74,7 +74,45 @@ const itemVariants: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
+const BRAND_NAME = "OburugoAgroChain";
+
+const letterContainerVariants: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.045,
+      delayChildren: 0.15,
+    },
+  },
+};
+
+const letterVariants: Variants = {
+  hidden: { opacity: 0, y: 28, scale: 0.88, filter: "blur(4px)" },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    filter: "blur(0px)",
+    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+const underlineVariants: Variants = {
+  hidden: { scaleX: 0, opacity: 0 },
+  visible: {
+    scaleX: 1,
+    opacity: 1,
+    transition: {
+      duration: 0.7,
+      ease: [0.22, 1, 0.36, 1],
+      delay: BRAND_NAME.length * 0.045 + 0.3,
+    },
+  },
+};
+
 export function Hero({ onExplore }: HeroProps) {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
     <section className="relative min-h-screen hero-mesh overflow-hidden flex flex-col justify-center">
       {/* Decorative grid lines */}
@@ -110,18 +148,74 @@ export function Hero({ onExplore }: HeroProps) {
 
         {/* Main headline */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.1 }}
+          transition={{ duration: 0.5, delay: 0.05 }}
           className="mb-6"
         >
           <div className="flex items-center gap-4 mb-4">
-            <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-yellow/15 border border-yellow/30">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.7, rotate: -15 }}
+              animate={{ opacity: 1, scale: 1, rotate: 0 }}
+              transition={{
+                duration: 0.6,
+                delay: 0.08,
+                type: "spring",
+                stiffness: 200,
+              }}
+              className="flex items-center justify-center w-12 h-12 rounded-xl bg-yellow/15 border border-yellow/30"
+            >
               <Coffee className="w-6 h-6 text-yellow" />
-            </div>
+            </motion.div>
           </div>
-          <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-none tracking-tight mb-4">
-            <span className="gradient-text">OburugoAgroChain</span>
+
+          {/* Animated brand name — letter by letter */}
+          <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-none tracking-tight mb-2 relative inline-block">
+            <motion.span
+              variants={
+                prefersReducedMotion ? undefined : letterContainerVariants
+              }
+              initial={prefersReducedMotion ? { opacity: 1 } : "hidden"}
+              animate="visible"
+              aria-label={BRAND_NAME}
+              className="inline-flex flex-wrap"
+              style={{ lineHeight: 1.1 }}
+            >
+              {BRAND_NAME.split("").map((char, i) => (
+                <motion.span
+                  // biome-ignore lint/suspicious/noArrayIndexKey: static string
+                  key={i}
+                  variants={prefersReducedMotion ? undefined : letterVariants}
+                  className="gradient-text inline-block"
+                  style={{ whiteSpace: char === " " ? "pre" : "normal" }}
+                >
+                  {char === " " ? "\u00A0" : char}
+                </motion.span>
+              ))}
+            </motion.span>
+
+            {/* Green glow underline that sweeps in after letters */}
+            <motion.div
+              variants={prefersReducedMotion ? undefined : underlineVariants}
+              initial={
+                prefersReducedMotion ? { scaleX: 1, opacity: 1 } : "hidden"
+              }
+              animate="visible"
+              style={{ originX: 0 }}
+              className="absolute -bottom-1 left-0 h-1 w-full rounded-full"
+              aria-hidden="true"
+            >
+              <div
+                className="h-full w-full rounded-full"
+                style={{
+                  background:
+                    "linear-gradient(90deg, oklch(var(--green)) 0%, oklch(var(--yellow)) 60%, oklch(var(--green) / 0.3) 100%)",
+                  boxShadow:
+                    "0 0 14px oklch(var(--green) / 0.7), 0 0 30px oklch(var(--green) / 0.3)",
+                  animation: "glow-pulse 2.5s ease-in-out infinite",
+                }}
+              />
+            </motion.div>
           </h1>
         </motion.div>
 

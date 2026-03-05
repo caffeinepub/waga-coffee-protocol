@@ -89,25 +89,347 @@ export class ExternalBlob {
         return this;
     }
 }
-export interface backendInterface {
-    ping(): Promise<string>;
+export interface DistributionOrder {
+    id: bigint;
+    tokenId: bigint;
+    distributorId: bigint;
+    timestamp: bigint;
+    quantity: bigint;
 }
+export interface Batch {
+    id: bigint;
+    region: string;
+    status: BatchStatus;
+    farmName: string;
+    weightKg: bigint;
+    grade: string;
+}
+export interface Token {
+    transactionHash: string;
+    tokenSupply: bigint;
+    timestamp: bigint;
+    batchId: bigint;
+}
+export interface BatchLifecycle {
+    distributions: Array<DistributionOrder>;
+    tokens: Array<Token>;
+    batch: Batch;
+    redemptions: Array<Redemption>;
+}
+export interface Redemption {
+    id: bigint;
+    status: RedemptionStatus;
+    redeemer: string;
+    timestamp: bigint;
+    quantity: bigint;
+    batchId: bigint;
+}
+export enum BatchStatus {
+    pendingVerification = "pendingVerification",
+    verified = "verified",
+    minted = "minted"
+}
+export enum RedemptionStatus {
+    pending = "pending",
+    completed = "completed"
+}
+export interface backendInterface {
+    completeRedemptionRequest(id: bigint): Promise<boolean>;
+    createBatch(farmName: string, region: string, weightKg: bigint, grade: string): Promise<bigint>;
+    getAllBatches(): Promise<Array<Batch>>;
+    getBatch(id: bigint): Promise<Batch | null>;
+    getBatchInventory(batchId: bigint): Promise<bigint | null>;
+    getBatchLifecycle(batchId: bigint): Promise<BatchLifecycle | null>;
+    getTokenBalance(tokenId: bigint): Promise<bigint | null>;
+    mintTokens(batchId: bigint, tokenSupply: bigint, transactionHash: string): Promise<boolean>;
+    placeDistributionOrder(tokenId: bigint, distributorId: bigint, quantity: bigint): Promise<boolean>;
+    registerDistributor(name: string, region: string, walletAddress: string): Promise<bigint>;
+    submitRedemptionRequest(batchId: bigint, quantity: bigint, redeemer: string): Promise<bigint>;
+    verifyBatch(id: bigint): Promise<boolean>;
+}
+import type { Batch as _Batch, BatchLifecycle as _BatchLifecycle, BatchStatus as _BatchStatus, DistributionOrder as _DistributionOrder, Redemption as _Redemption, RedemptionStatus as _RedemptionStatus, Token as _Token } from "./declarations/backend.did.d.ts";
 export class Backend implements backendInterface {
     constructor(private actor: ActorSubclass<_SERVICE>, private _uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, private _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, private processError?: (error: unknown) => never){}
-    async ping(): Promise<string> {
+    async completeRedemptionRequest(arg0: bigint): Promise<boolean> {
         if (this.processError) {
             try {
-                const result = await this.actor.ping();
+                const result = await this.actor.completeRedemptionRequest(arg0);
                 return result;
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
-            const result = await this.actor.ping();
+            const result = await this.actor.completeRedemptionRequest(arg0);
             return result;
         }
     }
+    async createBatch(arg0: string, arg1: string, arg2: bigint, arg3: string): Promise<bigint> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.createBatch(arg0, arg1, arg2, arg3);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.createBatch(arg0, arg1, arg2, arg3);
+            return result;
+        }
+    }
+    async getAllBatches(): Promise<Array<Batch>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getAllBatches();
+                return from_candid_vec_n1(this._uploadFile, this._downloadFile, result);
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getAllBatches();
+            return from_candid_vec_n1(this._uploadFile, this._downloadFile, result);
+        }
+    }
+    async getBatch(arg0: bigint): Promise<Batch | null> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getBatch(arg0);
+                return from_candid_opt_n6(this._uploadFile, this._downloadFile, result);
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getBatch(arg0);
+            return from_candid_opt_n6(this._uploadFile, this._downloadFile, result);
+        }
+    }
+    async getBatchInventory(arg0: bigint): Promise<bigint | null> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getBatchInventory(arg0);
+                return from_candid_opt_n7(this._uploadFile, this._downloadFile, result);
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getBatchInventory(arg0);
+            return from_candid_opt_n7(this._uploadFile, this._downloadFile, result);
+        }
+    }
+    async getBatchLifecycle(arg0: bigint): Promise<BatchLifecycle | null> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getBatchLifecycle(arg0);
+                return from_candid_opt_n8(this._uploadFile, this._downloadFile, result);
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getBatchLifecycle(arg0);
+            return from_candid_opt_n8(this._uploadFile, this._downloadFile, result);
+        }
+    }
+    async getTokenBalance(arg0: bigint): Promise<bigint | null> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getTokenBalance(arg0);
+                return from_candid_opt_n7(this._uploadFile, this._downloadFile, result);
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getTokenBalance(arg0);
+            return from_candid_opt_n7(this._uploadFile, this._downloadFile, result);
+        }
+    }
+    async mintTokens(arg0: bigint, arg1: bigint, arg2: string): Promise<boolean> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.mintTokens(arg0, arg1, arg2);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.mintTokens(arg0, arg1, arg2);
+            return result;
+        }
+    }
+    async placeDistributionOrder(arg0: bigint, arg1: bigint, arg2: bigint): Promise<boolean> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.placeDistributionOrder(arg0, arg1, arg2);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.placeDistributionOrder(arg0, arg1, arg2);
+            return result;
+        }
+    }
+    async registerDistributor(arg0: string, arg1: string, arg2: string): Promise<bigint> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.registerDistributor(arg0, arg1, arg2);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.registerDistributor(arg0, arg1, arg2);
+            return result;
+        }
+    }
+    async submitRedemptionRequest(arg0: bigint, arg1: bigint, arg2: string): Promise<bigint> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.submitRedemptionRequest(arg0, arg1, arg2);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.submitRedemptionRequest(arg0, arg1, arg2);
+            return result;
+        }
+    }
+    async verifyBatch(arg0: bigint): Promise<boolean> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.verifyBatch(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.verifyBatch(arg0);
+            return result;
+        }
+    }
+}
+function from_candid_BatchLifecycle_n9(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _BatchLifecycle): BatchLifecycle {
+    return from_candid_record_n10(_uploadFile, _downloadFile, value);
+}
+function from_candid_BatchStatus_n4(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _BatchStatus): BatchStatus {
+    return from_candid_variant_n5(_uploadFile, _downloadFile, value);
+}
+function from_candid_Batch_n2(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _Batch): Batch {
+    return from_candid_record_n3(_uploadFile, _downloadFile, value);
+}
+function from_candid_RedemptionStatus_n14(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _RedemptionStatus): RedemptionStatus {
+    return from_candid_variant_n15(_uploadFile, _downloadFile, value);
+}
+function from_candid_Redemption_n12(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _Redemption): Redemption {
+    return from_candid_record_n13(_uploadFile, _downloadFile, value);
+}
+function from_candid_opt_n6(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: [] | [_Batch]): Batch | null {
+    return value.length === 0 ? null : from_candid_Batch_n2(_uploadFile, _downloadFile, value[0]);
+}
+function from_candid_opt_n7(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: [] | [bigint]): bigint | null {
+    return value.length === 0 ? null : value[0];
+}
+function from_candid_opt_n8(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: [] | [_BatchLifecycle]): BatchLifecycle | null {
+    return value.length === 0 ? null : from_candid_BatchLifecycle_n9(_uploadFile, _downloadFile, value[0]);
+}
+function from_candid_record_n10(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
+    distributions: Array<_DistributionOrder>;
+    tokens: Array<_Token>;
+    batch: _Batch;
+    redemptions: Array<_Redemption>;
+}): {
+    distributions: Array<DistributionOrder>;
+    tokens: Array<Token>;
+    batch: Batch;
+    redemptions: Array<Redemption>;
+} {
+    return {
+        distributions: value.distributions,
+        tokens: value.tokens,
+        batch: from_candid_Batch_n2(_uploadFile, _downloadFile, value.batch),
+        redemptions: from_candid_vec_n11(_uploadFile, _downloadFile, value.redemptions)
+    };
+}
+function from_candid_record_n13(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
+    id: bigint;
+    status: _RedemptionStatus;
+    redeemer: string;
+    timestamp: bigint;
+    quantity: bigint;
+    batchId: bigint;
+}): {
+    id: bigint;
+    status: RedemptionStatus;
+    redeemer: string;
+    timestamp: bigint;
+    quantity: bigint;
+    batchId: bigint;
+} {
+    return {
+        id: value.id,
+        status: from_candid_RedemptionStatus_n14(_uploadFile, _downloadFile, value.status),
+        redeemer: value.redeemer,
+        timestamp: value.timestamp,
+        quantity: value.quantity,
+        batchId: value.batchId
+    };
+}
+function from_candid_record_n3(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
+    id: bigint;
+    region: string;
+    status: _BatchStatus;
+    farmName: string;
+    weightKg: bigint;
+    grade: string;
+}): {
+    id: bigint;
+    region: string;
+    status: BatchStatus;
+    farmName: string;
+    weightKg: bigint;
+    grade: string;
+} {
+    return {
+        id: value.id,
+        region: value.region,
+        status: from_candid_BatchStatus_n4(_uploadFile, _downloadFile, value.status),
+        farmName: value.farmName,
+        weightKg: value.weightKg,
+        grade: value.grade
+    };
+}
+function from_candid_variant_n15(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
+    pending: null;
+} | {
+    completed: null;
+}): RedemptionStatus {
+    return "pending" in value ? RedemptionStatus.pending : "completed" in value ? RedemptionStatus.completed : value;
+}
+function from_candid_variant_n5(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
+    pendingVerification: null;
+} | {
+    verified: null;
+} | {
+    minted: null;
+}): BatchStatus {
+    return "pendingVerification" in value ? BatchStatus.pendingVerification : "verified" in value ? BatchStatus.verified : "minted" in value ? BatchStatus.minted : value;
+}
+function from_candid_vec_n1(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: Array<_Batch>): Array<Batch> {
+    return value.map((x)=>from_candid_Batch_n2(_uploadFile, _downloadFile, x));
+}
+function from_candid_vec_n11(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: Array<_Redemption>): Array<Redemption> {
+    return value.map((x)=>from_candid_Redemption_n12(_uploadFile, _downloadFile, x));
 }
 export interface CreateActorOptions {
     agent?: Agent;

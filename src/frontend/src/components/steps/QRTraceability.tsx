@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/dialog";
 import { useApp } from "@/context/AppContext";
 import { cn } from "@/lib/utils";
+import { generateQRDataUrl } from "@/utils/qrCanvas";
 import {
   Box,
   Calendar,
@@ -27,7 +28,6 @@ import {
   Zap,
 } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
-import QRCode from "qrcode";
 import { useEffect, useState } from "react";
 
 const STATIC_BATCH = {
@@ -130,13 +130,8 @@ export function QRTraceability() {
       `TxHash: ${batchToken?.txHash ?? "N/A"}`,
     ].join("\n");
 
-    QRCode.toDataURL(qrText, {
-      width: 200,
-      margin: 1,
-      color: { dark: "#1a0f00", light: "#f5f0e8" },
-    })
-      .then((url: string) => setQrDataUrl(url))
-      .catch((err: unknown) => console.error("QR generation failed:", err));
+    const url = generateQRDataUrl(qrText, 200, "#1a0f00", "#f5f0e8");
+    if (url) setQrDataUrl(url);
   }, [
     coffeeInfo.batchId,
     coffeeInfo.producer,

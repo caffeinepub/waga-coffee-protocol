@@ -71,28 +71,37 @@ export default {
           border: "oklch(var(--sidebar-border))",
           ring: "oklch(var(--sidebar-ring))",
         },
-        // OburugoAgroChain custom semantic tokens
+        // Pitch deck semantic tokens
+        navy: {
+          DEFAULT: "oklch(var(--navy) / <alpha-value>)",
+          mid: "oklch(var(--navy-mid) / <alpha-value>)",
+          lift: "oklch(var(--navy-lift) / <alpha-value>)",
+        },
+        gold: {
+          DEFAULT: "oklch(var(--gold) / <alpha-value>)",
+          dim: "oklch(var(--gold-dim) / <alpha-value>)",
+        },
         green: {
           DEFAULT: "oklch(var(--green) / <alpha-value>)",
           dim: "oklch(var(--green-dim) / <alpha-value>)",
         },
+        // Legacy aliases
         yellow: {
-          DEFAULT: "oklch(var(--yellow) / <alpha-value>)",
-          dim: "oklch(var(--yellow-dim) / <alpha-value>)",
+          DEFAULT: "oklch(var(--gold) / <alpha-value>)",
+          dim: "oklch(var(--gold-dim) / <alpha-value>)",
+        },
+        amber: {
+          DEFAULT: "oklch(var(--gold) / <alpha-value>)",
+          dim: "oklch(var(--gold-dim) / <alpha-value>)",
         },
         espresso: {
-          DEFAULT: "oklch(var(--espresso) / <alpha-value>)",
-          mid: "oklch(var(--espresso-mid) / <alpha-value>)",
-        },
-        // Legacy aliases for backward compat
-        amber: {
-          DEFAULT: "oklch(var(--yellow) / <alpha-value>)",
-          dim: "oklch(var(--yellow-dim) / <alpha-value>)",
+          DEFAULT: "oklch(var(--navy) / <alpha-value>)",
+          mid: "oklch(var(--navy-mid) / <alpha-value>)",
         },
         cream: "oklch(var(--foreground))",
         coffee: {
-          DEFAULT: "oklch(var(--espresso-mid))",
-          dark: "oklch(var(--espresso))",
+          DEFAULT: "oklch(var(--navy-mid))",
+          dark: "oklch(var(--navy))",
         },
         success: "oklch(var(--success))",
         warning: "oklch(var(--warning))",
@@ -107,13 +116,16 @@ export default {
       },
       boxShadow: {
         xs: "0 1px 2px 0 rgba(0,0,0,0.05)",
-        "green-sm": "0 0 10px oklch(var(--green) / 0.25)",
-        "green-md": "0 0 20px oklch(var(--green) / 0.15), 0 0 40px oklch(var(--green) / 0.05)",
-        "yellow-sm": "0 0 10px oklch(var(--yellow) / 0.2)",
-        "yellow-md": "0 0 20px oklch(var(--yellow) / 0.15), 0 0 40px oklch(var(--yellow) / 0.05)",
-        "amber-sm": "0 0 10px oklch(var(--yellow) / 0.2)",
-        "amber-md": "0 0 20px oklch(var(--yellow) / 0.15), 0 0 40px oklch(var(--yellow) / 0.05)",
-        "card-hover": "0 0 15px oklch(var(--green) / 0.10), 0 4px 20px rgba(0,0,0,0.35)",
+        "gold-sm": "0 0 12px oklch(var(--gold) / 0.28)",
+        "gold-md": "0 0 24px oklch(var(--gold) / 0.18), 0 0 48px oklch(var(--gold) / 0.06)",
+        "green-sm": "0 0 12px oklch(var(--green) / 0.28)",
+        "green-md": "0 0 24px oklch(var(--green) / 0.18), 0 0 48px oklch(var(--green) / 0.06)",
+        // legacy
+        "yellow-sm": "0 0 10px oklch(var(--gold) / 0.2)",
+        "yellow-md": "0 0 20px oklch(var(--gold) / 0.15), 0 0 40px oklch(var(--gold) / 0.05)",
+        "amber-sm": "0 0 10px oklch(var(--gold) / 0.2)",
+        "amber-md": "0 0 20px oklch(var(--gold) / 0.15), 0 0 40px oklch(var(--gold) / 0.05)",
+        "card-hover": "0 0 15px oklch(var(--gold) / 0.10), 0 4px 20px rgba(0,0,0,0.35)",
       },
       keyframes: {
         "accordion-down": {
@@ -124,18 +136,6 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        "pulse-green": {
-          "0%, 100%": { opacity: "1" },
-          "50%": { opacity: "0.5" },
-        },
-        "pulse-amber": {
-          "0%, 100%": { opacity: "1" },
-          "50%": { opacity: "0.5" },
-        },
-        "spin-slow": {
-          from: { transform: "rotate(0deg)" },
-          to: { transform: "rotate(360deg)" },
-        },
         "fade-in": {
           from: { opacity: "0", transform: "translateY(8px)" },
           to: { opacity: "1", transform: "translateY(0)" },
@@ -144,15 +144,22 @@ export default {
           from: { opacity: "0", transform: "translateY(16px)" },
           to: { opacity: "1", transform: "translateY(0)" },
         },
+        "pulse-green": {
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: "0.5" },
+        },
+        "spin-slow": {
+          from: { transform: "rotate(0deg)" },
+          to: { transform: "rotate(360deg)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "pulse-green": "pulse-green 2s ease-in-out infinite",
-        "pulse-amber": "pulse-amber 2s ease-in-out infinite",
-        "spin-slow": "spin-slow 3s linear infinite",
         "fade-in": "fade-in 0.3s ease-out",
         "slide-up": "slide-up 0.4s ease-out",
+        "pulse-green": "pulse-green 2s ease-in-out infinite",
+        "spin-slow": "spin-slow 3s linear infinite",
       },
     },
   },
