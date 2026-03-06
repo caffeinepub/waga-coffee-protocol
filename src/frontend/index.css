@@ -313,6 +313,117 @@
     oklch(var(--navy));
 }
 
+/* ── Light / Print Mode ── */
+.slide-mesh-light {
+  background: #ffffff;
+}
+
+.print-mode {
+  --background: 0.98 0.005 80;
+  --foreground: 0.12 0.025 255;
+  --card: 0.95 0.008 80;
+  --card-foreground: 0.12 0.025 255;
+  --muted-foreground: 0.40 0.025 255;
+  --border: 0.82 0.015 255;
+  --muted: 0.92 0.010 255;
+  color-scheme: light;
+}
+
+/* Recolor all text-foreground/80, /85, /90 etc in print mode */
+.print-mode * {
+  --tw-text-opacity: 1;
+}
+
+/* Card/panel backgrounds */
+.print-mode [style*="oklch(0.16 0.030 255"],
+.print-mode [style*="oklch(0.14 0.025 255"] {
+  background: #f3f4f6 !important;
+  border-color: #d1d5db !important;
+}
+
+.print-mode [style*="oklch(0.58 0.14 148 / 0.07"] {
+  background: oklch(0.58 0.14 148 / 0.08) !important;
+  border-color: oklch(0.58 0.14 148 / 0.30) !important;
+}
+
+.print-mode [style*="oklch(0.78 0.155 75 / 0.05"] {
+  background: oklch(0.78 0.155 75 / 0.08) !important;
+  border-color: oklch(0.78 0.155 75 / 0.30) !important;
+}
+
+/* Table rows */
+.print-mode tbody tr {
+  background: #f9fafb !important;
+}
+.print-mode tbody tr:nth-child(even) {
+  background: #f3f4f6 !important;
+}
+.print-mode thead tr {
+  background: #e5e7eb !important;
+}
+
+/* Step flow pills */
+.print-mode .step-flow-pill {
+  background-color: #e5e7eb;
+  border-color: oklch(0.78 0.155 75 / 0.40);
+  color: oklch(0.35 0.08 75);
+}
+
+/* Muted text override */
+.print-mode .text-muted-foreground {
+  color: oklch(0.40 0.025 255) !important;
+}
+.print-mode .text-foreground\/80,
+.print-mode .text-foreground\/85,
+.print-mode .text-foreground\/90,
+.print-mode .text-foreground\/70,
+.print-mode .text-foreground\/60,
+.print-mode .text-foreground\/40,
+.print-mode .text-foreground\/30 {
+  color: oklch(0.25 0.03 255) !important;
+}
+
+/* Nav bar in print mode */
+.print-mode [style*="oklch(0.12 0.025 255 / 0.92"] {
+  background: #f3f4f6 !important;
+  border-top: 1px solid #d1d5db !important;
+}
+
+/* Wordmark panel */
+.print-mode [style*="oklch(0.16 0.030 255 / 0.85"] {
+  background: #f3f4f6 !important;
+  border-color: #d1d5db !important;
+}
+
+/* Badge overrides */
+.print-mode .badge-gray {
+  background-color: #e5e7eb;
+  color: #374151;
+  border-color: #d1d5db;
+}
+
+/* Cover slide radial glow — tone down in light mode */
+.print-mode .cover-vignette {
+  display: none;
+}
+
+/* Slide mesh override */
+.print-mode .slide-mesh-light {
+  background: #ffffff;
+}
+
+/* Also print with light bg when print-mode is active */
+@media print {
+  .print-mode .print-slide {
+    background: #ffffff !important;
+  }
+  .print-mode [style*="oklch(0.16"],
+  .print-mode [style*="oklch(0.14"],
+  .print-mode [style*="oklch(0.12"] {
+    background: #f3f4f6 !important;
+  }
+}
+
 /* accordion compat */
 @keyframes accordion-down {
   from { height: 0; }

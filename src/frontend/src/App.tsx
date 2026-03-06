@@ -3,8 +3,37 @@ import { useCallback, useEffect, useRef, useState } from "react";
 // ─────────────────────────────────────────────────────────────
 // Types
 // ─────────────────────────────────────────────────────────────
-type SlideId = 0 | 1 | 2 | 3 | 4 | 5 | 6;
-const TOTAL_SLIDES = 7;
+type SlideId = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
+const TOTAL_SLIDES = 12;
+
+// ─────────────────────────────────────────────────────────────
+// Global Hero Image Background (visible on all slides)
+// ─────────────────────────────────────────────────────────────
+function GlobalHeroBg() {
+  return (
+    <div className="fixed inset-0 z-0 pointer-events-none" aria-hidden="true">
+      {/* The uploaded coffee-farm-blockchain illustration */}
+      <div
+        className="absolute inset-0"
+        style={{
+          backgroundImage: "url('/assets/uploads/image-1.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center top",
+          backgroundRepeat: "no-repeat",
+          opacity: 0.12,
+        }}
+      />
+      {/* Deep overlay so text stays readable on all slides */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(180deg, oklch(0.10 0.025 255 / 0.65) 0%, oklch(0.10 0.025 255 / 0.45) 40%, oklch(0.10 0.025 255 / 0.70) 100%)",
+        }}
+      />
+    </div>
+  );
+}
 
 // ─────────────────────────────────────────────────────────────
 // Coffee Bean Background
@@ -59,6 +88,31 @@ function CoverSlide({ onNext }: { onNext: () => void }) {
   const title = "OburugoAgroChain";
   return (
     <div className="relative flex flex-col items-center justify-center min-h-screen px-6 py-16 text-center overflow-hidden">
+      {/* Full-bleed hero image — the uploaded coffee-farm-blockchain illustration */}
+      <div
+        className="absolute inset-0 z-0 pointer-events-none"
+        aria-hidden="true"
+      >
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: "url('/assets/uploads/image-1.png')",
+            backgroundSize: "cover",
+            backgroundPosition: "center top",
+            backgroundRepeat: "no-repeat",
+            opacity: 0.38,
+          }}
+        />
+        {/* Gradient scrim so text pops cleanly */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(180deg, oklch(0.10 0.025 255 / 0.35) 0%, oklch(0.10 0.025 255 / 0.15) 35%, oklch(0.10 0.025 255 / 0.55) 75%, oklch(0.10 0.025 255 / 0.85) 100%)",
+          }}
+        />
+      </div>
+
       {/* Vignette overlay */}
       <div className="cover-vignette" aria-hidden="true" />
 
@@ -72,10 +126,10 @@ function CoverSlide({ onNext }: { onNext: () => void }) {
         aria-hidden="true"
       />
 
-      <div className="relative z-10 flex flex-col items-center gap-6 max-w-4xl mx-auto">
+      <div className="relative z-10 flex flex-col items-center gap-5 max-w-4xl mx-auto">
         {/* Logo */}
         <div
-          className="w-20 h-20 md:w-24 md:h-24 mb-2"
+          className="w-20 h-20 md:w-24 md:h-24 mb-1"
           style={{ animation: "fade-in-up 0.6s ease-out 0.2s both" }}
         >
           <img
@@ -120,15 +174,20 @@ function CoverSlide({ onNext }: { onNext: () => void }) {
           />
         </div>
 
-        {/* Subtitle */}
+        {/* Hero tagline — new intro copy */}
         <p
-          className="font-display text-lg sm:text-xl md:text-2xl text-foreground/80 font-medium"
-          style={{ animation: "fade-in-up 0.6s ease-out 1.2s both" }}
+          className="font-display text-lg sm:text-xl md:text-2xl font-bold max-w-2xl leading-snug"
+          style={{
+            animation: "fade-in-up 0.6s ease-out 1.2s both",
+            color: "oklch(0.95 0.01 80)",
+          }}
         >
-          Tokenizing Uganda's Coffee Value Chain
+          Building the traceability infrastructure for{" "}
+          <span className="text-gold">Uganda's next $5B coffee economy</span> —
+          starting with the farmers who grow it.
         </p>
 
-        {/* Tagline */}
+        {/* Tagline badges */}
         <div
           className="flex flex-wrap items-center justify-center gap-2 sm:gap-4"
           style={{ animation: "fade-in-up 0.6s ease-out 1.5s both" }}
@@ -143,11 +202,38 @@ function CoverSlide({ onNext }: { onNext: () => void }) {
           ))}
         </div>
 
+        {/* Advisor photo + quote row */}
+        <div
+          className="flex items-center gap-4 mt-1 px-5 py-3 rounded-xl"
+          style={{
+            animation: "fade-in-up 0.6s ease-out 1.7s both",
+            background: "oklch(0.16 0.030 255 / 0.75)",
+            border: "1px solid oklch(0.60 0.12 190 / 0.30)",
+          }}
+        >
+          <img
+            src="/assets/uploads/Acho-1.jpeg"
+            alt="Emanuel Acho — Project Advisor"
+            className="w-12 h-12 rounded-full object-cover shrink-0"
+            style={{
+              boxShadow: "0 0 0 2px oklch(0.60 0.12 190 / 0.6)",
+            }}
+          />
+          <div className="text-left">
+            <p className="text-xs text-foreground/85 leading-snug font-medium italic max-w-xs">
+              "The infrastructure every African coffee farmer deserves."
+            </p>
+            <p className="text-xs text-foreground/50 mt-0.5 font-semibold">
+              Emanuel Acho · Advisor · Founder WagaToken
+            </p>
+          </div>
+        </div>
+
         {/* Seed round badge */}
         <div
-          className="mt-4 px-6 py-3 rounded-xl text-sm sm:text-base font-semibold tracking-wide"
+          className="mt-1 px-6 py-3 rounded-xl text-sm sm:text-base font-semibold tracking-wide"
           style={{
-            animation: "fade-in-up 0.6s ease-out 1.8s both",
+            animation: "fade-in-up 0.6s ease-out 1.9s both",
             background: "oklch(0.16 0.030 255 / 0.85)",
             border: "1px solid oklch(0.78 0.155 75 / 0.35)",
           }}
@@ -161,7 +247,7 @@ function CoverSlide({ onNext }: { onNext: () => void }) {
           type="button"
           data-ocid="cover.primary_button"
           onClick={onNext}
-          className="mt-6 px-8 py-3.5 rounded-full font-semibold text-base transition-all duration-200 hover:scale-105 active:scale-95"
+          className="mt-4 px-8 py-3.5 rounded-full font-semibold text-base transition-all duration-200 hover:scale-105 active:scale-95"
           style={{
             animation: "fade-in-up 0.6s ease-out 2.1s both",
             background: "oklch(0.58 0.14 148)",
@@ -203,9 +289,9 @@ function ProblemSlide() {
     },
     {
       icon: "💸",
-      stat: "$0.20/kg",
+      stat: "$3/kg",
       label: "Farmer earnings",
-      desc: "Retail sells for $10+. Middlemen capture 60–70% of the value chain — leaving farmers with cents.",
+      desc: "Retail sells for $10+/kg. Farmers receive only $3/kg — just 30% of the value — while middlemen capture the rest.",
     },
     {
       icon: "📋",
@@ -243,8 +329,8 @@ function ProblemSlide() {
           <span className="text-gold">Middlemen Capture the Value.</span>
         </h2>
         <p className="text-muted-foreground text-base mb-10 max-w-2xl">
-          Uganda's coffee sector generates over $1 billion annually — yet those
-          who grow it see almost none of that wealth.
+          Uganda's coffee sector generated $2.4 billion in October 2025 alone —
+          yet those who grow it see almost none of that wealth.
         </p>
 
         {/* Problem cards */}
@@ -305,20 +391,32 @@ function SolutionSlide() {
     {
       icon: "🎙️",
       title: "Voice-First Batch Creation",
-      desc: "Partnership with Voice Ledger enables farmers to create batches by speaking in their local language. No smartphone literacy required.",
+      desc: "Partnership with Voice Ledger enables farmers to create batches by speaking in their local language — including local dialects. No smartphone literacy required.",
       badge: "Voice Ledger Partner",
     },
     {
       icon: "🔗",
       title: "Full Tokenization Protocol",
-      desc: "Each batch becomes a blockchain-verified token (ERC-1155 equivalent) with reserve verification, community distribution, and QR traceability built in.",
+      desc: "Each batch becomes a blockchain-verified token with reserve verification, community distribution, and QR traceability built in.",
       badge: "7-Step Protocol",
     },
     {
       icon: "📱",
       title: "End-to-End Traceability",
-      desc: "Buyers, exporters, and consumers scan a QR code to verify the full chain of custody — from farm coordinates to export container.",
+      desc: "Buyers, exporters, and consumers scan a QR code to verify the full chain of custody — from farm to export container.",
       badge: "QR Verified",
+    },
+    {
+      icon: "💳",
+      title: "Coffee as Collateral",
+      desc: "Tracked and tokenized coffee acts like collateral — enabling farmers to access credit and trade finance for the first time.",
+      badge: "Finance Access",
+    },
+    {
+      icon: "🌱",
+      title: "Farmers Capture the Value",
+      desc: "By cutting out middlemen and tokenizing output directly, farmers capture the biggest share of the coffee value chain.",
+      badge: "Farmer First",
     },
   ];
 
@@ -352,8 +450,8 @@ function SolutionSlide() {
           real coffee batches — traceable from farm to cup.
         </p>
 
-        {/* 3 differentiator cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+        {/* Differentiator cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
           {differentiators.map((d) => (
             <div
               key={d.title}
@@ -412,9 +510,9 @@ function SolutionSlide() {
 function MarketSlide() {
   const stats = [
     {
-      value: "$1.07B",
-      label: "Uganda Coffee Exports (2023)",
-      sub: "Africa's #2 coffee exporter. Record year.",
+      value: "$2.4B",
+      label: "Uganda Coffee Production (Oct 2025)",
+      sub: "8.4 million 60-kg bags — making Uganda Africa's #1 coffee exporter.",
     },
     {
       value: "$3.2B+",
@@ -556,41 +654,6 @@ function BusinessModelSlide() {
     },
   ];
 
-  const fundsBreakdown = [
-    {
-      label: "Go-to-Market",
-      pct: 40,
-      amount: "$100,000",
-      color: "oklch(0.58 0.14 148)",
-      icon: "🚀",
-      desc: "Farmer onboarding, cooperative recruitment, Uganda pilot program",
-    },
-    {
-      label: "Partnerships & Biz Dev",
-      pct: 28,
-      amount: "$70,000",
-      color: "oklch(0.60 0.12 190)",
-      icon: "🤝",
-      desc: "UCDA alignment, exporter partnerships, certifier relations, regional expansion",
-    },
-    {
-      label: "Technology & Infrastructure",
-      pct: 20,
-      amount: "$50,000",
-      color: "oklch(0.78 0.155 75)",
-      icon: "⚙️",
-      desc: "Protocol development, ICP deployment, Voice Ledger integration",
-    },
-    {
-      label: "Operations & Team",
-      pct: 12,
-      amount: "$30,000",
-      color: "oklch(0.65 0.10 280)",
-      icon: "🏢",
-      desc: "Core team, legal, admin for Uganda launch phase",
-    },
-  ];
-
   return (
     <div className="flex flex-col justify-center min-h-screen px-6 py-16 max-w-5xl mx-auto w-full">
       <div className="slide-enter">
@@ -626,75 +689,37 @@ function BusinessModelSlide() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Revenue streams */}
-          <div>
-            <h3 className="font-display font-bold text-sm uppercase tracking-wide text-foreground/60 mb-3">
-              Revenue Streams
-            </h3>
-            <div className="flex flex-col gap-3">
-              {streams.map((s) => (
-                <div
-                  key={s.title}
-                  className="rounded-xl p-4 border flex items-start gap-3"
-                  style={{
-                    background: "oklch(0.16 0.030 255 / 0.7)",
-                    borderColor: "oklch(0.26 0.035 255)",
-                  }}
-                >
-                  <span className="text-xl shrink-0 mt-0.5">{s.icon}</span>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <span className="font-semibold text-sm text-foreground">
-                        {s.title}
-                      </span>
-                      <span className="badge-green text-xs px-2 py-0.5 rounded-full">
-                        {s.badge}
-                      </span>
-                    </div>
-                    <p className="text-xs text-muted-foreground mt-0.5">
-                      {s.detail}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Use of Funds */}
-          <div>
-            <h3 className="font-display font-bold text-sm uppercase tracking-wide text-foreground/60 mb-3">
-              Use of Funds — <span className="text-gold">$250,000</span>
-            </h3>
-            <div className="flex flex-col gap-3">
-              {fundsBreakdown.map((f) => (
-                <div key={f.label} className="flex flex-col gap-1.5">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="font-semibold text-foreground/80">
-                      {f.icon} {f.label}
+        {/* Revenue streams */}
+        <div>
+          <h3 className="font-display font-bold text-sm uppercase tracking-wide text-foreground/60 mb-3">
+            Revenue Streams
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            {streams.map((s) => (
+              <div
+                key={s.title}
+                className="rounded-xl p-4 border flex items-start gap-3"
+                style={{
+                  background: "oklch(0.16 0.030 255 / 0.7)",
+                  borderColor: "oklch(0.26 0.035 255)",
+                }}
+              >
+                <span className="text-xl shrink-0 mt-0.5">{s.icon}</span>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="font-semibold text-sm text-foreground">
+                      {s.title}
                     </span>
-                    <span className="font-bold" style={{ color: f.color }}>
-                      {f.pct}% · {f.amount}
+                    <span className="badge-green text-xs px-2 py-0.5 rounded-full">
+                      {s.badge}
                     </span>
                   </div>
-                  {/* Progress bar */}
-                  <div
-                    className="h-2 rounded-full overflow-hidden"
-                    style={{ background: "oklch(0.20 0.025 255)" }}
-                  >
-                    <div
-                      className="h-full rounded-full"
-                      style={{
-                        width: `${f.pct}%`,
-                        background: f.color,
-                        transition: "width 1s ease-out",
-                      }}
-                    />
-                  </div>
-                  <p className="text-xs text-muted-foreground">{f.desc}</p>
+                  <p className="text-xs text-muted-foreground mt-0.5">
+                    {s.detail}
+                  </p>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
 
@@ -707,10 +732,10 @@ function BusinessModelSlide() {
           }}
         >
           <span className="text-xs font-bold tracking-[0.15em] uppercase text-green/70 mr-2">
-            12-Month Milestone
+            Year 1 Milestone
           </span>
           <span className="text-sm text-foreground/85 font-medium">
-            Onboard <strong className="text-green">5,000 farmers</strong> ·{" "}
+            Onboard <strong className="text-green">100,000 farmers</strong> ·{" "}
             <strong className="text-green">50 cooperatives</strong> · Complete{" "}
             <strong className="text-green">Uganda pilot</strong>
           </span>
@@ -725,14 +750,14 @@ function BusinessModelSlide() {
 // ─────────────────────────────────────────────────────────────
 function TractionSlide() {
   const built = [
-    "Live protocol demo — full 7-step pipeline functional",
+    "Live protocol — full 7-step pipeline functional",
     "Voice Ledger partnership confirmed — voice batch creation integrated",
     "Built on Internet Computer (ICP) — mainnet-ready architecture",
     "QR traceability live — scannable end-to-end batch verification",
   ];
 
   const whyNow = [
-    "Uganda coffee exports hit record $1.07B in 2023 — sector momentum is real",
+    "Uganda coffee production hit $2.4B (Oct 2025) — 8.4 million 60-kg bags — sector momentum is real",
     "Government push for agri-tech modernization under NDP III national plan",
     "EU Deforestation Regulation (2025) forces European buyers to source verified, traceable coffee",
     "ICP offers zero gas fees and Web2-speed UX — removing previous blockchain adoption barriers",
@@ -823,7 +848,7 @@ function TractionSlide() {
               Seed Stage
             </span>
             <span className="badge-green text-xs px-3 py-1 rounded-full font-bold tracking-wide">
-              Protocol Live
+              Live Protocol
             </span>
             <span className="text-sm text-foreground/70 font-medium ml-2">
               Seeking <strong className="text-gold">$250,000</strong> to launch
@@ -876,9 +901,9 @@ function CompetitiveSlide() {
       desc: "The only protocol with voice-native batch creation in Uganda — lowering the literacy barrier to near zero.",
     },
     {
-      icon: "⚡",
-      title: "Internet Computer Advantage",
-      desc: "No gas fees, no wallet friction, Web2-speed UX on Web3 infrastructure. Competitors can't replicate without rebuilding.",
+      icon: "🌿",
+      title: "EUDR Compliant",
+      desc: "OburugoAgroChain meets EU Deforestation Regulation (EUDR) requirements — giving European buyers verified, deforestation-free sourcing proof directly from the blockchain.",
     },
     {
       icon: "🏛️",
@@ -1016,6 +1041,832 @@ function CompetitiveSlide() {
 }
 
 // ─────────────────────────────────────────────────────────────
+// Slide 7 — Go-to-Market Strategy
+// ─────────────────────────────────────────────────────────────
+function GoToMarketSlide() {
+  const phases = [
+    {
+      phase: "Pilot Phase (Year 1)",
+      icon: "🚀",
+      color: "oklch(0.58 0.14 148)",
+      borderColor: "oklch(0.58 0.14 148 / 0.25)",
+      bgColor: "oklch(0.58 0.14 148 / 0.07)",
+      points: [
+        "Partner with 50 coffee cooperatives across Uganda",
+        "Onboard 100,000 smallholder farmers through cooperative networks",
+        "Enable batch creation using Voice Ledger voice interface",
+      ],
+    },
+    {
+      phase: "Adoption Strategy (Year 1)",
+      icon: "📈",
+      color: "oklch(0.78 0.155 75)",
+      borderColor: "oklch(0.78 0.155 75 / 0.25)",
+      bgColor: "oklch(0.78 0.155 75 / 0.05)",
+      points: [
+        "Farmers record coffee batches through voice-enabled input",
+        "Cooperatives verify reserves and manage coffee inventory",
+        "Export partners access QR-based traceability for verified sourcing",
+      ],
+    },
+    {
+      phase: "Expansion Strategy",
+      icon: "🌍",
+      color: "oklch(0.60 0.12 190)",
+      borderColor: "oklch(0.60 0.12 190 / 0.25)",
+      bgColor: "oklch(0.60 0.12 190 / 0.07)",
+      points: [
+        "Uganda → Kenya → Rwanda → Ethiopia",
+        "Scale to regional cooperative networks",
+        "Position OburugoAgroChain as traceability infrastructure for East African coffee exports",
+      ],
+    },
+  ];
+
+  return (
+    <div className="flex flex-col justify-center min-h-screen px-6 py-16 max-w-5xl mx-auto w-full">
+      <div className="slide-enter">
+        <div className="flex items-center gap-3 mb-6">
+          <span className="text-xs font-bold tracking-[0.2em] uppercase text-green/80">
+            Slide 07
+          </span>
+          <div className="flex-1 h-px bg-gradient-to-r from-green/30 to-transparent" />
+        </div>
+
+        <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-foreground mb-2">
+          Launching Through{" "}
+          <span className="text-gold">Coffee Cooperatives</span>
+        </h2>
+        <p className="text-muted-foreground text-base mb-10 max-w-2xl">
+          A phased, cooperative-first go-to-market strategy built around
+          Uganda's existing coffee infrastructure.
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
+          {phases.map((p, idx) => (
+            <div
+              key={p.phase}
+              className="rounded-2xl p-6 border flex flex-col gap-4"
+              style={{
+                background: p.bgColor,
+                borderColor: p.borderColor,
+              }}
+            >
+              <div className="flex items-center gap-3">
+                <div
+                  className="w-10 h-10 rounded-full flex items-center justify-center text-xl"
+                  style={{ background: `${p.color.replace(")", " / 0.15)")}` }}
+                >
+                  {p.icon}
+                </div>
+                <div>
+                  <span
+                    className="text-xs font-bold uppercase tracking-wider"
+                    style={{ color: p.color }}
+                  >
+                    Phase {idx + 1}
+                  </span>
+                  <h3 className="font-display font-bold text-sm text-foreground">
+                    {p.phase}
+                  </h3>
+                </div>
+              </div>
+              <ul className="flex flex-col gap-2.5">
+                {p.points.map((point) => (
+                  <li key={point} className="flex items-start gap-2 text-sm">
+                    <span
+                      className="mt-1 shrink-0 w-1.5 h-1.5 rounded-full"
+                      style={{ background: p.color }}
+                    />
+                    <span className="text-foreground/80 leading-relaxed">
+                      {point}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        {/* Expansion map visual */}
+        <div
+          className="rounded-xl p-5 border flex flex-wrap items-center justify-center gap-3 text-center"
+          style={{
+            background: "oklch(0.16 0.030 255 / 0.7)",
+            borderColor: "oklch(0.26 0.035 255)",
+          }}
+        >
+          <span className="text-xs font-bold uppercase tracking-[0.15em] text-muted-foreground mr-2">
+            Expansion Path
+          </span>
+          {["🇺🇬 Uganda", "🇰🇪 Kenya", "🇷🇼 Rwanda", "🇪🇹 Ethiopia"].map(
+            (country, i, arr) => (
+              <div key={country} className="flex items-center gap-3">
+                <span className="font-display font-semibold text-sm text-foreground/90">
+                  {country}
+                </span>
+                {i < arr.length - 1 && (
+                  <span className="text-gold/50 font-bold">→</span>
+                )}
+              </div>
+            ),
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// Slide 8 — Financials
+// ─────────────────────────────────────────────────────────────
+function FinancialsSlide() {
+  const revenueStreams = [
+    {
+      icon: "⚙️",
+      title: "0.5% protocol transaction fee on tokenized coffee trades",
+      badge: "Core",
+      badgeColor: "oklch(0.58 0.14 148)",
+    },
+    {
+      icon: "🤝",
+      title:
+        "Strategic partnerships with governments, NGOs, and development agencies",
+      badge: "Strategic",
+      badgeColor: "oklch(0.65 0.10 280)",
+    },
+    {
+      icon: "📊",
+      title: "Traceability data services for exporters and regulators",
+      badge: "Scalable",
+      badgeColor: "oklch(0.60 0.14 40)",
+    },
+  ];
+
+  return (
+    <div className="flex flex-col justify-center min-h-screen px-6 py-16 max-w-5xl mx-auto w-full">
+      <div className="slide-enter">
+        <div className="flex items-center gap-3 mb-6">
+          <span className="text-xs font-bold tracking-[0.2em] uppercase text-green/80">
+            Slide 08
+          </span>
+          <div className="flex-1 h-px bg-gradient-to-r from-green/30 to-transparent" />
+        </div>
+
+        <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-foreground mb-2">
+          Revenue Streams &amp;{" "}
+          <span className="text-gold">Growth Projection</span>
+        </h2>
+        <p className="text-muted-foreground text-base mb-10 max-w-2xl">
+          Multiple revenue levers built into the protocol — automatic at scale.
+        </p>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* Revenue streams list */}
+          <div>
+            <h3 className="font-display font-bold text-sm uppercase tracking-wide text-foreground/60 mb-4">
+              Revenue Streams
+            </h3>
+            <div className="flex flex-col gap-3">
+              {revenueStreams.map((s, i) => (
+                <div
+                  key={s.title}
+                  className="rounded-xl p-4 border flex items-start gap-3"
+                  style={{
+                    background: "oklch(0.16 0.030 255 / 0.7)",
+                    borderColor: "oklch(0.26 0.035 255)",
+                    animationDelay: `${i * 0.06}s`,
+                  }}
+                >
+                  <span className="text-xl shrink-0 mt-0.5">{s.icon}</span>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <p className="text-sm text-foreground/85 leading-snug">
+                        {s.title}
+                      </p>
+                      <span
+                        className="text-xs px-2 py-0.5 rounded-full font-semibold shrink-0"
+                        style={{
+                          background: `${s.badgeColor.replace(")", " / 0.15)")}`,
+                          color: s.badgeColor,
+                          border: `1px solid ${s.badgeColor.replace(")", " / 0.3)")}`,
+                        }}
+                      >
+                        {s.badge}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Growth projection */}
+          <div className="flex flex-col gap-4">
+            <h3 className="font-display font-bold text-sm uppercase tracking-wide text-foreground/60">
+              Growth Projection
+            </h3>
+
+            {/* Year 1 */}
+            <div
+              className="rounded-2xl p-6 border flex flex-col gap-4"
+              style={{
+                background: "oklch(0.58 0.14 148 / 0.07)",
+                borderColor: "oklch(0.58 0.14 148 / 0.25)",
+              }}
+            >
+              <div className="flex items-center justify-between">
+                <span
+                  className="font-display font-bold text-lg"
+                  style={{ color: "oklch(0.58 0.14 148)" }}
+                >
+                  Year 1 — Pilot
+                </span>
+                <span className="badge-green text-xs px-2 py-0.5 rounded-full font-semibold">
+                  In Progress
+                </span>
+              </div>
+              <div className="grid grid-cols-3 gap-3 text-center">
+                {[
+                  { val: "100,000", label: "Farmers" },
+                  { val: "50", label: "Cooperatives" },
+                  { val: "~$25M", label: "Coffee Trade" },
+                ].map((stat) => (
+                  <div
+                    key={stat.label}
+                    className="rounded-xl p-3 flex flex-col gap-1"
+                    style={{
+                      background: "oklch(0.14 0.025 255 / 0.6)",
+                    }}
+                  >
+                    <span
+                      className="font-display font-extrabold text-xl leading-none"
+                      style={{ color: "oklch(0.78 0.155 75)" }}
+                    >
+                      {stat.val}
+                    </span>
+                    <span className="text-xs text-muted-foreground">
+                      {stat.label}
+                    </span>
+                  </div>
+                ))}
+              </div>
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                ~$25M coffee trade processed through the protocol at 0.5% fee =
+                <strong className="text-foreground/80">
+                  {" "}
+                  $125K protocol revenue
+                </strong>{" "}
+                in Year 1
+              </p>
+            </div>
+
+            {/* Horizon */}
+            <div
+              className="rounded-xl p-5 border"
+              style={{
+                background: "oklch(0.78 0.155 75 / 0.05)",
+                borderColor: "oklch(0.78 0.155 75 / 0.20)",
+              }}
+            >
+              <h4 className="font-display font-bold text-sm text-gold mb-2">
+                🌍 East Africa Horizon
+              </h4>
+              <p className="text-sm text-foreground/80 leading-relaxed">
+                Kenya + Rwanda + Ethiopia expansion unlocks a{" "}
+                <strong className="text-foreground">
+                  $3.2B+ combined market
+                </strong>{" "}
+                — with the same protocol, zero re-architecture.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// Slide 9 — Team
+// ─────────────────────────────────────────────────────────────
+function TeamSlide() {
+  const team = [
+    {
+      name: "Mucunguzi Moses",
+      role: "Co-Founder",
+      title: "Protocol Developer",
+      bio: "Protocol developer with hands-on experience in Web3, blockchain architecture, and decentralized systems.",
+      email: "moemucu@gmail.com",
+      phone: "+256781940358",
+      photo: "/assets/uploads/Mucu-1.jpeg",
+      initials: "MM",
+      accentColor: "oklch(0.58 0.14 148)",
+    },
+    {
+      name: "Nkuba Blair",
+      role: "Co-Founder",
+      title: "Software Engineer & Agritech Innovator",
+      bio: "Software engineer and agritech innovator bridging agricultural practice with modern digital infrastructure.",
+      email: "blairnkuba@gmail.com",
+      phone: "+256763719445",
+      photo: "/assets/uploads/Blair-1.jpeg",
+      initials: "NB",
+      accentColor: "oklch(0.78 0.155 75)",
+    },
+    {
+      name: "Emanuel Acho",
+      role: "Project Advisor",
+      title: "Founder, WagaToken · PHD AgroBusiness",
+      bio: "Founder of WagaToken. PHD in AgroBusiness — built his research in Uganda's floriculture sector. Deep agri-finance expertise.",
+      email: "emmanuel@earesearch.net",
+      phone: "+41774855288",
+      photo: "/assets/uploads/Acho-1.jpeg",
+      initials: "EA",
+      accentColor: "oklch(0.60 0.12 190)",
+    },
+  ];
+
+  return (
+    <div className="flex flex-col justify-center min-h-screen px-6 py-16 max-w-5xl mx-auto w-full">
+      <div className="slide-enter">
+        <div className="flex items-center gap-3 mb-6">
+          <span className="text-xs font-bold tracking-[0.2em] uppercase text-green/80">
+            Slide 09
+          </span>
+          <div className="flex-1 h-px bg-gradient-to-r from-green/30 to-transparent" />
+        </div>
+
+        <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-foreground mb-2">
+          The <span className="text-gold">Team</span>
+        </h2>
+        <p className="text-muted-foreground text-base mb-10 max-w-2xl">
+          Builders with roots in Web3, software engineering, and African
+          agriculture — united by a shared mission.
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {team.map((member) => (
+            <div
+              key={member.name}
+              className="rounded-2xl p-6 border flex flex-col gap-4"
+              style={{
+                background: "oklch(0.16 0.030 255 / 0.75)",
+                borderColor: `${member.accentColor.replace(")", " / 0.3)")}`,
+              }}
+            >
+              {/* Avatar */}
+              <div className="flex flex-col items-center gap-3">
+                {member.photo ? (
+                  <img
+                    src={member.photo}
+                    alt={member.name}
+                    className="w-20 h-20 rounded-full object-cover"
+                    style={{
+                      boxShadow: `0 0 0 2px ${member.accentColor.replace(")", " / 0.5)")}`,
+                    }}
+                  />
+                ) : (
+                  <div
+                    className="w-20 h-20 rounded-full flex items-center justify-center text-xl font-display font-extrabold"
+                    style={{
+                      background: `${member.accentColor.replace(")", " / 0.12)")}`,
+                      border: `2px solid ${member.accentColor.replace(")", " / 0.4)")}`,
+                      color: member.accentColor,
+                    }}
+                  >
+                    {member.initials}
+                  </div>
+                )}
+
+                <div className="text-center">
+                  <h3 className="font-display font-bold text-base text-foreground leading-tight">
+                    {member.name}
+                  </h3>
+                  <span
+                    className="text-xs font-semibold px-2 py-0.5 rounded-full mt-1 inline-block"
+                    style={{
+                      background: `${member.accentColor.replace(")", " / 0.12)")}`,
+                      color: member.accentColor,
+                    }}
+                  >
+                    {member.role}
+                  </span>
+                </div>
+              </div>
+
+              {/* Title + bio */}
+              <div className="flex flex-col gap-2">
+                <p
+                  className="text-xs font-semibold text-center uppercase tracking-wide"
+                  style={{ color: `${member.accentColor}` }}
+                >
+                  {member.title}
+                </p>
+                <p className="text-xs text-muted-foreground leading-relaxed text-center">
+                  {member.bio}
+                </p>
+              </div>
+
+              {/* Contact */}
+              <div
+                className="rounded-lg p-3 flex flex-col gap-1.5 mt-auto"
+                style={{
+                  background: "oklch(0.12 0.022 255 / 0.6)",
+                  border: `1px solid ${member.accentColor.replace(")", " / 0.15)")}`,
+                }}
+              >
+                <a
+                  href={`mailto:${member.email}`}
+                  className="flex items-center gap-2 text-xs text-foreground/70 hover:text-foreground transition-colors"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="11"
+                    height="11"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="shrink-0"
+                    aria-hidden="true"
+                  >
+                    <rect width="20" height="16" x="2" y="4" rx="2" />
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                  </svg>
+                  <span className="truncate">{member.email}</span>
+                </a>
+                <a
+                  href={`tel:${member.phone}`}
+                  className="flex items-center gap-2 text-xs text-foreground/70 hover:text-foreground transition-colors"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="11"
+                    height="11"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="shrink-0"
+                    aria-hidden="true"
+                  >
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.88 14a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.81 3h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 10.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 17z" />
+                  </svg>
+                  <span>{member.phone}</span>
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// Slide 10 — Ask & Use of Funds
+// ─────────────────────────────────────────────────────────────
+function AskSlide() {
+  const fundsBreakdown = [
+    {
+      label: "Go-to-Market",
+      pct: 45,
+      amount: "$112,500",
+      color: "oklch(0.58 0.14 148)",
+      icon: "🚀",
+      desc: "Farmer onboarding, cooperative recruitment, Uganda pilot program",
+    },
+    {
+      label: "Partnerships & Biz Dev",
+      pct: 28,
+      amount: "$70,000",
+      color: "oklch(0.60 0.12 190)",
+      icon: "🤝",
+      desc: "UCDA alignment, exporter partnerships, certifier relations, regional expansion",
+    },
+    {
+      label: "Technology & Infrastructure",
+      pct: 15,
+      amount: "$37,500",
+      color: "oklch(0.78 0.155 75)",
+      icon: "⚙️",
+      desc: "Protocol development, ICP deployment, Voice Ledger integration",
+    },
+    {
+      label: "Operations & Team",
+      pct: 12,
+      amount: "$30,000",
+      color: "oklch(0.65 0.10 280)",
+      icon: "🏢",
+      desc: "Core team, legal, admin for Uganda launch phase",
+    },
+  ];
+
+  return (
+    <div className="flex flex-col justify-center min-h-screen px-6 py-16 max-w-5xl mx-auto w-full">
+      <div className="slide-enter">
+        <div className="flex items-center gap-3 mb-6">
+          <span className="text-xs font-bold tracking-[0.2em] uppercase text-green/80">
+            Slide 10
+          </span>
+          <div className="flex-1 h-px bg-gradient-to-r from-green/30 to-transparent" />
+        </div>
+
+        <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-foreground mb-2">
+          The Ask &amp; <span className="text-gold">Use of Funds</span>
+        </h2>
+        <p className="text-muted-foreground text-base mb-2 max-w-2xl">
+          Raising{" "}
+          <strong className="text-gold font-bold text-lg">$250,000</strong> to
+          launch Uganda's coffee traceability pilot.
+        </p>
+
+        {/* Runway callout */}
+        <div
+          className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full mb-8"
+          style={{
+            background: "oklch(0.78 0.155 75 / 0.08)",
+            border: "1px solid oklch(0.78 0.155 75 / 0.3)",
+          }}
+        >
+          <span className="text-gold font-bold text-2xl font-display">
+            $250,000
+          </span>
+          <span className="text-sm text-foreground/70 font-medium">
+            Seed Round · Full Runway
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Fund breakdown */}
+          <div>
+            <h3 className="font-display font-bold text-sm uppercase tracking-wide text-foreground/60 mb-4">
+              Allocation
+            </h3>
+            <div className="flex flex-col gap-4">
+              {fundsBreakdown.map((f) => (
+                <div key={f.label} className="flex flex-col gap-2">
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="font-semibold text-foreground/90 flex items-center gap-1.5">
+                      <span>{f.icon}</span> {f.label}
+                    </span>
+                    <span className="font-bold" style={{ color: f.color }}>
+                      {f.pct}% · {f.amount}
+                    </span>
+                  </div>
+                  <div
+                    className="h-2.5 rounded-full overflow-hidden"
+                    style={{ background: "oklch(0.20 0.025 255)" }}
+                  >
+                    <div
+                      className="h-full rounded-full"
+                      style={{
+                        width: `${f.pct}%`,
+                        background: f.color,
+                        transition: "width 1.2s ease-out",
+                      }}
+                    />
+                  </div>
+                  <p className="text-xs text-muted-foreground">{f.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Milestones + impact */}
+          <div className="flex flex-col gap-4">
+            <h3 className="font-display font-bold text-sm uppercase tracking-wide text-foreground/60">
+              12-Month Milestones
+            </h3>
+            <div
+              className="rounded-2xl p-6 border flex flex-col gap-4"
+              style={{
+                background: "oklch(0.58 0.14 148 / 0.07)",
+                borderColor: "oklch(0.58 0.14 148 / 0.25)",
+              }}
+            >
+              {[
+                { icon: "👨‍🌾", stat: "100,000", label: "Farmers onboarded" },
+                { icon: "🏛️", stat: "50", label: "Cooperatives partnered" },
+                { icon: "🗺️", stat: "1", label: "Uganda pilot complete" },
+              ].map((m) => (
+                <div key={m.label} className="flex items-center gap-4">
+                  <span className="text-2xl">{m.icon}</span>
+                  <div>
+                    <div
+                      className="font-display font-extrabold text-2xl leading-none"
+                      style={{ color: "oklch(0.78 0.155 75)" }}
+                    >
+                      {m.stat}
+                    </div>
+                    <div className="text-xs text-muted-foreground mt-0.5">
+                      {m.label}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div
+              className="rounded-xl p-4 border"
+              style={{
+                background: "oklch(0.78 0.155 75 / 0.05)",
+                borderColor: "oklch(0.78 0.155 75 / 0.20)",
+              }}
+            >
+              <p className="text-sm text-foreground/80 leading-relaxed">
+                <strong className="text-gold">
+                  Go-to-Market takes the largest share
+                </strong>{" "}
+                because our biggest risk is farmer and cooperative adoption —
+                not technology. The protocol is live. Now we need feet on the
+                ground.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// Slide 11 — Closing & CTA
+// ─────────────────────────────────────────────────────────────
+function ClosingSlide({ onPrev }: { onPrev: () => void }) {
+  return (
+    <div className="relative flex flex-col items-center justify-center min-h-screen px-6 py-16 text-center overflow-hidden">
+      {/* Glow */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse 70% 55% at 50% 50%, oklch(0.22 0.038 255 / 0.7) 0%, transparent 70%)",
+        }}
+        aria-hidden="true"
+      />
+
+      <div className="relative z-10 flex flex-col items-center gap-6 max-w-3xl mx-auto">
+        <div className="slide-enter flex flex-col items-center gap-6 w-full">
+          {/* Section label */}
+          <div className="flex items-center gap-3 w-full">
+            <span className="text-xs font-bold tracking-[0.2em] uppercase text-green/80">
+              Slide 11
+            </span>
+            <div className="flex-1 h-px bg-gradient-to-r from-green/30 to-transparent" />
+          </div>
+
+          {/* Logo */}
+          <img
+            src="/assets/generated/oac-logo-transparent.dim_200x200.png"
+            alt="OburugoAgroChain"
+            className="w-16 h-16 object-contain"
+            style={{
+              filter: "drop-shadow(0 0 16px oklch(0.78 0.155 75 / 0.4))",
+            }}
+          />
+
+          {/* Title */}
+          <h2 className="font-display font-extrabold text-4xl sm:text-5xl md:text-6xl text-foreground leading-tight">
+            Join Our <span className="text-gold">Seed Round</span>
+          </h2>
+
+          {/* Subtitle */}
+          <p className="text-base sm:text-lg text-foreground/80 max-w-xl leading-relaxed">
+            OburugoAgroChain is building the traceability infrastructure for
+            Uganda's next{" "}
+            <strong className="text-gold">$5B coffee economy</strong> — starting
+            with the farmers who grow it.
+          </p>
+
+          {/* CTA Button */}
+          <button
+            type="button"
+            data-ocid="closing.primary_button"
+            className="mt-2 px-10 py-4 rounded-full font-display font-bold text-lg transition-all duration-200 hover:scale-105 active:scale-95"
+            style={{
+              background: "oklch(0.58 0.14 148)",
+              color: "oklch(0.98 0.005 80)",
+              boxShadow:
+                "0 0 32px oklch(0.58 0.14 148 / 0.4), 0 8px 24px oklch(0 0 0 / 0.3)",
+            }}
+            onClick={() => {
+              window.location.href =
+                "mailto:moemucu@gmail.com?subject=OburugoAgroChain Seed Round Inquiry";
+            }}
+          >
+            Join Our Seed Round →
+          </button>
+
+          {/* Vision reinforcement */}
+          <div
+            className="rounded-2xl p-6 border text-center max-w-xl w-full"
+            style={{
+              background: "oklch(0.78 0.155 75 / 0.06)",
+              borderColor: "oklch(0.78 0.155 75 / 0.25)",
+            }}
+          >
+            <p className="text-sm sm:text-base text-foreground/85 font-medium leading-relaxed italic">
+              "Together, we can bring transparency, fair value, and financial
+              inclusion to{" "}
+              <strong className="text-gold">3.5M+ smallholder farmers</strong>{" "}
+              across East Africa."
+            </p>
+          </div>
+
+          {/* Investor contact */}
+          <div
+            className="rounded-xl p-5 border w-full max-w-md"
+            style={{
+              background: "oklch(0.16 0.030 255 / 0.85)",
+              borderColor: "oklch(0.26 0.035 255)",
+            }}
+          >
+            <p className="text-xs font-bold uppercase tracking-[0.15em] text-muted-foreground mb-4 text-center">
+              Investor Inquiries
+            </p>
+            <div className="flex flex-col gap-3">
+              {[
+                {
+                  name: "Mucunguzi Moses",
+                  email: "moemucu@gmail.com",
+                  phone: "+256781940358",
+                  accent: "oklch(0.58 0.14 148)",
+                },
+                {
+                  name: "Nkuba Blair",
+                  email: "blairnkuba@gmail.com",
+                  phone: "+256763719445",
+                  accent: "oklch(0.78 0.155 75)",
+                },
+              ].map((contact) => (
+                <div
+                  key={contact.name}
+                  className="flex items-start justify-between gap-4"
+                >
+                  <span
+                    className="font-semibold text-sm"
+                    style={{ color: contact.accent }}
+                  >
+                    {contact.name}
+                  </span>
+                  <div className="flex flex-col items-end gap-1">
+                    <a
+                      href={`mailto:${contact.email}`}
+                      className="text-xs text-foreground/65 hover:text-foreground transition-colors"
+                    >
+                      {contact.email}
+                    </a>
+                    <a
+                      href={`tel:${contact.phone}`}
+                      className="text-xs text-foreground/65 hover:text-foreground transition-colors"
+                    >
+                      {contact.phone}
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Bottom tags */}
+          <div className="flex flex-wrap items-center justify-center gap-2 mt-2">
+            {[
+              "Seed Stage",
+              "Pre-Revenue",
+              "Protocol Live",
+              "Internet Computer",
+            ].map((tag) => (
+              <span
+                key={tag}
+                className="badge-gray text-xs px-3 py-1 rounded-full font-semibold tracking-wide"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          {/* Back button */}
+          <button
+            type="button"
+            data-ocid="closing.secondary_button"
+            onClick={onPrev}
+            className="text-xs text-muted-foreground hover:text-foreground/70 transition-colors mt-2"
+          >
+            ← Back to deck
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
 // Navigation Bar
 // ─────────────────────────────────────────────────────────────
 function NavBar({
@@ -1036,9 +1887,14 @@ function NavBar({
     "Problem",
     "Solution",
     "Market",
-    "Business Model",
+    "Business",
     "Traction",
     "Competitive",
+    "Go-to-Market",
+    "Financials",
+    "Team",
+    "Ask",
+    "Closing",
   ];
   return (
     <div
@@ -1106,42 +1962,119 @@ function NavBar({
 }
 
 // ─────────────────────────────────────────────────────────────
-// Download PDF Button
+// Download PDF Button + Print Mode Toggle
 // ─────────────────────────────────────────────────────────────
-function DownloadButton() {
+function DownloadButton({
+  printMode,
+  onTogglePrintMode,
+}: {
+  printMode: boolean;
+  onTogglePrintMode: () => void;
+}) {
+  function handleOpenDeck() {
+    window.open("/deck.html", "_blank");
+  }
+
   return (
-    <button
-      type="button"
-      data-ocid="deck.download_button"
-      onClick={() => window.print()}
-      className="no-print fixed top-4 z-50 flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-all duration-150 hover:scale-105 active:scale-95"
-      style={{
-        right: "8rem",
-        background: "oklch(0.78 0.155 75 / 0.12)",
-        border: "1px solid oklch(0.78 0.155 75 / 0.35)",
-        color: "oklch(0.78 0.155 75)",
-        backdropFilter: "blur(12px)",
-      }}
-      aria-label="Download pitch deck as PDF"
+    <div
+      className="no-print fixed top-4 z-50 flex items-center gap-2"
+      style={{ right: "8rem" }}
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="12"
-        height="12"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        aria-hidden="true"
+      {/* Print mode toggle (kept for dark/light in-app toggle) */}
+      <button
+        type="button"
+        data-ocid="deck.print_mode_toggle"
+        onClick={onTogglePrintMode}
+        title={
+          printMode ? "Switch to dark mode" : "Switch to light mode for PDF"
+        }
+        className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-all duration-150 hover:scale-105 active:scale-95"
+        style={{
+          background: printMode
+            ? "oklch(0.58 0.14 148 / 0.15)"
+            : "oklch(0.78 0.155 75 / 0.12)",
+          border: printMode
+            ? "1px solid oklch(0.58 0.14 148 / 0.5)"
+            : "1px solid oklch(0.78 0.155 75 / 0.35)",
+          color: printMode ? "oklch(0.58 0.14 148)" : "oklch(0.78 0.155 75)",
+          backdropFilter: "blur(12px)",
+        }}
+        aria-label={printMode ? "Exit print mode" : "Enable light print mode"}
       >
-        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-        <polyline points="7 10 12 15 17 10" />
-        <line x1="12" y1="15" x2="12" y2="3" />
-      </svg>
-      PDF
-    </button>
+        {printMode ? (
+          <>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+            </svg>
+            Light Mode
+          </>
+        ) : (
+          <>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            </svg>
+            Print Mode
+          </>
+        )}
+      </button>
+
+      {/* Download PDF — opens clean HTML deck in new tab */}
+      <button
+        type="button"
+        data-ocid="deck.download_button"
+        onClick={handleOpenDeck}
+        className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-all duration-150 hover:scale-105 active:scale-95"
+        style={{
+          background: "oklch(0.78 0.155 75 / 0.12)",
+          border: "1px solid oklch(0.78 0.155 75 / 0.35)",
+          color: "oklch(0.78 0.155 75)",
+          backdropFilter: "blur(12px)",
+        }}
+        aria-label="Open printable pitch deck"
+        title="Opens a clean white version — click Download PDF in the new tab"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="12"
+          height="12"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+          <polyline points="7 10 12 15 17 10" />
+          <line x1="12" y1="15" x2="12" y2="3" />
+        </svg>
+        PDF
+      </button>
+    </div>
   );
 }
 
@@ -1206,6 +2139,11 @@ const SLIDES = [
   BusinessModelSlide,
   TractionSlide,
   CompetitiveSlide,
+  GoToMarketSlide,
+  FinancialsSlide,
+  TeamSlide,
+  AskSlide,
+  ClosingSlide,
 ] as const;
 
 // Slide data-ocid map
@@ -1217,13 +2155,23 @@ const SLIDE_OCIDS: string[] = [
   "deck.slide.5",
   "deck.slide.6",
   "deck.slide.7",
+  "deck.slide.8",
+  "deck.slide.9",
+  "deck.slide.10",
+  "deck.slide.11",
+  "deck.slide.12",
 ];
 
 export default function App() {
   const [currentSlide, setCurrentSlide] = useState<SlideId>(0);
   const [animKey, setAnimKey] = useState(0);
+  const [printMode, setPrintMode] = useState(false);
   const touchStartX = useRef<number | null>(null);
   const touchStartY = useRef<number | null>(null);
+
+  const togglePrintMode = useCallback(() => {
+    setPrintMode((v) => !v);
+  }, []);
 
   const goTo = useCallback((i: number) => {
     const clamped = Math.max(0, Math.min(TOTAL_SLIDES - 1, i)) as SlideId;
@@ -1261,22 +2209,28 @@ export default function App() {
     touchStartY.current = null;
   }
 
-  const _SlideComponent = SLIDES[currentSlide];
+  const _SlideComponent = SLIDES[currentSlide as number];
 
   return (
     <div
-      className="fixed inset-0 slide-mesh overflow-hidden"
+      className={`fixed inset-0 overflow-hidden${printMode ? " print-mode slide-mesh-light" : " slide-mesh"}`}
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
     >
+      {/* Global hero image background — shows on all slides */}
+      <GlobalHeroBg />
+
       {/* Coffee bean background */}
       <CoffeeBeanBg />
 
       {/* Top-right counter */}
       <SlideCounter current={currentSlide} total={TOTAL_SLIDES} />
 
-      {/* Download PDF button */}
-      <DownloadButton />
+      {/* Download PDF button + Print Mode toggle */}
+      <DownloadButton
+        printMode={printMode}
+        onTogglePrintMode={togglePrintMode}
+      />
 
       {/* Top-left wordmark (hidden on cover) */}
       <Wordmark visible={currentSlide !== 0} />
@@ -1300,8 +2254,18 @@ export default function App() {
           <BusinessModelSlide />
         ) : currentSlide === 5 ? (
           <TractionSlide />
-        ) : (
+        ) : currentSlide === 6 ? (
           <CompetitiveSlide />
+        ) : currentSlide === 7 ? (
+          <GoToMarketSlide />
+        ) : currentSlide === 8 ? (
+          <FinancialsSlide />
+        ) : currentSlide === 9 ? (
+          <TeamSlide />
+        ) : currentSlide === 10 ? (
+          <AskSlide />
+        ) : (
+          <ClosingSlide onPrev={prev} />
         )}
       </section>
 
@@ -1358,6 +2322,21 @@ export default function App() {
         </div>
         <div className="print-slide">
           <CompetitiveSlide />
+        </div>
+        <div className="print-slide">
+          <GoToMarketSlide />
+        </div>
+        <div className="print-slide">
+          <FinancialsSlide />
+        </div>
+        <div className="print-slide">
+          <TeamSlide />
+        </div>
+        <div className="print-slide">
+          <AskSlide />
+        </div>
+        <div className="print-slide">
+          <ClosingSlide onPrev={() => {}} />
         </div>
       </div>
     </div>

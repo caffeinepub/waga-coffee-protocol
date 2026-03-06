@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OburugoAgroChain — Investor Pitch Deck</title>
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { font-size: 16px; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #ffffff;
+      color: #1a1a1a;
+      line-height: 1.6;
+    }
+
+    /* ── Print button (screen only) ── */
+    .print-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: #fff;
+      border-bottom: 1px solid #e5e7eb;
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .print-bar-brand {
+      font-weight: 700;
+      font-size: 15px;
+      color: #3b1a08;
+      letter-spacing: 0.02em;
+    }
+    .print-bar-actions { display: flex; gap: 10px; align-items: center; }
+    .btn-print {
+      background: #2d7a3a;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 8px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .btn-print:hover { background: #236230; }
+    .btn-back {
+      background: transparent;
+      color: #555;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      padding: 8px 16px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .btn-back:hover { background: #f9fafb; }
+    .print-hint {
+      font-size: 12px;
+      color: #6b7280;
+    }
+
+    /* ── Slides container ── */
+    .deck {
+      padding-top: 56px; /* offset for print bar */
+    }
+
+    /* ── Each slide ── */
+    .slide {
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto 0 auto;
+      padding: 48px 40px;
+      border-bottom: 2px solid #f0f0f0;
+      min-height: 520px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* ── Typography ── */
+    .slide-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #2d7a3a;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .slide-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, #2d7a3a44, transparent);
+    }
+
+    h1 {
+      font-size: 42px;
+      font-weight: 900;
+      color: #3b1a08;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+    h1 .gold { color: #b45309; }
+
+    h2 {
+      font-size: 30px;
+      font-weight: 800;
+      color: #1a1a1a;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    h2 .gold { color: #b45309; }
+    h2 .green { color: #2d7a3a; }
+    h2 .muted { color: #374151; }
+
+    h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 6px;
+    }
+    h3.green { color: #2d7a3a; }
+    h3.gold { color: #b45309; }
+
+    p, li {
+      font-size: 14px;
+      color: #374151;
+      line-height: 1.65;
+    }
+    .lead {
+      font-size: 15px;
+      color: #4b5563;
+      margin-bottom: 28px;
+      max-width: 640px;
+    }
+
+    /* ── Cards ── */
+    .card-grid {
+      display: grid;
+      gap: 14px;
+    }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-2-3 { grid-template-columns: 1fr 2fr; }
+
+    .card {
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 18px 20px;
+    }
+    .card-green {
+      background: #f0fdf4;
+      border-color: #86efac;
+    }
+    .card-gold {
+      background: #fffbeb;
+      border-color: #fcd34d;
+    }
+    .card-dark {
+      background: #1a1a1a;
+      border-color: #333;
+      color: #f9fafb;
+    }
+
+    .stat-value {
+      font-size: 36px;
+      font-weight: 900;
+      color: #b45309;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .stat-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #6b7280;
+    }
+    .stat-sub {
+      font-size: 12px;
+      color: #6b7280;
+      margin-top: 4px;
+    }
+
+    /* ── Badges ── */
+    .badge {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+    .badge-green { background: #dcfce7; color: #15803d; }
+    .badge-gold { background: #fef3c7; color: #92400e; }
+    .badge-gray { background: #f3f4f6; color: #374151; }
+    .badge-blue { background: #eff6ff; color: #1d4ed8; }
+
+    /* ── Cover slide extras ── */
+    .cover-logo {
+      width: 64px;
+      height: 64px;
+      object-fit: contain;
+      margin-bottom: 12px;
+    }
+    .cover-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0 16px;
+    }
+    .cover-seed {
+      display: inline-block;
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-size: 15px;
+      color: #4b5563;
+      margin-top: 4px;
+    }
+    .cover-seed strong { color: #b45309; font-weight: 800; }
+    .cover-footer {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 28px;
+      font-size: 12px;
+      color: #9ca3af;
+    }
+    .cover-footer span { display: flex; align-items: center; gap: 4px; }
+
+    /* ── Problem cards ── */
+    .problem-icon { font-size: 22px; }
+    .problem-stat { font-size: 22px; font-weight: 900; color: #b45309; }
+    .problem-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #9ca3af; }
+    .insight-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: #f0fdf4;
+      border: 1px solid #86efac;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-top: 14px;
+    }
+    .insight-card .icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+    .insight-card p { font-size: 13px; color: #1a1a1a; font-weight: 500; }
+
+    /* ── Solution: protocol flow ── */
+    .flow-bar {
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-top: 16px;
+    }
+    .flow-bar .flow-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #9ca3af;
+      margin-bottom: 10px;
+    }
+    .flow-pills {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+    }
+    .pill {
+      background: #fff;
+      border: 1px solid #d1d5db;
+      border-radius: 999px;
+      padding: 4px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #374151;
+    }
+    .arrow { font-size: 11px; color: #9ca3af; font-weight: 700; }
+
+    /* ── Business model bars ── */
+    .bar-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .bar-row { display: flex; flex-direction: column; gap: 4px; }
+    .bar-header { display: flex; justify-content: space-between; font-size: 12px; }
+    .bar-header .name { font-weight: 600; color: #1a1a1a; }
+    .bar-track {
+      height: 8px;
+      background: #e5e7eb;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%;
+      border-radius: 999px;
+    }
+    .bar-desc { font-size: 11px; color: #6b7280; }
+
+    .quote-box {
+      background: #fffbeb;
+      border: 1px solid #fcd34d;
+      border-radius: 12px;
+      padding: 18px 24px;
+      margin-bottom: 24px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #1a1a1a;
+      line-height: 1.6;
+    }
+    .quote-box strong { color: #b45309; }
+
+    /* ── Traction ── */
+    .check-list { display: flex; flex-direction: column; gap: 10px; }
+    .check-item { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; }
+    .check-item .tick { color: #2d7a3a; font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+    .check-item .arrow-icon { color: #b45309; font-size: 13px; flex-shrink: 0; margin-top: 2px; font-weight: 700; }
+
+    .status-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 14px 20px;
+      margin-top: 24px;
+    }
+
+    /* ── Competitive table ── */
+    table { width: 100%; border-collapse: collapse; }
+    thead tr { background: #f9fafb; }
+    th {
+      padding: 10px 14px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #6b7280;
+      text-align: left;
+    }
+    th.center { text-align: center; }
+    td {
+      padding: 10px 14px;
+      font-size: 13px;
+      color: #374151;
+      border-top: 1px solid #f0f0f0;
+    }
+    td.center { text-align: center; }
+    tr:nth-child(even) td { background: #fafafa; }
+    .check { color: #2d7a3a; font-weight: 700; font-size: 15px; }
+    .cross { color: #dc2626; font-weight: 700; font-size: 14px; }
+    .partial { color: #b45309; font-weight: 600; font-size: 12px; }
+    .na { color: #9ca3af; font-size: 12px; }
+
+    .closing-quote {
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 16px 20px;
+      text-align: center;
+      margin-top: 20px;
+      font-size: 15px;
+      font-weight: 700;
+      color: #1a1a1a;
+    }
+    .closing-quote .gold { color: #b45309; }
+
+    /* ── Moat cards ── */
+    .moat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .moat-card {
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+    .moat-icon { font-size: 20px; margin-bottom: 6px; }
+    .moat-title { font-size: 12px; font-weight: 700; color: #1a1a1a; margin-bottom: 4px; }
+    .moat-desc { font-size: 11px; color: #6b7280; line-height: 1.55; }
+
+    /* ── Milestone strip ── */
+    .milestone {
+      background: #f0fdf4;
+      border: 1px solid #86efac;
+      border-radius: 10px;
+      padding: 12px 20px;
+      text-align: center;
+      font-size: 13px;
+      color: #1a1a1a;
+      margin-top: 20px;
+    }
+    .milestone .label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #2d7a3a;
+      margin-right: 8px;
+    }
+    .milestone strong { color: #2d7a3a; }
+
+    /* ── Divider between slides (screen) ── */
+    @media screen {
+      .slide { box-shadow: 0 1px 0 #e5e7eb; }
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       PRINT STYLES
+       Each slide → one A4 landscape page
+    ═══════════════════════════════════════════════════════════ */
+    @media print {
+      html, body { background: #fff !important; }
+
+      .print-bar { display: none !important; }
+      .deck { padding-top: 0 !important; }
+
+      .slide {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-height: 0 !important;
+        height: auto !important;
+        padding: 28px 36px !important;
+        border: none !important;
+        border-bottom: none !important;
+        box-shadow: none !important;
+        page-break-after: always !important;
+        break-after: page !important;
+        display: block !important;
+      }
+
+      /* Prevent content from splitting across pages */
+      .card, .card-grid, .insight-card, .quote-box, .flow-bar,
+      .bar-wrap, .status-bar, .moat-grid, .milestone, table { 
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+      }
+
+      h1 { font-size: 34px !important; }
+      h2 { font-size: 24px !important; }
+      .stat-value { font-size: 28px !important; }
+
+      @page {
+        size: A4 landscape;
+        margin: 12mm 14mm;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Print Bar (screen only) ── -->
+<div class="print-bar">
+  <span class="print-bar-brand">OburugoAgroChain — Investor Pitch Deck</span>
+  <div class="print-bar-actions">
+    <a href="/" class="btn-back">← Back to App</a>
+    <span class="print-hint">Print tip: File → Print → <strong>Save as PDF</strong>, enable <strong>Background graphics</strong></span>
+    <button class="btn-print" onclick="window.print()">⬇ Download PDF</button>
+  </div>
+</div>
+
+<div class="deck">
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 1 — COVER
+  ══════════════════════════════════════════ -->
+  <div class="slide" id="slide-cover">
+    <div style="display:flex;flex-direction:column;align-items:flex-start;gap:10px;max-width:680px;">
+      <img src="/assets/generated/oac-logo-transparent.dim_200x200.png" alt="OburugoAgroChain Logo" class="cover-logo" onerror="this.style.display='none'" />
+      <h1>Oburugo<span class="gold">AgroChain</span></h1>
+      <p style="font-size:20px;font-weight:600;color:#4b5563;margin:0 0 4px;">Tokenizing Uganda's Coffee Value Chain</p>
+      <div class="cover-tags">
+        <span class="badge badge-gold">Transparent</span>
+        <span class="badge badge-green">Voice-Enabled</span>
+        <span class="badge badge-blue">Blockchain-Powered</span>
+      </div>
+      <div class="cover-seed">
+        Investor Briefing &nbsp;·&nbsp; <strong>Seed Round · $250,000</strong>
+      </div>
+      <div class="cover-footer">
+        <span>Built on Internet Computer</span>
+        <span>|</span>
+        <span>Voice Ledger Partnership</span>
+        <span>|</span>
+        <span>Uganda · East Africa · Global</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 2 — THE PROBLEM
+  ══════════════════════════════════════════ -->
+  <div class="slide" id="slide-problem">
+    <div class="slide-label">Slide 01</div>
+    <h2>Farmers Grow the Coffee. <span class="gold">Middlemen Capture the Value.</span></h2>
+    <p class="lead">Uganda's coffee sector generates over $1 billion annually — yet those who grow it see almost none of that wealth.</p>
+
+    <div class="card-grid grid-3" style="margin-bottom:14px;">
+      <div class="card">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+          <span class="problem-icon">🌿</span>
+          <div>
+            <div class="problem-stat">3.5M+</div>
+            <div class="problem-label">Smallholder farmers</div>
+          </div>
+        </div>
+        <p>Uganda's coffee farmers — locked out of fair, transparent markets by layers of intermediaries.</p>
+      </div>
+      <div class="card">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+          <span class="problem-icon">💸</span>
+          <div>
+            <div class="problem-stat">$0.20/kg</div>
+            <div class="problem-label">Farmer earnings</div>
+          </div>
+        </div>
+        <p>Retail sells for $10+. Middlemen capture 60–70% of the value chain — leaving farmers with cents.</p>
+      </div>
+      <div class="card">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+          <span class="problem-icon">📋</span>
+          <div>
+            <div class="problem-stat">Zero</div>
+            <div class="problem-label">Traceability</div>
+          </div>
+        </div>
+        <p>Manual, paper-based batch records lead to quality disputes, rejected shipments, and zero auditability.</p>
+      </div>
+      <div class="card">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+          <span class="problem-icon">🔇</span>
+          <div>
+            <div class="problem-stat">Low</div>
+            <div class="problem-label">Digital literacy</div>
+          </div>
+        </div>
+        <p>Most smallholder farmers cannot use smartphones or fill digital forms — blocking adoption of ag-tech.</p>
+      </div>
+      <div class="card">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+          <span class="problem-icon">🏦</span>
+          <div>
+            <div class="problem-stat">0%</div>
+            <div class="problem-label">Trade finance access</div>
+          </div>
+        </div>
+        <p>No verifiable records = no collateral = no credit. Farmers cannot grow without capital.</p>
+      </div>
+    </div>
+
+    <div class="insight-card">
+      <span class="icon">⚠️</span>
+      <p>These aren't separate problems — they form a compounding trap. Without traceability, there's no credit. Without credit, there's no scale. Without scale, the farmer stays trapped.</p>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 3 — THE SOLUTION
+  ══════════════════════════════════════════ -->
+  <div class="slide" id="slide-solution">
+    <div class="slide-label">Slide 02</div>
+    <h2>OburugoAgroChain: <span class="gold">Voice-to-Chain</span> Coffee Protocol</h2>
+    <p class="lead">A 7-step blockchain protocol on the Internet Computer that tokenizes real coffee batches — traceable from farm to cup.</p>
+
+    <div class="card-grid grid-3" style="margin-bottom:16px;">
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+          <span style="font-size:22px;">🎙️</span>
+          <span class="badge badge-green">Voice Ledger Partner</span>
+        </div>
+        <h3>Voice-First Batch Creation</h3>
+        <p>Partnership with Voice Ledger enables farmers to create batches by speaking in their local language. No smartphone literacy required.</p>
+      </div>
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+          <span style="font-size:22px;">🔗</span>
+          <span class="badge badge-blue">7-Step Protocol</span>
+        </div>
+        <h3>Full Tokenization Protocol</h3>
+        <p>Each batch becomes a blockchain-verified token with reserve verification, community distribution, and QR traceability built in.</p>
+      </div>
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+          <span style="font-size:22px;">📱</span>
+          <span class="badge badge-gold">QR Verified</span>
+        </div>
+        <h3>End-to-End Traceability</h3>
+        <p>Buyers, exporters, and consumers scan a QR code to verify the full chain of custody — from farm coordinates to export container.</p>
+      </div>
+    </div>
+
+    <div class="flow-bar">
+      <div class="flow-label">Protocol Flow</div>
+      <div class="flow-pills">
+        <span class="pill">Batch Creation</span>
+        <span class="arrow">→</span>
+        <span class="pill">Reserve Verification</span>
+        <span class="arrow">→</span>
+        <span class="pill">Token Minting</span>
+        <span class="arrow">→</span>
+        <span class="pill">Community Distribution</span>
+        <span class="arrow">→</span>
+        <span class="pill">Inventory Management</span>
+        <span class="arrow">→</span>
+        <span class="pill">Token Redemption</span>
+        <span class="arrow">→</span>
+        <span class="pill">QR Traceability</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 4 — MARKET OPPORTUNITY
+  ══════════════════════════════════════════ -->
+  <div class="slide" id="slide-market">
+    <div class="slide-label">Slide 03</div>
+    <h2>A <span class="gold">$83B Global Market</span>, <span class="muted">Starting in Uganda</span></h2>
+    <p class="lead">We're entering at the source — Uganda's booming coffee export sector — with a clear path to the global specialty market.</p>
+
+    <div class="card-grid grid-3" style="margin-bottom:16px;">
+      <div class="card" style="text-align:center;">
+        <div class="stat-value">$1.07B</div>
+        <div class="stat-label">Uganda Coffee Exports (2023)</div>
+        <div class="stat-sub">Africa's #2 coffee exporter. Record year.</div>
+      </div>
+      <div class="card" style="text-align:center;">
+        <div class="stat-value">$3.2B+</div>
+        <div class="stat-label">East Africa Annual Coffee Market</div>
+        <div class="stat-sub">Kenya, Ethiopia, Tanzania combined addressable market.</div>
+      </div>
+      <div class="card card-gold" style="text-align:center;">
+        <div class="stat-value">$83B</div>
+        <div class="stat-label">Global Specialty Coffee Market by 2027</div>
+        <div class="stat-sub">8.5% CAGR — fastest-growing segment in food commodities.</div>
+      </div>
+    </div>
+
+    <div class="card-grid grid-2">
+      <div class="card card-green">
+        <h3 class="green">🎯 Target Market</h3>
+        <p><strong>1.5M+ cooperatives &amp; smallholder farmers</strong> in Uganda alone. UCDA-registered cooperatives as primary entry points for batch onboarding.</p>
+      </div>
+      <div class="card card-gold">
+        <h3 class="gold">🌍 Expansion Path</h3>
+        <p><strong>Uganda → East Africa</strong> (Kenya, Ethiopia, Tanzania) → <strong>Global specialty buyers</strong> demanding ethical sourcing and traceability.</p>
+      </div>
+    </div>
+
+    <p style="font-size:11px;color:#9ca3af;text-align:center;margin-top:12px;">ICP blockchain agri-fintech: underserved, high-growth segment — no dominant player yet.</p>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 5 — BUSINESS MODEL
+  ══════════════════════════════════════════ -->
+  <div class="slide" id="slide-business">
+    <div class="slide-label">Slide 04</div>
+    <h2>Simple, <span class="gold">Scalable</span>, Low-Friction Revenue</h2>
+
+    <div class="quote-box" style="margin-top:16px;">
+      We charge <strong>0.5%</strong> of every transaction processed through the protocol — a fraction of what middlemen currently extract, generating revenue at scale automatically. No SaaS subscriptions — pure transaction alignment.
+    </div>
+
+    <div class="card-grid grid-2">
+      <!-- Revenue Streams -->
+      <div>
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#6b7280;margin-bottom:10px;">Revenue Streams</div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div class="card" style="display:flex;align-items:flex-start;gap:12px;padding:12px 14px;">
+            <span style="font-size:18px;flex-shrink:0;margin-top:2px;">⚙️</span>
+            <div>
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:3px;">
+                <span style="font-size:13px;font-weight:600;">Protocol Transaction Fee</span>
+                <span class="badge badge-green">Core Revenue</span>
+              </div>
+              <p style="font-size:12px;color:#6b7280;">0.5% of every transaction processed through the protocol</p>
+            </div>
+          </div>
+          <div class="card" style="display:flex;align-items:flex-start;gap:12px;padding:12px 14px;">
+            <span style="font-size:18px;flex-shrink:0;margin-top:2px;">📊</span>
+            <div>
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:3px;">
+                <span style="font-size:13px;font-weight:600;">Data Licensing</span>
+                <span class="badge badge-blue">Scalable</span>
+              </div>
+              <p style="font-size:12px;color:#6b7280;">Verified batch data licensed to exporters, governments &amp; sustainability auditors</p>
+            </div>
+          </div>
+          <div class="card" style="display:flex;align-items:flex-start;gap:12px;padding:12px 14px;">
+            <span style="font-size:18px;flex-shrink:0;margin-top:2px;">🤝</span>
+            <div>
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:3px;">
+                <span style="font-size:13px;font-weight:600;">Partnership Revenue</span>
+                <span class="badge badge-gold">Strategic</span>
+              </div>
+              <p style="font-size:12px;color:#6b7280;">Co-revenue share with cooperatives, certification bodies, and export partners</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Use of Funds -->
+      <div>
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#6b7280;margin-bottom:10px;">Use of Funds — <strong style="color:#b45309;">$250,000</strong></div>
+        <div class="bar-wrap">
+          <div class="bar-row">
+            <div class="bar-header">
+              <span class="name">🚀 Go-to-Market</span>
+              <span style="color:#2d7a3a;font-weight:700;">40% · $100,000</span>
+            </div>
+            <div class="bar-track"><div class="bar-fill" style="width:40%;background:#2d7a3a;"></div></div>
+            <p class="bar-desc">Farmer onboarding, cooperative recruitment, Uganda pilot program</p>
+          </div>
+          <div class="bar-row">
+            <div class="bar-header">
+              <span class="name">🤝 Partnerships &amp; Biz Dev</span>
+              <span style="color:#0891b2;font-weight:700;">28% · $70,000</span>
+            </div>
+            <div class="bar-track"><div class="bar-fill" style="width:28%;background:#0891b2;"></div></div>
+            <p class="bar-desc">UCDA alignment, exporter partnerships, certifier relations, regional expansion</p>
+          </div>
+          <div class="bar-row">
+            <div class="bar-header">
+              <span class="name">⚙️ Technology &amp; Infrastructure</span>
+              <span style="color:#b45309;font-weight:700;">20% · $50,000</span>
+            </div>
+            <div class="bar-track"><div class="bar-fill" style="width:20%;background:#b45309;"></div></div>
+            <p class="bar-desc">Protocol development, ICP deployment, Voice Ledger integration</p>
+          </div>
+          <div class="bar-row">
+            <div class="bar-header">
+              <span class="name">🏢 Operations &amp; Team</span>
+              <span style="color:#7c3aed;font-weight:700;">12% · $30,000</span>
+            </div>
+            <div class="bar-track"><div class="bar-fill" style="width:12%;background:#7c3aed;"></div></div>
+            <p class="bar-desc">Core team, legal, admin for Uganda launch phase</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="milestone">
+      <span class="label">12-Month Milestone</span>
+      Onboard <strong>5,000 farmers</strong> · <strong>50 cooperatives</strong> · Complete <strong>Uganda pilot</strong>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 6 — TRACTION & VALIDATION
+  ══════════════════════════════════════════ -->
+  <div class="slide" id="slide-traction">
+    <div class="slide-label">Slide 05</div>
+    <h2>Early Stage. <span class="gold">Real Foundation.</span></h2>
+
+    <div class="card-grid grid-2" style="margin-top:20px;margin-bottom:20px;">
+      <div class="card card-green">
+        <h3 class="green" style="margin-bottom:12px;">✓ What's Built</h3>
+        <ul class="check-list">
+          <li class="check-item"><span class="tick">✅</span><span>Live protocol demo — full 7-step pipeline functional</span></li>
+          <li class="check-item"><span class="tick">✅</span><span>Voice Ledger partnership confirmed — voice batch creation integrated</span></li>
+          <li class="check-item"><span class="tick">✅</span><span>Built on Internet Computer (ICP) — mainnet-ready architecture</span></li>
+          <li class="check-item"><span class="tick">✅</span><span>QR traceability live — scannable end-to-end batch verification</span></li>
+        </ul>
+      </div>
+      <div class="card card-gold">
+        <h3 class="gold" style="margin-bottom:12px;">⚡ Why Now</h3>
+        <ul class="check-list">
+          <li class="check-item"><span class="arrow-icon">→</span><span>Uganda coffee exports hit record $1.07B in 2023 — sector momentum is real</span></li>
+          <li class="check-item"><span class="arrow-icon">→</span><span>Government push for agri-tech modernization under NDP III national plan</span></li>
+          <li class="check-item"><span class="arrow-icon">→</span><span>EU Deforestation Regulation (2025) forces European buyers to source verified, traceable coffee</span></li>
+          <li class="check-item"><span class="arrow-icon">→</span><span>ICP offers zero gas fees and Web2-speed UX — removing previous blockchain adoption barriers</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="status-bar">
+      <span class="badge badge-gray">Pre-Revenue</span>
+      <span class="badge badge-gold">Seed Stage</span>
+      <span class="badge badge-green">Protocol Live</span>
+      <span style="font-size:13px;color:#4b5563;margin-left:8px;">Seeking <strong style="color:#b45309;">$250,000</strong> to launch Uganda pilot</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 7 — COMPETITIVE ADVANTAGE
+  ══════════════════════════════════════════ -->
+  <div class="slide" id="slide-competitive">
+    <div class="slide-label">Slide 06</div>
+    <h2>We're Not <span class="gold">Another Blockchain Farm App</span></h2>
+
+    <div style="margin-top:16px;margin-bottom:16px;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden;">
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th class="center"><span class="badge badge-gold">OburugoAgroChain</span></th>
+            <th class="center">Traditional Middlemen</th>
+            <th class="center">Other Ag-Tech</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Voice-First Batch Creation</td>
+            <td class="center"><span class="check">✓</span></td>
+            <td class="center"><span class="cross">✗</span></td>
+            <td class="center"><span class="partial">Partial</span></td>
+          </tr>
+          <tr>
+            <td>Blockchain Tokenization</td>
+            <td class="center"><span class="check">✓</span></td>
+            <td class="center"><span class="cross">✗</span></td>
+            <td class="center"><span class="partial">Partial</span></td>
+          </tr>
+          <tr>
+            <td>Zero Gas Fees (ICP)</td>
+            <td class="center"><span class="check">✓</span></td>
+            <td class="center"><span class="na">N/A</span></td>
+            <td class="center"><span class="cross">✗</span></td>
+          </tr>
+          <tr>
+            <td>End-to-End QR Traceability</td>
+            <td class="center"><span class="check">✓</span></td>
+            <td class="center"><span class="cross">✗</span></td>
+            <td class="center"><span class="partial">Partial</span></td>
+          </tr>
+          <tr>
+            <td>Trade Finance Ready</td>
+            <td class="center"><span class="check">✓</span></td>
+            <td class="center"><span class="cross">✗</span></td>
+            <td class="center"><span class="cross">✗</span></td>
+          </tr>
+          <tr>
+            <td>Farmer Revenue Share</td>
+            <td class="center" style="color:#2d7a3a;font-weight:700;font-size:12px;">High</td>
+            <td class="center" style="color:#dc2626;font-weight:600;font-size:12px;">Low (30%)</td>
+            <td class="center" style="color:#b45309;font-weight:600;font-size:12px;">Medium</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="moat-grid">
+      <div class="moat-card">
+        <div class="moat-icon">🎙️</div>
+        <div class="moat-title">Voice Ledger Exclusive Integration</div>
+        <p class="moat-desc">The only protocol with voice-native batch creation in Uganda — lowering the literacy barrier to near zero.</p>
+      </div>
+      <div class="moat-card">
+        <div class="moat-icon">⚡</div>
+        <div class="moat-title">Internet Computer Advantage</div>
+        <p class="moat-desc">No gas fees, no wallet friction, Web2-speed UX on Web3 infrastructure. Competitors can't replicate without rebuilding.</p>
+      </div>
+      <div class="moat-card">
+        <div class="moat-icon">🏛️</div>
+        <div class="moat-title">Government Alignment</div>
+        <p class="moat-desc">Designed for UCDA (Uganda Coffee Development Authority) compliance — giving us a regulatory moat from day one.</p>
+      </div>
+    </div>
+
+    <div class="closing-quote">
+      "The infrastructure for Uganda's next <span class="gold">$5B coffee economy</span> — built for farmers first."
+    </div>
+  </div>
+
+</div><!-- /deck -->
+
+</body>
+</html>
